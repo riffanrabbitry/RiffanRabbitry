@@ -152,12 +152,13 @@
             transition: all 0.3s ease;
         }
 
-        /* Hero Section */
+        /* Hero Section - PERBAIKAN untuk mobile */
         .hero {
             padding: 180px 0 100px;
             background: linear-gradient(135deg, rgba(255, 107, 139, 0.05) 0%, rgba(126, 211, 33, 0.05) 100%);
             position: relative;
             overflow: hidden;
+            margin-top: 0; /* Pastikan tidak ada margin yang menutupi */
         }
 
         .hero::before {
@@ -175,6 +176,7 @@
             position: relative;
             z-index: 1;
             max-width: 850px;
+            padding-top: 0; /* Pastikan tidak ada padding yang menutupi */
         }
 
         .hero h1 {
@@ -637,7 +639,7 @@
             color: var(--primary);
         }
 
-        /* Responsive Styles */
+        /* Responsive Styles - PERBAIKAN untuk mobile */
         @media (max-width: 1200px) {
             .hero h1 {
                 font-size: 3.2rem;
@@ -662,7 +664,7 @@
             }
             
             .hero {
-                padding: 150px 0 80px;
+                padding: 150px 0 80px; /* Diperbaiki padding untuk mobile */
             }
             
             .section-title {
@@ -679,26 +681,43 @@
         }
 
         @media (max-width: 768px) {
+            .hero {
+                padding: 140px 0 70px; /* Diperbaiki agar text tidak tertutup header */
+                margin-top: 0;
+            }
+            
             .hero h1 {
                 font-size: 2.4rem;
+                margin-top: 0;
+                padding-top: 0;
+            }
+            
+            .hero-content {
+                padding-top: 0;
+                margin-top: 0;
             }
             
             .hero p {
                 font-size: 1.2rem;
+                margin-top: 20px;
             }
             
             .section-title {
                 font-size: 2.1rem;
+                margin-top: 0;
+                padding-top: 0;
             }
             
             .breed-header {
                 flex-direction: column;
                 text-align: center;
                 gap: 15px;
+                margin-top: 0;
             }
             
             .token-card {
                 padding: 50px 30px;
+                margin-top: 0;
             }
             
             .token-header {
@@ -718,25 +737,68 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: flex-start;
+                margin-top: 30px;
             }
             
             .cta-button {
                 width: 100%;
                 max-width: 350px;
+                margin-top: 10px;
+            }
+            
+            /* Perbaikan untuk semua section agar tidak tertutup header */
+            .breeds, .token-section {
+                scroll-margin-top: 80px; /* Memberikan ruang untuk header */
+            }
+            
+            #home {
+                scroll-margin-top: 0; /* Home tidak perlu scroll margin */
             }
         }
 
         @media (max-width: 576px) {
-            .hero h1 {
-                font-size: 2rem;
+            .hero {
+                padding: 130px 0 60px; /* Diperbaiki padding untuk mobile kecil */
             }
             
-            .hero {
-                padding: 130px 0 60px;
+            .hero h1 {
+                font-size: 2rem;
+                line-height: 1.2;
+                margin-bottom: 20px;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+                margin-bottom: 30px;
+            }
+            
+            .logo-title {
+                font-size: 1.5rem; /* Logo text lebih kecil di mobile */
+            }
+            
+            .logo-subtitle {
+                font-size: 0.85rem;
+            }
+            
+            .logo-img {
+                height: 45px; /* Logo lebih kecil di mobile */
+            }
+            
+            .header-scrolled .logo-img {
+                height: 40px; /* Logo lebih kecil saat scroll di mobile */
+            }
+            
+            .nav-container {
+                padding: 15px 0; /* Header lebih kecil di mobile */
+            }
+            
+            .header-scrolled .nav-container {
+                padding: 10px 0;
             }
             
             .breeds, .token-section {
                 padding: 80px 0;
+                scroll-margin-top: 70px; /* Sesuaikan untuk mobile kecil */
             }
             
             .swiper-container {
@@ -749,6 +811,46 @@
             
             .dropdown-menu {
                 width: 85%;
+                padding-top: 90px; /* Beri ruang untuk close button */
+            }
+            
+            .menu-close {
+                top: 25px;
+                right: 25px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .hero {
+                padding: 120px 0 50px;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .cta-button {
+                padding: 16px 30px;
+                font-size: 1.1rem;
+            }
+            
+            .logo-title {
+                font-size: 1.3rem;
+            }
+            
+            .nav-container {
+                padding: 12px 0;
+            }
+        }
+
+        /* Fix untuk anchor links tidak tertutup header */
+        html {
+            scroll-padding-top: 100px; /* Memberikan padding untuk semua anchor links */
+        }
+
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 80px; /* Lebih kecil untuk mobile */
             }
         }
     </style>
@@ -1072,7 +1174,7 @@
         const swiperConfig = {
             loop: true,
             autoplay: {
-                delay: 6000, // Diperlambat dari 4000ms menjadi 6000ms (6 detik)
+                delay: 6000, // 6 detik per slide
                 disableOnInteraction: false,
             },
             pagination: {
@@ -1081,7 +1183,7 @@
             },
             navigation: false, // Menghapus panah navigasi
             effect: 'slide',
-            speed: 1000, // Diperlambat dari 800ms menjadi 1000ms
+            speed: 1000, // Transisi 1 detik
             grabCursor: true,
         };
 
@@ -1152,7 +1254,7 @@
             spans[2].style.transform = 'none';
         }
 
-        // Smooth scroll for navigation links
+        // Smooth scroll for navigation links - DIPERBAIKI untuk mobile
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if(this.getAttribute('href') === '#') return;
@@ -1162,8 +1264,12 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if(targetElement) {
+                    // Perhitungan offset yang berbeda untuk mobile
+                    const isMobile = window.innerWidth <= 768;
+                    const headerHeight = isMobile ? 70 : 100; // Header lebih kecil di mobile
+                    
                     window.scrollTo({
-                        top: targetElement.offsetTop - 100,
+                        top: targetElement.offsetTop - headerHeight,
                         behavior: 'smooth'
                     });
                 }
