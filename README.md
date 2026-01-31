@@ -21,7 +21,7 @@ riffanrabbitry/
 ### 🐰 **Rabbit Business (Kelinci Fisik):**
 - **Website:** https://riffanrabbitry.xyz
 - **Instagram:** https://instagram.com/kelinci_lembang
-- **WhatsApp:** https://wa.me/087822793234
+- **WhatsApp:** https://wa.me/6287822793234
 - **X (Twitter):** https://x.com/kelinci_lembang
 
 ### 🔗 **Community Token ($RFN):**
@@ -178,7 +178,6 @@ Always conduct your own research (DYOR) before making any decisions.
 
 ---
 
-© 2026 Riffan Rabbitry. All rights reserved.
-Netherland Dwarf Rabbit Specialist • Since 2014
+© 2026 Riffan Rabbitry. All rights reserved. Rabbit Breeder Specialty • Since 2014
 
 ```
