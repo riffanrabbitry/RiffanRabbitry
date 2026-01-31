@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riffan Rabbitry - Peternakan Kelinci Netherland Dwarf</title>
+    <link rel="icon" href="https://riffanrabbitry.xyz/assets/rfn.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #FF6B8B;
+            --secondary: #7ED321;
+            --dark: #2C3E50;
+            --light: #F8F9FA;
+            --gray: #6C757D;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            height: 48px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .logo-sub {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .nav-menu a:hover::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 6px;
+        }
+
+        .menu-toggle span {
+            width: 28px;
+            height: 3px;
+            background-color: var(--dark);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 160px 0 100px;
+            background: linear-gradient(135deg, rgba(255,107,139,0.08) 0%, rgba(126,211,33,0.08) 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 20px;
+            color: var(--dark);
+            line-height: 1.2;
+        }
+
+        .hero-highlight {
+            color: var(--primary);
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(to right, var(--primary), #FF8E53);
+            color: white;
+            padding: 16px 38px;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(255,107,139,0.3);
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255,107,139,0.4);
+        }
+
+        .cta-button.secondary {
+            background: linear-gradient(to right, var(--secondary), #24C6DC);
+            box-shadow: 0 8px 20px rgba(126,211,33,0.3);
+        }
+
+        .cta-button.secondary:hover {
+            box-shadow: 0 12px 25px rgba(126,211,33,0.4);
+        }
+
+        /* Breeds Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+            color: var(--dark);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .breeds {
+            padding: 100px 0;
+            background-color: white;
+        }
+
+        .breeds-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .breed-card {
+            background-color: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            transition: transform 0.4s, box-shadow 0.4s;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .breed-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .breed-img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .breed-info {
+            padding: 25px;
+        }
+
+        .breed-name {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .breed-desc {
+            color: var(--gray);
+            font-size: 1.05rem;
+        }
+
+        /* Token Section */
+        .token-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(44,62,80,0.03) 0%, rgba(255,107,139,0.03) 100%);
+            text-align: center;
+        }
+
+        .token-card {
+            background-color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.07);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .token-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #FF6B8B, #7ED321);
+            padding: 5px;
+        }
+
+        .token-logo img {
+            width: 90%;
+            height: 90%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .token-title {
+            font-size: 2.8rem;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .token-symbol {
+            color: var(--primary);
+            font-weight: 800;
+        }
+
+        .token-desc {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 70px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .footer-about {
+            font-size: 1.05rem;
+            color: #B0B7C3;
+            line-height: 1.7;
+        }
+
+        .social-section h3, .contact-section h3 {
+            font-size: 1.4rem;
+            margin-bottom: 25px;
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(255,255,255,0.08);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #B0B7C3;
+        }
+
+        .contact-item i {
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #B0B7C3;
+            font-size: 0.95rem;
+        }
+
+        /* Menu "Titik 3" - Dropdown Mobile */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            border-radius: 12px;
+            overflow: hidden;
+            z-index: 999;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 18px 25px;
+            text-decoration: none;
+            color: var(--dark);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: background-color 0.3s;
+            font-weight: 600;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: rgba(255,107,139,0.08);
+            color: var(--primary);
+        }
+
+        .dropdown-menu a:last-child {
+            border-bottom: none;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.7rem;
+            }
+            
+            .nav-menu {
+                display: none;
+            }
+            
+            .menu-toggle {
+                display: flex;
+            }
+            
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero p {
+                font-size: 1.15rem;
+                padding: 0 15px;
+            }
+            
+            .section-title {
+                font-size: 2.1rem;
+            }
+            
+            .token-title {
+                font-size: 2.2rem;
+            }
+            
+            .breeds-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 140px 0 80px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                display: block;
+                margin: 15px auto;
+                width: 90%;
+                max-width: 300px;
+            }
+            
+            .token-card {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <div class="logo">
+                    <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbitry Logo" class="logo-img">
+                    <div>
+                        <div class="logo-text">Riffan Rabbitry</div>
+                        <div class="logo-sub">Netherland Dwarf Specialist</div>
+                    </div>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="#home">Home</a>
+                    <a href="#breeds">Jenis Kelinci</a>
+                    <a href="#token">Token RFN</a>
+                    <a href="https://wa.me/087822793234" target="_blank">Kontak</a>
+                </nav>
+                
+                <!-- Menu "Titik 3" untuk mobile -->
+                <div class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Dropdown Menu Mobile -->
+        <div class="dropdown-menu" id="dropdownMenu">
+            <a href="#home">Home</a>
+            <a href="#breeds">Jenis Kelinci</a>
+            <a href="#token">Token RFN</a>
+            <a href="https://wa.me/087822793234" target="_blank">Kontak via WhatsApp</a>
+            <a href="https://instagram.com/kelinci_lembang" target="_blank">Instagram</a>
+            <a href="https://github.com/riffanrabbitry" target="_blank">GitHub</a>
+        </div>
+    </header>
+
+    <!-- Hero Section (Home) -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>Riffan Rabbitry: <span class="hero-highlight">Spesialis Netherland Dwarf</span></h1>
+            <p>Peternakan kelinci modern yang berfokus pada pengembangbiakan kelinci ras murni Netherland Dwarf, Holland Lop, dan Jersey Wooly dengan standar kualitas tertinggi.</p>
+            <a href="#breeds" class="cta-button">Lihat Jenis Kelinci Kami</a>
+            <a href="#token" class="cta-button secondary">Belajar tentang Token RFN</a>
+        </div>
+    </section>
+
+    <!-- Breeds Section -->
+    <section class="breeds" id="breeds">
+        <div class="container">
+            <h2 class="section-title">Jenis Kelinci Unggulan Kami</h2>
+            <div class="breeds-grid">
+                <div class="breed-card">
+                    <img src="https://riffanrabbitry.xyz/assets/nd.png" alt="Netherland Dwarf" class="breed-img">
+                    <div class="breed-info">
+                        <h3 class="breed-name">Netherland Dwarf</h3>
+                        <p class="breed-desc">Kelinci kerdil paling populer dengan berat maksimal 1.1 kg. Memiliki wajah bulat, telinga pendek, dan sifat yang aktif namun ramah. Fokus utama peternakan kami.</p>
+                    </div>
+                </div>
+                
+                <div class="breed-card">
+                    <img src="https://riffanrabbitry.xyz/assets/hl.png" alt="Holland Lop" class="breed-img">
+                    <div class="breed-info">
+                        <h3 class="breed-name">Holland Lop</h3>
+                        <p class="breed-desc">Kelinci lop bertelinga jatuh dengan tubuh kompak dan kepala lebar. Sangat jinak dan cocok sebagai hewan peliharaan keluarga. Berat ideal antara 1.4-1.8 kg.</p>
+                    </div>
+                </div>
+                
+                <div class="breed-card">
+                    <img src="https://riffanrabbitry.xyz/assets/jw.png" alt="Jersey Wooly" class="breed-img">
+                    <div class="breed-info">
+                        <h3 class="breed-name">Jersey Wooly</h3>
+                        <p class="breed-desc">Kelinci wool berukuran kecil dengan bulu wol yang lembut dan halus. Sifatnya tenang dan penyayang, cocok untuk penghobi yang menyukai bulu panjang.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Token RFN Section -->
+    <section class="token-section" id="token">
+        <div class="container">
+            <div class="token-card">
+                <div class="token-logo">
+                    <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="RFN Token Logo">
+                </div>
+                <h2 class="token-title">Token <span class="token-symbol">$RFN</span></h2>
+                <p class="token-desc">Riffan Rabbitry meluncurkan token komunitas $RFN untuk menghubungkan pecinta kelinci,dengan block chain.</p>
+                <a href="#" class="cta-button">Beli Token RFN Sekarang</a>
+                <p style="margin-top: 20px; color: var(--gray); font-size: 0.95rem;">*Token komunitas untuk komunitas pecinta kelinci</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <div class="footer-logo">Riffan Rabbitry</div>
+                    <p class="footer-about">Peternakan kelinci spesialis yang berkomitmen untuk menghasilkan keturunan sehat dan berkualitas dengan standar tertinggi. Berdiri sejak 2014 di Lembang, Bandung Barat Indonesia.</p>
+                </div>
+                
+                <div class="social-section">
+                    <h3>Ikuti Kami</h3>
+                    <div class="social-links">
+                        <a href="https://instagram.com/kelinci_lembang" target="_blank" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://wa.me/087822793234" target="_blank" class="social-link">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://github.com/riffanrabbitry" target="_blank" class="social-link">
+                            <i class="fab fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="contact-section">
+                    <h3>Hubungi Kami</h3>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <span>0878-2279-3234</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Lembang, Bandung, Indonesia</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-bunny"></i>
+                            <span>Rabbit Breeder</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2026 Riffan Rabbitry. Semua hak dilindungi. | Domain: riffan.rabbitry.xyz</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle dropdown menu untuk "titik 3"
+        document.getElementById('menuToggle').addEventListener('click', function() {
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            dropdownMenu.classList.toggle('show');
+            
+            // Animasi hamburger menu
+            const spans = this.querySelectorAll('span');
+            if (dropdownMenu.classList.contains('show')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        // Tutup dropdown saat klik di luar
+        document.addEventListener('click', function(event) {
+            const menuToggle = document.getElementById('menuToggle');
+            const dropdownMenu = document.getElementById('dropdownMenu');
+            
+            if (!menuToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                dropdownMenu.classList.remove('show');
+                const spans = menuToggle.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        // Smooth scroll untuk navigasi
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Tutup dropdown menu setelah klik (untuk mobile)
+                    document.getElementById('dropdownMenu').classList.remove('show');
+                    const spans = document.querySelectorAll('.menu-toggle span');
+                    spans[0].style.transform = 'none';
+                    spans[1].style.opacity = '1';
+                    spans[2].style.transform = 'none';
+                }
+            });
+        });
+        
+        // Token button interaction
+        document.querySelector('.token-section .cta-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Halaman pembelian token RFN sedang dalam pengembangan. Hubungi kami via WhatsApp untuk informasi lebih lanjut!');
+        });
+    </script>
+</body>
+</html>
