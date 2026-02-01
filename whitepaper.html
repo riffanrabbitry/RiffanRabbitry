@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFN Token Whitepaper - Riffan Rabbit Farms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.min.css">
+    <style>
+        :root {
+            --primary: #8a6d3b;
+            --secondary: #5d4037;
+            --accent: #d7ccc8;
+            --light: #f5f1e8;
+            --dark: #3e2723;
+            --gold: #c8a96a;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --presale: #3498db;
+            --liquidity: #2ecc71;
+            --rewards: #9b59b6;
+            --team: #e74c3c;
+            --marketing: #f39c12;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+        
+        /* Table of Contents */
+        .toc-sidebar {
+            position: fixed;
+            left: 20px;
+            top: 120px;
+            width: 250px;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 20px var(--shadow);
+            display: none;
+        }
+        
+        .toc-sidebar h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.2);
+        }
+        
+        .toc-list {
+            list-style: none;
+        }
+        
+        .toc-list li {
+            margin-bottom: 10px;
+        }
+        
+        .toc-list a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: block;
+            padding: 5px 0;
+            border-left: 3px solid transparent;
+            padding-left: 10px;
+        }
+        
+        .toc-list a:hover {
+            color: var(--primary);
+            border-left-color: var(--gold);
+        }
+        
+        /* Whitepaper Content */
+        .whitepaper-container {
+            max-width: 900px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px var(--shadow);
+            padding: 50px;
+        }
+        
+        .document-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.2);
+        }
+        
+        .document-header h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .document-header .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .version {
+            background-color: var(--gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            font-size: 0.9rem;
+        }
+        
+        /* Sections */
+        .section {
+            margin-bottom: 60px;
+            scroll-margin-top: 100px;
+        }
+        
+        .section h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(138, 109, 59, 0.2);
+        }
+        
+        .section h3 {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+        }
+        
+        .section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+        
+        .section ul, .section ol {
+            padding-left: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .section li {
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        /* Tokenomics Visualization */
+        .tokenomics-chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: center;
+        }
+        
+        .chart-wrapper {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .tokenomics-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .distribution-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: rgba(138, 109, 59, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid;
+        }
+        
+        .distribution-item.presale {
+            border-left-color: var(--presale);
+        }
+        
+        .distribution-item.liquidity {
+            border-left-color: var(--liquidity);
+        }
+        
+        .distribution-item.rewards {
+            border-left-color: var(--rewards);
+        }
+        
+        .distribution-item.team {
+            border-left-color: var(--team);
+        }
+        
+        .distribution-item.marketing {
+            border-left-color: var(--marketing);
+        }
+        
+        .distribution-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .color-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+        }
+        
+        .color-dot.presale {
+            background-color: var(--presale);
+        }
+        
+        .color-dot.liquidity {
+            background-color: var(--liquidity);
+        }
+        
+        .color-dot.rewards {
+            background-color: var(--rewards);
+        }
+        
+        .color-dot.team {
+            background-color: var(--team);
+        }
+        
+        .color-dot.marketing {
+            background-color: var(--marketing);
+        }
+        
+        .distribution-numbers {
+            text-align: right;
+        }
+        
+        .distribution-percentage {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .distribution-amount {
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        /* Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .data-table th {
+            background-color: var(--primary);
+            color: white;
+            text-align: left;
+            padding: 15px;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.1);
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: rgba(138, 109, 59, 0.05);
+        }
+        
+        /* Technical Details */
+        .tech-box {
+            background-color: rgba(138, 109, 59, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+            border-left: 4px solid var(--gold);
+        }
+        
+        .tech-box h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .contract-address {
+            background-color: rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            word-break: break-all;
+            margin: 15px 0;
+        }
+        
+        /* Disclaimer Box */
+        .disclaimer-box {
+            background-color: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid #e74c3c;
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .disclaimer-box h3 {
+            color: #e74c3c;
+            margin-bottom: 15px;
+        }
+        
+        /* Roadmap */
+        .roadmap-timeline {
+            position: relative;
+            margin: 40px 0;
+        }
+        
+        .roadmap-timeline::before {
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 100%;
+            background-color: var(--gold);
+            left: 0;
+            top: 0;
+        }
+        
+        .roadmap-phase {
+            margin-left: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .roadmap-phase::before {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--gold);
+            border-radius: 50%;
+            left: -39px;
+            top: 5px;
+        }
+        
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .phase-tag {
+            background-color: var(--gold);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 60px 20px 30px;
+            margin-top: 50px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Responsive */
+        @media (min-width: 1200px) {
+            .whitepaper-container {
+                margin-left: 300px;
+                max-width: 900px;
+            }
+            
+            .toc-sidebar {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .whitepaper-container {
+                padding: 30px 20px;
+            }
+            
+            .document-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tokenomics-chart-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media print {
+            header, footer, .toc-sidebar {
+                display: none;
+            }
+            
+            .whitepaper-container {
+                margin: 0;
+                padding: 20px;
+                box-shadow: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbit Farms Logo" class="logo">
+                <div class="logo-text">
+                    <h1>Riffan Rabbit Farms</h1>
+                    <p>RFN Token Whitepaper</p>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Table of Contents -->
+    <aside class="toc-sidebar">
+        <h3>Table of Contents</h3>
+        <ul class="toc-list">
+            <li><a href="#abstract">Abstract</a></li>
+            <li><a href="#introduction">Introduction</a></li>
+            <li><a href="#problem-statement">Problem Statement</a></li>
+            <li><a href="#solution">Solution</a></li>
+            <li><a href="#tokenomics">Tokenomics</a></li>
+            <li><a href="#distribution">Token Distribution</a></li>
+            <li><a href="#staking">Staking Mechanism</a></li>
+            <li><a href="#technical">Technical Details</a></li>
+            <li><a href="#roadmap">Roadmap</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#legal">Legal Disclaimer</a></li>
+        </ul>
+    </aside>
+    
+    <!-- Whitepaper Content -->
+    <main class="whitepaper-container">
+        <!-- Document Header -->
+        <div class="document-header">
+            <h1>RFN Token Whitepaper</h1>
+            <div class="subtitle">Riffan Rabbit Farms Community Token</div>
+            <div class="version">Version 1.0 - January 2024</div>
+        </div>
+        
+        <!-- Abstract -->
+        <section id="abstract" class="section">
+            <h2>Abstract</h2>
+            <p>This whitepaper outlines the technical specifications, tokenomics, and implementation strategy for the RFN (Riffan Rabbit Token), a BEP-20 utility token on the BNB Smart Chain. RFN serves as the native token for the Riffan Rabbit Farms ecosystem, facilitating community participation, governance, and reward distribution within the global rabbit enthusiast community.</p>
+            
+            <p>The token is designed to create a sustainable digital ecosystem that bridges traditional rabbit breeding with blockchain technology, enabling transparent community engagement and participation in rabbit-related activities.</p>
+        </section>
+        
+        <!-- Introduction -->
+        <section id="introduction" class="section">
+            <h2>1. Introduction</h2>
+            <p>Riffan Rabbit Farms, established in 2014 in Lembang, West Java, Indonesia, has been a premier rabbit breeding facility specializing in premium breeds. With nearly a decade of experience, we have developed extensive expertise in rabbit care, breeding, and community building.</p>
+            
+            <p>The RFN token represents our initiative to extend our physical community into the digital realm, leveraging blockchain technology to create a global ecosystem for rabbit enthusiasts. This document provides comprehensive details about the token's design, functionality, and integration within our ecosystem.</p>
+        </section>
+        
+        <!-- Problem Statement -->
+        <section id="problem-statement" class="section">
+            <h2>2. Problem Statement</h2>
+            <h3>2.1 Fragmented Global Community</h3>
+            <p>Rabbit enthusiasts worldwide lack a unified digital platform for connection, education, and collaboration. Existing communities are fragmented across various social media platforms without integrated functionality for shared activities or governance.</p>
+            
+            <h3>2.2 Limited Participation Mechanisms</h3>
+            <p>Traditional rabbit breeding communities offer limited opportunities for digital participation. Enthusiasts cannot easily engage with breeding programs, educational content, or community decisions without physical presence.</p>
+            
+            <h3>2.3 Funding Sustainability</h3>
+            <p>Animal breeding and conservation initiatives often struggle with sustainable funding models. Traditional donation-based systems lack transparency and consistent engagement mechanisms.</p>
+        </section>
+        
+        <!-- Solution -->
+        <section id="solution" class="section">
+            <h2>3. Solution: RFN Token Ecosystem</h2>
+            <p>The RFN token ecosystem addresses these challenges through a comprehensive blockchain-based solution:</p>
+            
+            <h3>3.1 Unified Digital Platform</h3>
+            <p>RFN serves as the access token for a unified digital ecosystem where rabbit enthusiasts can connect, share knowledge, and participate in community activities.</p>
+            
+            <h3>3.2 Digital Participation Mechanism</h3>
+            <p>Token holders can participate in various ecosystem activities including breeding program updates, educational content access, and community governance through voting mechanisms.</p>
+            
+            <h3>3.3 Sustainable Reward System</h3>
+            <p>A transparent staking and reward system distributes ecosystem benefits to active participants, creating a sustainable funding model for community initiatives.</p>
+        </section>
+        
+        <!-- Tokenomics -->
+        <section id="tokenomics" class="section">
+            <h2>4. Tokenomics</h2>
+            
+            <div class="tech-box">
+                <h4>Token Specifications</h4>
+                <table class="data-table">
+                    <tr>
+                        <td>Token Name</td>
+                        <td>Riffan Rabbit Token</td>
+                    </tr>
+                    <tr>
+                        <td>Token Symbol</td>
+                        <td>RFN</td>
+                    </tr>
+                    <tr>
+                        <td>Blockchain</td>
+                        <td>BNB Smart Chain (BEP-20)</td>
+                    </tr>
+                    <tr>
+                        <td>Total Supply</td>
+                        <td>27,000,000 RFN</td>
+                    </tr>
+                    <tr>
+                        <td>Decimals</td>
+                        <td>18</td>
+                    </tr>
+                    <tr>
+                        <td>Contract Address</td>
+                        <td>0x56C44f52D7Dc7DD82b01f6694D9a91C8e3cDF9a6</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Token Distribution -->
+        <section id="distribution" class="section">
+            <h2>5. Token Distribution</h2>
+            
+            <div class="tokenomics-chart-container">
+                <div class="chart-wrapper">
+                    <canvas id="tokenDistributionChart" width="400" height="400"></canvas>
+                </div>
+                
+                <div class="tokenomics-details">
+                    <div class="distribution-item presale">
+                        <div class="distribution-info">
+                            <div class="color-dot presale"></div>
+                            <div>
+                                <strong>Presale</strong>
+                                <div>Private/Public Sale</div>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">30%</div>
+                            <div class="distribution-amount">8.1M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item rewards">
+                        <div class="distribution-info">
+                            <div class="color-dot rewards"></div>
+                            <div>
+                                <strong>Rewards Pool</strong>
+                                <div>Staking & Ecosystem</div>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">50%</div>
+                            <div class="distribution-amount">13.5M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item liquidity">
+                        <div class="distribution-info">
+                            <div class="color-dot liquidity"></div>
+                            <div>
+                                <strong>Liquidity</strong>
+                                <div>DEX Liquidity (Locked 1 year)</div>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">10%</div>
+                            <div class="distribution-amount">2.7M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item team">
+                        <div class="distribution-info">
+                            <div class="color-dot team"></div>
+                            <div>
+                                <strong>Team</strong>
+                                <div>24-month vesting</div>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">7%</div>
+                            <div class="distribution-amount">1.89M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item marketing">
+                        <div class="distribution-info">
+                            <div class="color-dot marketing"></div>
+                            <div>
+                                <strong>Marketing</strong>
+                                <div>2-year allocation</div>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">3%</div>
+                            <div class="distribution-amount">0.81M RFN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3>5.1 Detailed Allocation</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Allocation</th>
+                        <th>Percentage</th>
+                        <th>Amount (RFN)</th>
+                        <th>Release Schedule</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Presale</td>
+                        <td>30%</td>
+                        <td>8,100,000</td>
+                        <td>TGE: 40%, then monthly over 6 months</td>
+                        <td>Private & public sale in phases</td>
+                    </tr>
+                    <tr>
+                        <td>Rewards Pool</td>
+                        <td>50%</td>
+                        <td>13,500,000</td>
+                        <td>Initial allocation + continuous 1% buyback</td>
+                        <td>Staking rewards, ecosystem incentives</td>
+                    </tr>
+                    <tr>
+                        <td>Liquidity</td>
+                        <td>10%</td>
+                        <td>2,700,000</td>
+                        <td>100% locked for 1 year at TGE</td>
+                        <td>DEX liquidity provision</td>
+                    </tr>
+                    <tr>
+                        <td>Team</td>
+                        <td>7%</td>
+                        <td>1,890,000</td>
+                        <td>24-month linear vesting</td>
+                        <td>Team compensation & development</td>
+                    </tr>
+                    <tr>
+                        <td>Marketing</td>
+                        <td>3%</td>
+                        <td>810,000</td>
+                        <td>Quarterly releases over 2 years</td>
+                        <td>Community growth & awareness</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>5.2 Presale Details</h3>
+            <div class="tech-box">
+                <table class="data-table">
+                    <tr>
+                        <td>Mini Cap</td>
+                        <td>5 BNB</td>
+                    </tr>
+                    <tr>
+                        <td>Soft Cap</td>
+                        <td>10 BNB</td>
+                    </tr>
+                    <tr>
+                        <td>Hard Cap</td>
+                        <td>20 BNB</td>
+                    </tr>
+                    <tr>
+                        <td>Sale Structure</td>
+                        <td>Private (whitelist) followed by Public</td>
+                    </tr>
+                    <tr>
+                        <td>Token Release</td>
+                        <td>40% at TGE, remainder vested monthly</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        
+        <!-- Staking Mechanism -->
+        <section id="staking" class="section">
+            <h2>6. Staking & Reward Mechanism</h2>
+            
+            <h3>6.1 Staking Pool Structure</h3>
+            <p>The staking mechanism allows RFN holders to lock their tokens in various pools to earn rewards from the ecosystem.</p>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Pool Type</th>
+                        <th>Lock Period</th>
+                        <th>Base APY</th>
+                        <th>Reward Token</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Flexible Staking</td>
+                        <td>0 days (flexible)</td>
+                        <td>5-10%</td>
+                        <td>RFN</td>
+                    </tr>
+                    <tr>
+                        <td>30-day Lock</td>
+                        <td>30 days</td>
+                        <td>15-25%</td>
+                        <td>RFN/BNB</td>
+                    </tr>
+                    <tr>
+                        <td>90-day Lock</td>
+                        <td>90 days</td>
+                        <td>30-45%</td>
+                        <td>RFN/BNB</td>
+                    </tr>
+                    <tr>
+                        <td>180-day Lock</td>
+                        <td>180 days</td>
+                        <td>50-75%</td>
+                        <td>RFN/BNB</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>6.2 Reward Distribution</h3>
+            <p>Rewards are distributed from multiple sources:</p>
+            <ul>
+                <li><strong>Initial Rewards Pool:</strong> 13.5M RFN allocated for initial staking rewards</li>
+                <li><strong>Ecosystem Buyback:</strong> 1% of farm profits allocated to buyback RFN for staking rewards</li>
+                <li><strong>Transaction Fees:</strong> Portion of DEX transaction fees redirected to reward pool</li>
+            </ul>
+            
+            <div class="tech-box">
+                <h4>Reward Calculation Formula</h4>
+                <p><code>User Rewards = (User Staked Amount / Total Staked Amount) × Daily Reward Pool</code></p>
+                <p>Daily rewards are calculated and distributed automatically through smart contracts.</p>
+            </div>
+        </section>
+        
+        <!-- Technical Details -->
+        <section id="technical" class="section">
+            <h2>7. Technical Implementation</h2>
+            
+            <h3>7.1 Smart Contract Features</h3>
+            <ul>
+                <li><strong>BEP-20 Compliance:</strong> Full compatibility with BNB Chain ecosystem</li>
+                <li><strong>Anti-whale Mechanism:</strong> Limits on maximum transaction amounts</li>
+                <li><strong>Auto-Liquidity:</strong> Percentage of transactions added to liquidity pool</li>
+                <li><strong>Reflection Rewards:</strong> Optional reflection to holders</li>
+                <li><strong>Multi-signature Wallet:</strong> Treasury management with multiple signers</li>
+            </ul>
+            
+            <h3>7.2 Contract Address & Verification</h3>
+            <div class="contract-address">
+                0x56C44f52D7Dc7DD82b01f6694D9a91C8e3cDF9a6
+            </div>
+            <p>Contract will be verified on BscScan with full source code transparency.</p>
+            
+            <h3>7.3 Security Measures</h3>
+            <ul>
+                <li>Third-party audit before deployment</li>
+                <li>Time-locked team tokens (24-month vesting)</li>
+                <li>Liquidity locked for 1 year using trusted locking service</li>
+                <li>Multi-signature wallet for ecosystem funds</li>
+                <li>Emergency pause functionality for critical situations</li>
+            </ul>
+        </section>
+        
+        <!-- Roadmap -->
+        <section id="roadmap" class="section">
+            <h2>8. Development Roadmap</h2>
+            
+            <div class="roadmap-timeline">
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-tag">Q1 2024</span>
+                        <h3>Phase 1: Foundation</h3>
+                    </div>
+                    <ul>
+                        <li>Smart contract development & audit</li>
+                        <li>Website launch with basic functionality</li>
+                        <li>Initial community building on Telegram & Twitter</li>
+                        <li>Private presale for early supporters</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-tag">Q2 2024</span>
+                        <h3>Phase 2: Launch & Distribution</h3>
+                    </div>
+                    <ul>
+                        <li>Public presale completion</li>
+                        <li>DEX listing (PancakeSwap)</li>
+                        <li>Staking platform launch</li>
+                        <li>Initial marketing campaigns</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-tag">Q3-Q4 2024</span>
+                        <h3>Phase 3: Ecosystem Expansion</h3>
+                    </div>
+                    <ul>
+                        <li>Community governance platform</li>
+                        <li>Educational content platform</li>
+                        <li>First community voting events</li>
+                        <li>Partnership development</li>
+                    </ul>
+                </div>
+                
+                <div class="roadmap-phase">
+                    <div class="phase-header">
+                        <span class="phase-tag">2025</span>
+                        <h3>Phase 4: Growth & Integration</h3>
+                    </div>
+                    <ul>
+                        <li>Mobile application development</li>
+                        <li>Advanced staking features</li>
+                        <li>International community expansion</li>
+                        <li>Additional CEX listings</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Team -->
+        <section id="team" class="section">
+            <h2>9. Team & Advisors</h2>
+            
+            <p>The Riffan Rabbit Farms team brings together expertise in rabbit breeding, blockchain technology, and community management.</p>
+            
+            <h3>9.1 Core Team</h3>
+            <ul>
+                <li><strong>Founder:</strong> 10+ years in rabbit breeding & farm management</li>
+                <li><strong>Blockchain Developer:</strong> 5+ years in smart contract development</li>
+                <li><strong>Community Manager:</strong> 3+ years in crypto community building</li>
+                <li><strong>Marketing Specialist:</strong> Digital marketing & social media expertise</li>
+            </ul>
+            
+            <h3>9.2 Advisory Board</h3>
+            <ul>
+                <li><strong>Animal Welfare Advisor:</strong> Veterinary specialist in rabbit care</li>
+                <li><strong>Blockchain Advisor:</strong> DeFi project consultant</li>
+                <li><strong>Community Advisor:</strong> Experienced DAO organizer</li>
+            </ul>
+            
+            <p><em>Note: Full team doxxing will occur progressively as the project matures and achieves milestones.</em></p>
+        </section>
+        
+        <!-- Legal Disclaimer -->
+        <section id="legal" class="section">
+            <h2>10. Legal Disclaimer & Risk Factors</h2>
+            
+            <div class="disclaimer-box">
+                <h3>⚠️ IMPORTANT LEGAL NOTICE</h3>
+                <p><strong>RFN TOKEN IS A COMMUNITY UTILITY TOKEN ONLY</strong></p>
+            </div>
+            
+            <h3>10.1 What RFN Token IS NOT:</h3>
+            <ul>
+                <li><strong>NOT an investment instrument</strong> - No profit guarantees or expectations</li>
+                <li><strong>NOT a security</strong> - Not regulated as financial instrument</li>
+                <li><strong>NOT ownership in Riffan Rabbit Farms</strong> - No equity, shares, or ownership rights</li>
+                <li><strong>NOT governance over farm operations</strong> - Cannot intervene in farm management decisions</li>
+                <li><strong>NOT a promise of returns</strong> - Token value may fluctuate based on market</li>
+            </ul>
+            
+            <h3>10.2 What RFN Token IS:</h3>
+            <ul>
+                <li><strong>Community participation token</strong> for ecosystem access</li>
+                <li><strong>Utility token</strong> for staking rewards and ecosystem benefits</li>
+                <li><strong>Voting rights</strong> for community activities (naming rabbits, etc.)</li>
+                <li><strong>Access token</strong> to educational content and community features</li>
+            </ul>
+            
+            <h3>10.3 Risk Factors</h3>
+            <ul>
+                <li><strong>Market Risk:</strong> Token value subject to market volatility</li>
+                <li><strong>Regulatory Risk:</strong> Changing cryptocurrency regulations</li>
+                <li><strong>Technology Risk:</strong> Smart contract vulnerabilities</li>
+                <li><strong>Adoption Risk:</strong> Dependent on community growth</li>
+                <li><strong>Liquidity Risk:</strong> Market liquidity may be limited</li>
+            </ul>
+            
+            <h3>10.4 User Responsibilities</h3>
+            <p>By participating in the RFN ecosystem, users acknowledge that:</p>
+            <ul>
+                <li>They have conducted their own research</li>
+                <li>They understand the token's utility nature</li>
+                <li>They accept all associated risks</li>
+                <li>They are not purchasing for investment purposes</li>
+                <li>They verify information through official channels only</li>
+            </ul>
+        </section>
+        
+        <!-- Conclusion -->
+        <section class="section">
+            <h2>Conclusion</h2>
+            <p>The RFN token represents an innovative approach to building a global rabbit enthusiast community through blockchain technology. By combining traditional rabbit breeding expertise with transparent digital participation mechanisms, we aim to create a sustainable ecosystem that benefits all participants.</p>
+            
+            <p>This whitepaper serves as the foundational document outlining the technical and economic parameters of the RFN token ecosystem. As the project evolves, updates and modifications will be communicated transparently through official channels.</p>
+            
+            <div class="tech-box">
+                <h4>Official Channels</h4>
+                <p><strong>Website:</strong> riffanrabbitry.xyz</p>
+                <p><strong>Twitter:</strong> @riffanrabbitry</p>
+                <p><strong>Telegram:</strong> t.me/riffanrabbitry</p>
+                <p><strong>GitHub:</strong> github.com/riffanrabbitry</p>
+                <p><strong>Email:</strong> info@riffanrabbitry.xyz</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Riffan Rabbit Farms</h3>
+                <p>Premium rabbit breeder specialty farm established in 2014. Located in Lembang, West Bandung, West Java, Indonesia.</p>
+                <p>© 2024 Riffan Rabbit Farms. All Rights Reserved.</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Disclaimer</h3>
+                <p>This whitepaper is for informational purposes only. RFN is a community utility token, not an investment instrument. Always conduct your own research and consult with financial advisors before participating.</p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>RFN Token Whitepaper v1.0 | Last Updated: January 2024</p>
+        </div>
+    </footer>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <script>
+        // Initialize Token Distribution Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('tokenDistributionChart').getContext('2d');
+            
+            const tokenDistributionChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Presale (30%)', 'Rewards Pool (50%)', 'Liquidity (10%)', 'Team (7%)', 'Marketing (3%)'],
+                    datasets: [{
+                        data: [30, 50, 10, 7, 3],
+                        backgroundColor: [
+                            '#3498db', // Presale
+                            '#9b59b6', // Rewards
+                            '#2ecc71', // Liquidity
+                            '#e74c3c', // Team
+                            '#f39c12'  // Marketing
+                        ],
+                        borderWidth: 2,
+                        borderColor: '#ffffff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = Math.round((value / total) * 100);
+                                    const amount = getTokenAmount(value);
+                                    return `${label}: ${percentage}% (${amount})`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            
+            function getTokenAmount(percentage) {
+                const totalSupply = 27000000;
+                const amount = Math.round(totalSupply * (percentage / 100));
+                return new Intl.NumberFormat().format(amount) + ' RFN';
+            }
+            
+            // Table of Contents highlighting
+            const sections = document.querySelectorAll('.section');
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        tocLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                                link.style.color = 'var(--primary)';
+                                link.style.fontWeight = '600';
+                                link.style.borderLeftColor = 'var(--gold)';
+                            }
+                        });
+                    }
+                });
+            }, { threshold: 0.3 });
+            
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Smooth scrolling for TOC links
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetSection = document.querySelector(targetId);
+                    
+                    window.scrollTo({
+                        top: targetSection.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+            
+            // Add print functionality
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                    e.preventDefault();
+                    window.print();
+                }
+                
+                if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                    e.preventDefault();
+                    
+                    const htmlContent = document.documentElement.outerHTML;
+                    const blob = new Blob([htmlContent], { type: 'text/html' });
+                    const url = URL.createObjectURL(blob);
+                    
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'rfn-token-whitepaper.html';
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    URL.revokeObjectURL(url);
+                    
+                    alert('Whitepaper downloaded as HTML file!');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
