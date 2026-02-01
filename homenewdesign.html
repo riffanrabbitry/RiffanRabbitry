@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riffan Rabbit Farms - Premium Rabbit Breeder Since 2014</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #8a6d3b;
+            --secondary: #5d4037;
+            --accent: #d7ccc8;
+            --light: #f5f1e8;
+            --dark: #3e2723;
+            --gold: #c8a96a;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            color: var(--secondary);
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+            background-color: rgba(138, 109, 59, 0.1);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            transition: var(--transition);
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(62, 39, 35, 0.7), rgba(62, 39, 35, 0.7)), 
+                        url('https://images.unsplash.com/photo-1452857297128-d9c29adba80b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 90px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            color: var(--light);
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--gold);
+            color: var(--dark);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Rabbit Breeds Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin: 60px 0 40px;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--gold);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .breeds-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 60px;
+        }
+        
+        /* Rabbit Breed Card */
+        .breed-card {
+            background-color: white;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .breed-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .breed-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 30px;
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .breed-name {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        /* Image Slider */
+        .image-slider {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
+        }
+        
+        .slider-container {
+            display: flex;
+            width: 400%;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+        
+        .slide {
+            width: 25%;
+            height: 100%;
+        }
+        
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .slider-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .slider-dot.active {
+            background-color: var(--gold);
+            transform: scale(1.2);
+        }
+        
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        
+        .slider-arrow:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        
+        .slider-arrow.left {
+            left: 20px;
+        }
+        
+        .slider-arrow.right {
+            right: 20px;
+        }
+        
+        /* Breed Info */
+        .breed-info {
+            padding: 30px;
+        }
+        
+        .breed-history {
+            background-color: rgba(138, 109, 59, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .info-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .breed-description {
+            line-height: 1.7;
+            color: var(--dark);
+        }
+        
+        /* Token Section */
+        .token-section {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .token-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .token-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .token-section p {
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: var(--accent);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background-color: var(--gold);
+            color: var(--dark);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 90px;
+            right: -100%;
+            width: 250px;
+            height: calc(100vh - 90px);
+            background-color: white;
+            box-shadow: -5px 0 15px var(--shadow);
+            transition: right 0.4s ease;
+            padding: 30px;
+            z-index: 999;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--primary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+            
+            .image-slider {
+                height: 350px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .hero-content {
+                padding: 30px 20px;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .image-slider {
+                height: 300px;
+            }
+            
+            .breed-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero {
+                margin-top: 80px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .image-slider {
+                height: 250px;
+            }
+            
+            .slider-arrow {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .breed-info {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbit Farms Logo" class="logo">
+                <div class="logo-text">
+                    <h1>Riffan Rabbit Farms</h1>
+                    <p>Premium Rabbit Breeder Since 2014</p>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#breeds">Rabbit Breeds</a></li>
+                <li><a href="#token">RFN Token</a></li>
+                <li><a href="disclaimer">Disclaimer</a></li>
+            </ul>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#breeds">Rabbit Breeds</a></li>
+            <li><a href="#token">RFN Token</a></li>
+            <li><a href="disclaimer">Disclaimer</a></li>
+        </ul>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h2>Riffan Rabbit Farms</h2>
+            <p>Established in 2014, Riffan Rabbit Farms is a premium rabbit breeder specialty farm located in Lembang, West Bandung, West Java, Indonesia. We breed and raise high-quality rabbits with care, dedication, and expertise.</p>
+            <a href="#breeds" class="btn">Explore Our Rabbits</a>
+        </div>
+    </section>
+    
+    <!-- Rabbit Breeds Section -->
+    <section id="breeds">
+        <h2 class="section-title">Our Premium Rabbit Breeds</h2>
+        
+        <div class="breeds-container">
+            <!-- Netherland Dwarf -->
+            <div class="breed-card" id="netherland-dwarf">
+                <div class="breed-header">
+                    <h3 class="breed-name">Netherland Dwarf</h3>
+                    <div class="slider-nav" id="nd-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="nd-slider">
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/nd.png" alt="Netherland Dwarf Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/nd2.png" alt="Netherland Dwarf Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/nd3.png" alt="Netherland Dwarf Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/nd4.png" alt="Netherland Dwarf Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="nd-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="nd-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-history">
+                        <h4 class="info-title">History</h4>
+                        <p class="breed-description">The Netherland Dwarf is one of the smallest rabbit breeds, originating in the Netherlands in the early 20th century. Through selective breeding of smaller Polish rabbits and wild rabbits, breeders created this distinctive tiny breed that quickly gained popularity worldwide.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title">Description</h4>
+                        <p>Netherland Dwarfs are known for their compact bodies, short ears, and large heads relative to their body size. They typically weigh between 1.1 to 2.5 pounds. Despite their small size, they have bold personalities and come in a wide variety of colors. Their tiny size makes them popular as house pets, but they require careful handling due to their fragile bones.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Holland Lop -->
+            <div class="breed-card" id="holland-lop">
+                <div class="breed-header">
+                    <h3 class="breed-name">Holland Lop</h3>
+                    <div class="slider-nav" id="hl-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="hl-slider">
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/hl.png" alt="Holland Lop Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/hl2.png" alt="Holland Lop Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/hl3.png" alt="Holland Lop Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/hl4.png" alt="Holland Lop Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="hl-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="hl-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-history">
+                        <h4 class="info-title">History</h4>
+                        <p class="breed-description">The Holland Lop was created in the Netherlands in the 1950s by Adriann de Cock, who aimed to produce a miniature version of the French Lop. By crossing French Lops with Netherland Dwarfs, he successfully created this adorable dwarf lop breed that was recognized in the Netherlands in 1964 and later worldwide.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title">Description</h4>
+                        <p>Holland Lops are small, compact rabbits with a muscular body and distinctive floppy ears that hang down beside their head. They typically weigh between 2-4 pounds. Known for their sweet temperament and playful nature, Holland Lops make excellent family pets. Their ears should be lopped (hanging down) from birth, and they come in a wide array of colors and patterns.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Jersey Wooly -->
+            <div class="breed-card" id="jersey-wooly">
+                <div class="breed-header">
+                    <h3 class="breed-name">Jersey Wooly</h3>
+                    <div class="slider-nav" id="jw-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="jw-slider">
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/jw.png" alt="Jersey Wooly Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/jw2.png" alt="Jersey Wooly Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/jw3.png" alt="Jersey Wooly Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/jw4.png" alt="Jersey Wooly Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="jw-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="jw-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-history">
+                        <h4 class="info-title">History</h4>
+                        <p class="breed-description">The Jersey Wooly was developed in the United States in the 1980s by Bonnie Seeley of High Bridge, New Jersey. She crossed a Netherland Dwarf with a French Angora rabbit to create a small, wool-producing breed with a gentle temperament. The breed was recognized by the American Rabbit Breeders Association in 1988.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title">Description</h4>
+                        <p>Jersey Woolies are small rabbits weighing between 1-3 pounds, known for their soft, wooly fur that requires regular grooming. They have a compact body, short ears, and a friendly, docile temperament that makes them excellent pets. Their wool comes in various colors and is similar to angora but easier to maintain. They are often described as "gentle teddy bears" due to their sweet nature and fluffy appearance.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flemish Giant -->
+            <div class="breed-card" id="flemish-giant">
+                <div class="breed-header">
+                    <h3 class="breed-name">Flemish Giant</h3>
+                    <div class="slider-nav" id="fg-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="fg-slider">
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/fg.png" alt="Flemish Giant Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/fg2.png" alt="Flemish Giant Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/fg3.png" alt="Flemish Giant Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/fg4.png" alt="Flemish Giant Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="fg-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="fg-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-history">
+                        <h4 class="info-title">History</h4>
+                        <p class="breed-description">The Flemish Giant is one of the oldest and largest recognized rabbit breeds, originating in the Flanders region of Belgium as early as the 16th century. Originally bred for meat and fur, these "gentle giants" were imported to America in the early 20th century and quickly became popular as show animals and pets due to their impressive size and calm temperament.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title">Description</h4>
+                        <p>Flemish Giants are massive rabbits, with adults typically weighing 13-14 pounds or more, and some reaching over 20 pounds. They have a semi-arch body type, long powerful legs, and broad heads. Despite their imposing size, they are known for their docile, gentle nature and are often called "gentle giants." They require more space and food than smaller breeds but make wonderful, calm companions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- English Angora -->
+            <div class="breed-card" id="english-angora">
+                <div class="breed-header">
+                    <h3 class="breed-name">English Angora</h3>
+                    <div class="slider-nav" id="ea-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="ea-slider">
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/ea.png" alt="English Angora Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/ea2.png" alt="English Angora Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/ea3.png" alt="English Angora Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="riffanrabbitry.xyz/assets/ea4.png" alt="English Angora Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="ea-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="ea-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-history">
+                        <h4 class="info-title">History</h4>
+                        <p class="breed-description">Angora rabbits are one of the oldest types of domestic rabbits, originating in Ankara (historically known as Angora), Turkey. They were brought to France in the 18th century and became popular with French royalty. The English Angora was developed in England through selective breeding for their distinctive wooly appearance and has been prized for centuries for their luxurious wool.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title">Description</h4>
+                        <p>English Angoras are small to medium-sized rabbits weighing 5-7.5 pounds, completely covered in long, soft wool that requires daily grooming to prevent matting. Their wool grows about 1 inch per month and can be harvested every 3-4 months. They have a rounded body shape with wool covering their entire body including their face and ears, giving them a distinctive "pom-pom" appearance. They are gentle, friendly rabbits that require dedicated care due to their high-maintenance coats.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- RFN Token Section -->
+    <section class="token-section" id="token">
+        <div class="token-container">
+            <h2>RFN Token - Join Our Community</h2>
+            <p>Riffan Rabbit Farms is launching the RFN Token, a community token that allows rabbit enthusiasts, breeders, and animal lovers to become part of our growing ecosystem. Holders of RFN tokens will receive exclusive benefits, early access to new rabbit breeds, and voting rights in community decisions.</p>
+            <a href="riffanrabbitry.xyz/riffan" class="btn">Buy RFN Token Now</a>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Riffan Rabbit Farms</h3>
+                <p>Premium rabbit breeder specialty farm established in 2014. Located in Lembang, West Bandung, West Java, Indonesia.</p>
+                <p>2026 Rabbit Breeder Indonesia</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Riffan Rabbit Farm's, Lembang, West Bandung</p>
+                <p><i class="fas fa-phone"></i> <a href="wa.me/6287822793234" style="color: var(--accent); text-decoration: none;">+62 878 2279 3234</a></p>
+                <div class="social-links">
+                    <a href="instagram.com/kelinci_lembang" aria-label="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="github.com/riffanrabbitry" aria-label="GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="x.com/riffanrabbitry" aria-label="Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="wa.me/6287822793234" aria-label="WhatsApp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li><a href="#home" style="color: var(--accent); text-decoration: none;">Home</a></li>
+                    <li><a href="#breeds" style="color: var(--accent); text-decoration: none;">Rabbit Breeds</a></li>
+                    <li><a href="#token" style="color: var(--accent); text-decoration: none;">RFN Token</a></li>
+                    <li><a href="disclaimer" style="color: var(--accent); text-decoration: none;">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2026 Riffan Rabbit Farms. All rights reserved.</p>
+            <p>Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for rabbit enthusiasts worldwide</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            
+            // Animate hamburger to X
+            const spans = hamburger.querySelectorAll('span');
+            if (mobileMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.mobile-nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            });
+        });
+        
+        // Image Slider Functionality
+        function createSlider(sliderId, prevId, nextId, navId) {
+            const slider = document.getElementById(sliderId);
+            const prevBtn = document.getElementById(prevId);
+            const nextBtn = document.getElementById(nextId);
+            const dots = document.querySelectorAll(`#${navId} .slider-dot`);
+            let currentSlide = 0;
+            const totalSlides = 4;
+            
+            function updateSlider() {
+                slider.style.transform = `translateX(-${currentSlide * 25}%)`;
+                
+                // Update dots
+                dots.forEach((dot, index) => {
+                    if (index === currentSlide) {
+                        dot.classList.add('active');
+                    } else {
+                        dot.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Next button
+            nextBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            });
+            
+            // Previous button
+            prevBtn.addEventListener('click', () => {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateSlider();
+            });
+            
+            // Dot navigation
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
+                });
+            });
+            
+            // Auto slide every 5 seconds
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateSlider();
+            }, 5000);
+        }
+        
+        // Initialize all sliders
+        createSlider('nd-slider', 'nd-prev', 'nd-next', 'nd-nav');
+        createSlider('hl-slider', 'hl-prev', 'hl-next', 'hl-nav');
+        createSlider('jw-slider', 'jw-prev', 'jw-next', 'jw-nav');
+        createSlider('fg-slider', 'fg-prev', 'fg-next', 'fg-nav');
+        createSlider('ea-slider', 'ea-prev', 'ea-next', 'ea-nav');
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 100,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add download shortcut functionality
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+S or Cmd+S to download page as HTML
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+                e.preventDefault();
+                
+                // Create a downloadable HTML file
+                const htmlContent = document.documentElement.outerHTML;
+                const blob = new Blob([htmlContent], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'riffan-rabbit-farms-website.html';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                alert('Website downloaded as HTML file!');
+            }
+        });
+        
+        // Add a subtle scroll effect to header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                header.style.padding = '10px 0';
+            } else {
+                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+                header.style.padding = '15px 0';
+            }
+        });
+    </script>
+</body>
+</html>
