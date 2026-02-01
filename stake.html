@@ -1,0 +1,2185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stake RFN Tokens - Riffan Rabbit Farms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #8a6d3b;
+            --secondary: #5d4037;
+            --accent: #d7ccc8;
+            --light: #f5f1e8;
+            --dark: #3e2723;
+            --gold: #c8a96a;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--secondary);
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+            background-color: rgba(138, 109, 59, 0.1);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+            background: transparent;
+            border: none;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        
+        /* Wallet Connect */
+        .wallet-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .connect-btn {
+            background-color: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .connect-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .wallet-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(138, 109, 59, 0.1);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .wallet-address {
+            font-family: monospace;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .wallet-balance {
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Hero Section */
+        .staking-hero {
+            background: linear-gradient(rgba(62, 39, 35, 0.9), rgba(62, 39, 35, 0.9)), 
+                        url('https://images.unsplash.com/photo-1556838803-cc94986cb631?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 100px 20px 60px;
+            text-align: center;
+            color: white;
+            margin-top: 74px;
+        }
+        
+        .staking-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--gold);
+        }
+        
+        .staking-hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--accent);
+            line-height: 1.6;
+        }
+        
+        /* Main Content */
+        .staking-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 992px) {
+            .staking-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Staking Pools Section */
+        .staking-pools {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(138, 109, 59, 0.2);
+        }
+        
+        .pools-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .pools-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        .pool-card {
+            border: 2px solid rgba(138, 109, 59, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pool-card:hover {
+            border-color: var(--gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .pool-card.featured {
+            border-color: var(--gold);
+            background: linear-gradient(135deg, rgba(200, 169, 106, 0.05) 0%, rgba(200, 169, 106, 0.01) 100%);
+        }
+        
+        .pool-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--gold);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .pool-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .pool-name {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .pool-apy {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .pool-apy span {
+            font-size: 1rem;
+            color: var(--secondary);
+        }
+        
+        .pool-details {
+            margin-bottom: 25px;
+        }
+        
+        .pool-detail {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+        }
+        
+        .pool-detail .label {
+            color: var(--secondary);
+        }
+        
+        .pool-detail .value {
+            color: var(--dark);
+            font-weight: 500;
+        }
+        
+        .stake-form {
+            margin-top: 20px;
+        }
+        
+        .token-toggle {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            background-color: rgba(138, 109, 59, 0.05);
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .token-option {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+        
+        .token-option.active {
+            background-color: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            color: var(--primary);
+        }
+        
+        .stake-input-group {
+            margin-bottom: 20px;
+        }
+        
+        .stake-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .input-with-max {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .stake-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid rgba(138, 109, 59, 0.3);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        .stake-input:focus {
+            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(200, 169, 106, 0.2);
+        }
+        
+        .max-btn {
+            background-color: var(--gold);
+            color: var(--dark);
+            border: none;
+            padding: 0 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .max-btn:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .stake-btn {
+            width: 100%;
+            padding: 14px;
+            background-color: var(--gold);
+            color: var(--dark);
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .stake-btn:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stake-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Sidebar */
+        .staking-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .user-stats, .quick-actions, .stats-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px var(--shadow);
+        }
+        
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.1);
+        }
+        
+        .stats-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .stats-label {
+            color: var(--secondary);
+            font-size: 0.95rem;
+        }
+        
+        .stats-value {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .action-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 20px;
+            background-color: rgba(138, 109, 59, 0.05);
+            border: 1px solid rgba(138, 109, 59, 0.2);
+            border-radius: 8px;
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .action-btn:hover {
+            background-color: rgba(138, 109, 59, 0.1);
+            border-color: var(--gold);
+            transform: translateX(5px);
+        }
+        
+        .action-btn i {
+            color: var(--gold);
+            font-size: 1.2rem;
+        }
+        
+        /* My Stakes Section */
+        .my-stakes {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px var(--shadow);
+            margin-top: 30px;
+        }
+        
+        .stakes-table-container {
+            overflow-x: auto;
+        }
+        
+        .stakes-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        .stakes-table th {
+            background-color: rgba(138, 109, 59, 0.05);
+            padding: 15px;
+            text-align: left;
+            color: var(--primary);
+            font-weight: 600;
+            border-bottom: 2px solid rgba(138, 109, 59, 0.2);
+        }
+        
+        .stakes-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.1);
+            vertical-align: middle;
+        }
+        
+        .stakes-table tr:hover {
+            background-color: rgba(138, 109, 59, 0.02);
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+        
+        .status-active {
+            background-color: rgba(39, 174, 96, 0.1);
+            color: var(--success);
+        }
+        
+        .status-locked {
+            background-color: rgba(243, 156, 18, 0.1);
+            color: var(--warning);
+        }
+        
+        .status-completed {
+            background-color: rgba(52, 152, 219, 0.1);
+            color: var(--info);
+        }
+        
+        .action-cell {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .table-btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .table-btn.claim {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .table-btn.unstake {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .table-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(138, 109, 59, 0.2);
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--primary);
+        }
+        
+        .modal-body {
+            margin-bottom: 25px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-btn.primary {
+            background-color: var(--gold);
+            color: var(--dark);
+        }
+        
+        .modal-btn.secondary {
+            background-color: rgba(138, 109, 59, 0.1);
+            color: var(--dark);
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(138, 109, 59, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--gold);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .notification.active {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background-color: var(--success);
+        }
+        
+        .notification.error {
+            background-color: var(--danger);
+        }
+        
+        .notification.info {
+            background-color: var(--info);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 74px;
+            right: -100%;
+            width: 280px;
+            height: calc(100vh - 74px);
+            background-color: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+            transition: right 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 30px 25px;
+            z-index: 999;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.1);
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--primary);
+            padding-left: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 50px 20px 25px;
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 767px) {
+            .nav-menu, .wallet-section {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .staking-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .staking-hero p {
+                font-size: 1rem;
+            }
+            
+            .pool-apy {
+                font-size: 1.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .staking-hero {
+                padding: 80px 20px 40px;
+            }
+            
+            .pool-card {
+                padding: 20px;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbit Farms Logo" class="logo">
+                <div class="logo-text">
+                    <h1>Riffan Rabbit Farms</h1>
+                    <p>Stake RFN Tokens</p>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/token">RFN Token</a></li>
+                <li><a href="/stake" class="active">Stake RFN</a></li>
+                <li><a href="/disclaimer">Disclaimer</a></li>
+            </ul>
+            
+            <div class="wallet-section">
+                <div class="wallet-info" id="walletInfo">
+                    <div>
+                        <div class="wallet-address" id="walletAddressShort"></div>
+                        <div class="wallet-balance">Balance: <span id="walletBalance">0</span> RFN</div>
+                    </div>
+                    <button class="connect-btn" id="disconnectBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button class="connect-btn" id="connectBtn">
+                    <i class="fas fa-wallet"></i>
+                    <span>Connect Wallet</span>
+                </button>
+            </div>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/token">RFN Token</a></li>
+            <li><a href="/stake" class="active">Stake RFN</a></li>
+            <li><a href="/disclaimer">Disclaimer</a></li>
+        </ul>
+        <div style="margin-top: 30px;">
+            <button class="connect-btn" id="mobileConnectBtn" style="width: 100%;">
+                <i class="fas fa-wallet"></i>
+                <span>Connect Wallet</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="staking-hero">
+        <h1>Stake RFN Tokens & Earn Rewards</h1>
+        <p>Lock your RFN tokens or BNB in our staking pools and earn attractive APY returns. Choose from multiple lock periods with different reward rates. Help secure the Riffan Rabbit Farms ecosystem while earning passive income.</p>
+        <div style="margin-top: 30px; font-size: 1.2rem; color: var(--gold); font-weight: 600;">
+            Total Value Locked: <span id="totalValueLocked">Loading...</span>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="staking-container">
+        <!-- Staking Pools -->
+        <section class="staking-pools">
+            <h2 class="section-title">Available Staking Pools</h2>
+            <div class="pools-grid" id="poolsGrid">
+                <!-- Pools will be loaded dynamically -->
+            </div>
+            
+            <div style="margin-top: 40px; padding: 20px; background-color: rgba(138, 109, 59, 0.05); border-radius: 10px;">
+                <h3 style="color: var(--primary); margin-bottom: 10px; font-size: 1.1rem;">
+                    <i class="fas fa-info-circle" style="color: var(--gold); margin-right: 8px;"></i>
+                    Staking Information
+                </h3>
+                <p style="color: var(--secondary); font-size: 0.95rem; line-height: 1.6;">
+                    <strong>Minimum Stake:</strong> Equivalent to $14.76 in RFN (10,000 RFN) or BNB (0.019 BNB)<br>
+                    <strong>Maximum Stake:</strong> 1,000,000 RFN or 2 BNB per pool<br>
+                    <strong>Rewards:</strong> Paid in RFN tokens upon unstaking<br>
+                    <strong>Withdrawals:</strong> Available after lock period ends<br>
+                    <strong>APY:</strong> Annual Percentage Yield, subject to change
+                </p>
+            </div>
+        </section>
+        
+        <!-- Sidebar -->
+        <aside class="staking-sidebar">
+            <!-- User Stats -->
+            <div class="user-stats">
+                <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.3rem;">My Staking Stats</h3>
+                <div class="stats-item">
+                    <span class="stats-label">Total Staked</span>
+                    <span class="stats-value" id="myTotalStaked">0 RFN</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Claimable Rewards</span>
+                    <span class="stats-value" id="myClaimableRewards">0 RFN</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Pending Rewards</span>
+                    <span class="stats-value" id="myPendingRewards">0 RFN</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Active Stakes</span>
+                    <span class="stats-value" id="myActiveStakes">0</span>
+                </div>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3 style="color: var(--primary); margin-bottom: 15px; font-size: 1.3rem;">Quick Actions</h3>
+                <button class="action-btn" id="claimAllBtn">
+                    <i class="fas fa-gift"></i>
+                    <span>Claim All Rewards</span>
+                </button>
+                <button class="action-btn" id="addRewardsBtn">
+                    <i class="fas fa-plus-circle"></i>
+                    <span>Add to Reward Pool</span>
+                </button>
+                <a href="https://bscscan.com/address/0x603fcF9aCEDAB68007fd82d86913A88c1d41A6b2" target="_blank" class="action-btn">
+                    <i class="fas fa-external-link-alt"></i>
+                    <span>View Contract</span>
+                </a>
+            </div>
+            
+            <!-- Stats Card -->
+            <div class="stats-card">
+                <h3 style="color: var(--primary); margin-bottom: 20px; font-size: 1.3rem;">Global Stats</h3>
+                <div class="stats-item">
+                    <span class="stats-label">Total Staked</span>
+                    <span class="stats-value" id="globalTotalStaked">Loading...</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Total Stakers</span>
+                    <span class="stats-value" id="globalTotalStakers">Loading...</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Rewards Distributed</span>
+                    <span class="stats-value" id="globalRewardsDistributed">Loading...</span>
+                </div>
+                <div class="stats-item">
+                    <span class="stats-label">Reward Pool</span>
+                    <span class="stats-value" id="globalRewardPool">Loading...</span>
+                </div>
+            </div>
+        </aside>
+    </main>
+    
+    <!-- My Stakes Section -->
+    <section class="my-stakes">
+        <h2 class="section-title">My Stakes</h2>
+        <div class="stakes-table-container">
+            <table class="stakes-table" id="stakesTable">
+                <thead>
+                    <tr>
+                        <th>Pool</th>
+                        <th>Amount</th>
+                        <th>Stake Date</th>
+                        <th>Unlock Date</th>
+                        <th>Rewards</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="stakesTableBody">
+                    <!-- Stakes will be loaded dynamically -->
+                    <tr id="noStakesRow">
+                        <td colspan="7" style="text-align: center; padding: 40px 20px; color: var(--secondary);">
+                            <i class="fas fa-coins" style="font-size: 3rem; margin-bottom: 15px; display: block; color: rgba(138, 109, 59, 0.3);"></i>
+                            <p>No stakes found. Connect your wallet and stake RFN or BNB to get started.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Modal for Stake Details -->
+    <div class="modal-overlay" id="stakeModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="stakeModalTitle">Stake Tokens</h3>
+                <button class="modal-close" id="stakeModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="stakeModalContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="stakeModalCancel">Cancel</button>
+                <button class="modal-btn primary" id="stakeModalConfirm">Confirm Stake</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for Claim/Unstake -->
+    <div class="modal-overlay" id="actionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="actionModalTitle">Claim Rewards</h3>
+                <button class="modal-close" id="actionModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="actionModalContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="actionModalCancel">Cancel</button>
+                <button class="modal-btn primary" id="actionModalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Riffan Rabbit Farms</h3>
+                <p>Premium rabbit breeder specialty farm established in 2014. Located in Lembang, West Bandung, West Java, Indonesia.</p>
+                <p>2026 Rabbit Breeder Indonesia</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/token">RFN Token</a></li>
+                    <li><a href="/stake">Stake RFN</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Smart Contract</h3>
+                <p>Staking Contract Address:</p>
+                <p style="font-family: monospace; font-size: 0.9rem; word-break: break-all; color: var(--accent);">
+                    0x603fcF9aCEDAB68007fd82d86913A88c1d41A6b2
+                </p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <i class="fas fa-exclamation-triangle" style="color: var(--gold);"></i>
+                    Always verify contract address
+                </p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2026 Riffan Rabbit Farms. All rights reserved.</p>
+            <p>RFN Token is a community token. Always ensure you are accessing the official website only.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Contract Configuration
+        const STAKING_CONTRACT_ADDRESS = '0x603fcF9aCEDAB68007fd82d86913A88c1d41A6b2';
+        const RFN_TOKEN_ADDRESS = '0x56C44f52D7Dc7DD82b01f6694D9a91C8e3cDF9a6';
+        
+        // Contract ABI (simplified for main functions)
+        const STAKING_ABI = [
+            // Pool Info
+            {
+                "inputs": [{"internalType": "uint8", "name": "poolId", "type": "uint8"}],
+                "name": "getPoolInfo",
+                "outputs": [
+                    {"internalType": "uint256", "name": "lockPeriod", "type": "uint256"},
+                    {"internalType": "uint256", "name": "apy", "type": "uint256"},
+                    {"internalType": "uint256", "name": "minRfnStake", "type": "uint256"},
+                    {"internalType": "uint256", "name": "minNativeStake", "type": "uint256"},
+                    {"internalType": "uint256", "name": "maxRfnStake", "type": "uint256"},
+                    {"internalType": "uint256", "name": "maxNativeStake", "type": "uint256"},
+                    {"internalType": "uint256", "name": "totalStaked", "type": "uint256"},
+                    {"internalType": "uint256", "name": "totalStakers", "type": "uint256"},
+                    {"internalType": "bool", "name": "active", "type": "bool"},
+                    {"internalType": "uint256", "name": "lastUpdated", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Stake Functions
+            {
+                "inputs": [{"internalType": "uint8", "name": "poolId", "type": "uint8"}],
+                "name": "stakeNative",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {"internalType": "uint256", "name": "amount", "type": "uint256"},
+                    {"internalType": "uint8", "name": "poolId", "type": "uint8"}
+                ],
+                "name": "stakeRfn",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            // User Stakes
+            {
+                "inputs": [{"internalType": "address", "name": "user", "type": "address"}],
+                "name": "getUserStakes",
+                "outputs": [
+                    {
+                        "components": [
+                            {"internalType": "uint256", "name": "amount", "type": "uint256"},
+                            {"internalType": "uint256", "name": "stakeTime", "type": "uint256"},
+                            {"internalType": "uint256", "name": "unlockTime", "type": "uint256"},
+                            {"internalType": "uint256", "name": "rewardDebt", "type": "uint256"},
+                            {"internalType": "bool", "name": "isNative", "type": "bool"},
+                            {"internalType": "uint8", "name": "poolId", "type": "uint8"},
+                            {"internalType": "bool", "name": "unstaked", "type": "bool"},
+                            {"internalType": "bool", "name": "rewardsClaimed", "type": "bool"},
+                            {"internalType": "uint256", "name": "apyAtStakeTime", "type": "uint256"}
+                        ],
+                        "internalType": "struct RiffanRabbitryStaking.UserStake[]",
+                        "name": "",
+                        "type": "tuple[]"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Claim Functions
+            {
+                "inputs": [{"internalType": "uint256", "name": "stakeIndex", "type": "uint256"}],
+                "name": "claimRewards",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "claimAllRewards",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "uint256", "name": "stakeIndex", "type": "uint256"}],
+                "name": "unstake",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            // View Functions
+            {
+                "inputs": [{"internalType": "address", "name": "user", "type": "address"}],
+                "name": "getClaimableRewards",
+                "outputs": [{"internalType": "uint256", "name": "totalRewards", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [{"internalType": "address", "name": "user", "type": "address"}],
+                "name": "getPendingRewards",
+                "outputs": [{"internalType": "uint256", "name": "totalPending", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "totalStaked",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "totalRewardsDistributed",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "rewardPool",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "totalStakers",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "getContractBalance",
+                "outputs": [
+                    {"internalType": "uint256", "name": "rfnBalance", "type": "uint256"},
+                    {"internalType": "uint256", "name": "nativeBalance", "type": "uint256"},
+                    {"internalType": "uint256", "name": "availableRewardPool", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // ERC20 Interface (for RFN token)
+            {
+                "constant": true,
+                "inputs": [{"name": "_owner", "type": "address"}],
+                "name": "balanceOf",
+                "outputs": [{"name": "balance", "type": "uint256"}],
+                "type": "function"
+            },
+            {
+                "constant": false,
+                "inputs": [
+                    {"name": "_spender", "type": "address"},
+                    {"name": "_value", "type": "uint256"}
+                ],
+                "name": "approve",
+                "outputs": [{"name": "success", "type": "bool"}],
+                "type": "function"
+            }
+        ];
+        
+        // Global Variables
+        let web3;
+        let stakingContract;
+        let rfnTokenContract;
+        let userAddress;
+        let currentAccount;
+        let isWalletConnected = false;
+        let selectedPool = 0;
+        let selectedTokenType = 'rfn'; // 'rfn' or 'native'
+        let currentStakeIndex = null;
+        
+        // DOM Elements
+        const connectBtn = document.getElementById('connectBtn');
+        const mobileConnectBtn = document.getElementById('mobileConnectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const walletInfo = document.getElementById('walletInfo');
+        const walletAddressShort = document.getElementById('walletAddressShort');
+        const walletBalance = document.getElementById('walletBalance');
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const poolsGrid = document.getElementById('poolsGrid');
+        const stakesTableBody = document.getElementById('stakesTableBody');
+        const noStakesRow = document.getElementById('noStakesRow');
+        const notification = document.getElementById('notification');
+        
+        // Global Stats
+        const totalValueLocked = document.getElementById('totalValueLocked');
+        const globalTotalStaked = document.getElementById('globalTotalStaked');
+        const globalTotalStakers = document.getElementById('globalTotalStakers');
+        const globalRewardsDistributed = document.getElementById('globalRewardsDistributed');
+        const globalRewardPool = document.getElementById('globalRewardPool');
+        
+        // User Stats
+        const myTotalStaked = document.getElementById('myTotalStaked');
+        const myClaimableRewards = document.getElementById('myClaimableRewards');
+        const myPendingRewards = document.getElementById('myPendingRewards');
+        const myActiveStakes = document.getElementById('myActiveStakes');
+        
+        // Action Buttons
+        const claimAllBtn = document.getElementById('claimAllBtn');
+        const addRewardsBtn = document.getElementById('addRewardsBtn');
+        
+        // Modals
+        const stakeModal = document.getElementById('stakeModal');
+        const stakeModalClose = document.getElementById('stakeModalClose');
+        const stakeModalCancel = document.getElementById('stakeModalCancel');
+        const stakeModalConfirm = document.getElementById('stakeModalConfirm');
+        const stakeModalTitle = document.getElementById('stakeModalTitle');
+        const stakeModalContent = document.getElementById('stakeModalContent');
+        
+        const actionModal = document.getElementById('actionModal');
+        const actionModalClose = document.getElementById('actionModalClose');
+        const actionModalCancel = document.getElementById('actionModalCancel');
+        const actionModalConfirm = document.getElementById('actionModalConfirm');
+        const actionModalTitle = document.getElementById('actionModalTitle');
+        const actionModalContent = document.getElementById('actionModalContent');
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initWeb3();
+            loadPools();
+            loadGlobalStats();
+            
+            // Event Listeners
+            connectBtn.addEventListener('click', connectWallet);
+            mobileConnectBtn.addEventListener('click', connectWallet);
+            disconnectBtn.addEventListener('click', disconnectWallet);
+            hamburger.addEventListener('click', toggleMobileMenu);
+            
+            claimAllBtn.addEventListener('click', claimAllRewards);
+            addRewardsBtn.addEventListener('click', showAddRewardsModal);
+            
+            // Modal Events
+            stakeModalClose.addEventListener('click', () => stakeModal.classList.remove('active'));
+            stakeModalCancel.addEventListener('click', () => stakeModal.classList.remove('active'));
+            actionModalClose.addEventListener('click', () => actionModal.classList.remove('active'));
+            actionModalCancel.addEventListener('click', () => actionModal.classList.remove('active'));
+            
+            // Close modals on outside click
+            stakeModal.addEventListener('click', (e) => {
+                if (e.target === stakeModal) stakeModal.classList.remove('active');
+            });
+            
+            actionModal.addEventListener('click', (e) => {
+                if (e.target === actionModal) actionModal.classList.remove('active');
+            });
+            
+            // Check for saved wallet connection
+            checkSavedConnection();
+        });
+        
+        // Initialize Web3
+        async function initWeb3() {
+            if (window.ethereum) {
+                web3 = new Web3(window.ethereum);
+                try {
+                    stakingContract = new web3.eth.Contract(STAKING_ABI, STAKING_CONTRACT_ADDRESS);
+                    rfnTokenContract = new web3.eth.Contract(STAKING_ABI, RFN_TOKEN_ADDRESS);
+                    console.log('Web3 initialized successfully');
+                } catch (error) {
+                    console.error('Error initializing contracts:', error);
+                    showNotification('Error initializing contracts', 'error');
+                }
+            } else {
+                console.warn('No Ethereum wallet detected');
+                showNotification('Please install MetaMask or another Web3 wallet', 'error');
+            }
+        }
+        
+        // Check for saved wallet connection
+        function checkSavedConnection() {
+            const savedAddress = localStorage.getItem('walletAddress');
+            if (savedAddress && window.ethereum) {
+                connectWallet();
+            }
+        }
+        
+        // Connect Wallet
+        async function connectWallet() {
+            if (!window.ethereum) {
+                showNotification('Please install MetaMask first', 'error');
+                return;
+            }
+            
+            try {
+                showNotification('Connecting wallet...', 'info');
+                
+                // Request account access
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                userAddress = accounts[0];
+                currentAccount = accounts[0];
+                isWalletConnected = true;
+                
+                // Save to localStorage
+                localStorage.setItem('walletAddress', userAddress);
+                
+                // Update UI
+                updateWalletUI();
+                loadUserData();
+                
+                // Listen for account changes
+                window.ethereum.on('accountsChanged', handleAccountsChanged);
+                
+                // Listen for chain changes
+                window.ethereum.on('chainChanged', handleChainChanged);
+                
+                showNotification('Wallet connected successfully', 'success');
+                
+                // Close mobile menu if open
+                mobileMenu.classList.remove('active');
+                
+            } catch (error) {
+                console.error('Error connecting wallet:', error);
+                showNotification('Failed to connect wallet', 'error');
+            }
+        }
+        
+        // Disconnect Wallet
+        function disconnectWallet() {
+            isWalletConnected = false;
+            userAddress = null;
+            currentAccount = null;
+            
+            // Remove from localStorage
+            localStorage.removeItem('walletAddress');
+            
+            // Update UI
+            updateWalletUI();
+            clearUserData();
+            
+            showNotification('Wallet disconnected', 'info');
+        }
+        
+        // Handle account changes
+        function handleAccountsChanged(accounts) {
+            if (accounts.length === 0) {
+                disconnectWallet();
+            } else if (accounts[0] !== currentAccount) {
+                currentAccount = accounts[0];
+                userAddress = accounts[0];
+                localStorage.setItem('walletAddress', userAddress);
+                updateWalletUI();
+                loadUserData();
+                showNotification('Account changed', 'info');
+            }
+        }
+        
+        // Handle chain changes
+        function handleChainChanged() {
+            window.location.reload();
+        }
+        
+        // Update Wallet UI
+        function updateWalletUI() {
+            if (isWalletConnected && userAddress) {
+                const shortAddress = `${userAddress.substring(0, 6)}...${userAddress.substring(userAddress.length - 4)}`;
+                walletAddressShort.textContent = shortAddress;
+                walletInfo.style.display = 'flex';
+                connectBtn.style.display = 'none';
+                disconnectBtn.style.display = 'block';
+                
+                // Update mobile connect button
+                mobileConnectBtn.innerHTML = `<i class="fas fa-wallet"></i><span>${shortAddress}</span>`;
+            } else {
+                walletInfo.style.display = 'none';
+                connectBtn.style.display = 'flex';
+                disconnectBtn.style.display = 'none';
+                
+                // Reset mobile connect button
+                mobileConnectBtn.innerHTML = '<i class="fas fa-wallet"></i><span>Connect Wallet</span>';
+            }
+        }
+        
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            const spans = hamburger.querySelectorAll('span');
+            
+            if (mobileMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        }
+        
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('active');
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 5000);
+        }
+        
+        // Load Pools
+        async function loadPools() {
+            if (!stakingContract) {
+                setTimeout(loadPools, 1000);
+                return;
+            }
+            
+            try {
+                const poolNames = ['30 Days', '90 Days', '180 Days', '365 Days'];
+                const poolColors = ['#3498db', '#2ecc71', '#9b59b6', '#e74c3c'];
+                
+                poolsGrid.innerHTML = '';
+                
+                for (let i = 0; i < 4; i++) {
+                    const poolInfo = await stakingContract.methods.getPoolInfo(i).call();
+                    
+                    const lockPeriodDays = Math.floor(parseInt(poolInfo.lockPeriod) / (60 * 60 * 24));
+                    const apy = parseInt(poolInfo.apy) / 100;
+                    const minRfnStake = web3.utils.fromWei(poolInfo.minRfnStake, 'ether');
+                    const minNativeStake = web3.utils.fromWei(poolInfo.minNativeStake, 'ether');
+                    const maxRfnStake = web3.utils.fromWei(poolInfo.maxRfnStake, 'ether');
+                    const maxNativeStake = web3.utils.fromWei(poolInfo.maxNativeStake, 'ether');
+                    
+                    const poolCard = document.createElement('div');
+                    poolCard.className = `pool-card ${i === 3 ? 'featured' : ''}`;
+                    poolCard.innerHTML = `
+                        ${i === 3 ? '<div class="pool-badge">RECOMMENDED</div>' : ''}
+                        <div class="pool-header">
+                            <div class="pool-name">${poolNames[i]}</div>
+                            <div class="pool-apy">${apy}%<span> APY</span></div>
+                        </div>
+                        <div class="pool-details">
+                            <div class="pool-detail">
+                                <span class="label">Lock Period:</span>
+                                <span class="value">${lockPeriodDays} Days</span>
+                            </div>
+                            <div class="pool-detail">
+                                <span class="label">Min RFN Stake:</span>
+                                <span class="value">${parseFloat(minRfnStake).toLocaleString()} RFN</span>
+                            </div>
+                            <div class="pool-detail">
+                                <span class="label">Min BNB Stake:</span>
+                                <span class="value">${parseFloat(minNativeStake).toFixed(3)} BNB</span>
+                            </div>
+                            <div class="pool-detail">
+                                <span class="label">Stakers in Pool:</span>
+                                <span class="value">${parseInt(poolInfo.totalStakers).toLocaleString()}</span>
+                            </div>
+                            <div class="pool-detail">
+                                <span class="label">Total Staked:</span>
+                                <span class="value">${web3.utils.fromWei(poolInfo.totalStaked, 'ether').toLocaleString()} ${poolInfo.totalStaked > 1000000000000000000 ? 'BNB' : 'RFN'}</span>
+                            </div>
+                        </div>
+                        <div class="stake-form">
+                            <button class="stake-btn" onclick="showStakeModal(${i})" ${!poolInfo.active ? 'disabled' : ''}>
+                                <i class="fas fa-lock"></i>
+                                ${poolInfo.active ? 'Stake Now' : 'Pool Inactive'}
+                            </button>
+                        </div>
+                    `;
+                    
+                    // Add color accent
+                    poolCard.style.borderTopColor = poolColors[i];
+                    
+                    poolsGrid.appendChild(poolCard);
+                }
+            } catch (error) {
+                console.error('Error loading pools:', error);
+                showNotification('Error loading staking pools', 'error');
+            }
+        }
+        
+        // Show Stake Modal
+        async function showStakeModal(poolId) {
+            if (!isWalletConnected) {
+                showNotification('Please connect your wallet first', 'error');
+                return;
+            }
+            
+            selectedPool = poolId;
+            
+            try {
+                const poolInfo = await stakingContract.methods.getPoolInfo(poolId).call();
+                const poolNames = ['30 Days', '90 Days', '180 Days', '365 Days'];
+                
+                const minRfnStake = web3.utils.fromWei(poolInfo.minRfnStake, 'ether');
+                const maxRfnStake = web3.utils.fromWei(poolInfo.maxRfnStake, 'ether');
+                const minNativeStake = web3.utils.fromWei(poolInfo.minNativeStake, 'ether');
+                const maxNativeStake = web3.utils.fromWei(poolInfo.maxNativeStake, 'ether');
+                const apy = parseInt(poolInfo.apy) / 100;
+                
+                // Get user balances
+                let rfnBalance = '0';
+                let nativeBalance = '0';
+                
+                if (rfnTokenContract) {
+                    rfnBalance = web3.utils.fromWei(await rfnTokenContract.methods.balanceOf(userAddress).call(), 'ether');
+                }
+                
+                if (web3) {
+                    nativeBalance = web3.utils.fromWei(await web3.eth.getBalance(userAddress), 'ether');
+                }
+                
+                stakeModalTitle.textContent = `Stake in ${poolNames[poolId]} Pool`;
+                stakeModalContent.innerHTML = `
+                    <div style="margin-bottom: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <div>
+                                <div style="font-size: 1.2rem; color: var(--primary); font-weight: 600;">${apy}% APY</div>
+                                <div style="font-size: 0.9rem; color: var(--secondary);">Lock Period: ${Math.floor(parseInt(poolInfo.lockPeriod) / (60 * 60 * 24))} Days</div>
+                            </div>
+                            <div style="text-align: right;">
+                                <div style="font-size: 0.9rem; color: var(--secondary);">Your Balances:</div>
+                                <div style="font-size: 0.9rem; color: var(--primary); font-weight: 500;">${parseFloat(rfnBalance).toLocaleString()} RFN</div>
+                                <div style="font-size: 0.9rem; color: var(--primary); font-weight: 500;">${parseFloat(nativeBalance).toFixed(4)} BNB</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="token-toggle">
+                        <div class="token-option ${selectedTokenType === 'rfn' ? 'active' : ''}" onclick="selectTokenType('rfn')">
+                            <i class="fas fa-coins"></i> RFN Token
+                        </div>
+                        <div class="token-option ${selectedTokenType === 'native' ? 'active' : ''}" onclick="selectTokenType('native')">
+                            <i class="fab fa-ethereum"></i> BNB
+                        </div>
+                    </div>
+                    
+                    <div class="stake-input-group">
+                        <label class="stake-label">
+                            Amount to Stake (${selectedTokenType === 'rfn' ? 'RFN' : 'BNB'})
+                        </label>
+                        <div class="input-with-max">
+                            <input type="number" class="stake-input" id="stakeAmount" 
+                                   min="${selectedTokenType === 'rfn' ? minRfnStake : minNativeStake}" 
+                                   max="${selectedTokenType === 'rfn' ? maxRfnStake : maxNativeStake}"
+                                   step="${selectedTokenType === 'rfn' ? '100' : '0.001'}"
+                                   placeholder="Enter amount">
+                            <button class="max-btn" onclick="setMaxAmount()">MAX</button>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--secondary); margin-top: 5px;">
+                            Min: ${selectedTokenType === 'rfn' ? parseFloat(minRfnStake).toLocaleString() : parseFloat(minNativeStake).toFixed(3)} 
+                            ${selectedTokenType === 'rfn' ? 'RFN' : 'BNB'} | 
+                            Max: ${selectedTokenType === 'rfn' ? parseFloat(maxRfnStake).toLocaleString() : parseFloat(maxNativeStake).toFixed(3)} 
+                            ${selectedTokenType === 'rfn' ? 'RFN' : 'BNB'}
+                        </div>
+                    </div>
+                    
+                    <div id="estimatedRewards" style="background-color: rgba(39, 174, 96, 0.1); padding: 15px; border-radius: 8px; margin-top: 20px; text-align: center;">
+                        <div style="color: var(--success); font-weight: 600; font-size: 1.1rem;">
+                            Estimated Rewards: <span id="rewardAmount">0</span> RFN
+                        </div>
+                        <div style="font-size: 0.9rem; color: var(--secondary); margin-top: 5px;">
+                            Based on ${apy}% APY for ${Math.floor(parseInt(poolInfo.lockPeriod) / (60 * 60 * 24))} days
+                        </div>
+                    </div>
+                `;
+                
+                stakeModal.classList.add('active');
+                
+                // Add event listener for amount input
+                const stakeAmountInput = document.getElementById('stakeAmount');
+                stakeAmountInput.addEventListener('input', calculateEstimatedRewards);
+                
+                // Initial calculation
+                calculateEstimatedRewards();
+                
+            } catch (error) {
+                console.error('Error loading stake modal:', error);
+                showNotification('Error loading pool information', 'error');
+            }
+        }
+        
+        // Select Token Type
+        function selectTokenType(type) {
+            selectedTokenType = type;
+            const tokenOptions = document.querySelectorAll('.token-option');
+            tokenOptions.forEach(opt => opt.classList.remove('active'));
+            
+            if (type === 'rfn') {
+                tokenOptions[0].classList.add('active');
+            } else {
+                tokenOptions[1].classList.add('active');
+            }
+            
+            // Update the modal
+            showStakeModal(selectedPool);
+        }
+        
+        // Set Max Amount
+        async function setMaxAmount() {
+            const stakeAmountInput = document.getElementById('stakeAmount');
+            
+            if (selectedTokenType === 'rfn') {
+                if (rfnTokenContract && userAddress) {
+                    const balance = await rfnTokenContract.methods.balanceOf(userAddress).call();
+                    const balanceInEther = web3.utils.fromWei(balance, 'ether');
+                    
+                    const poolInfo = await stakingContract.methods.getPoolInfo(selectedPool).call();
+                    const maxRfnStake = web3.utils.fromWei(poolInfo.maxRfnStake, 'ether');
+                    
+                    stakeAmountInput.value = Math.min(parseFloat(balanceInEther), parseFloat(maxRfnStake));
+                }
+            } else {
+                if (web3 && userAddress) {
+                    const balance = await web3.eth.getBalance(userAddress);
+                    const balanceInEther = web3.utils.fromWei(balance, 'ether');
+                    
+                    const poolInfo = await stakingContract.methods.getPoolInfo(selectedPool).call();
+                    const maxNativeStake = web3.utils.fromWei(poolInfo.maxNativeStake, 'ether');
+                    
+                    stakeAmountInput.value = Math.min(parseFloat(balanceInEther), parseFloat(maxNativeStake)).toFixed(4);
+                }
+            }
+            
+            calculateEstimatedRewards();
+        }
+        
+        // Calculate Estimated Rewards
+        function calculateEstimatedRewards() {
+            const stakeAmountInput = document.getElementById('stakeAmount');
+            const amount = parseFloat(stakeAmountInput.value);
+            
+            if (isNaN(amount) || amount <= 0) {
+                document.getElementById('rewardAmount').textContent = '0';
+                return;
+            }
+            
+            // Simple reward calculation (APY * days / 365)
+            const poolInfoPromise = stakingContract.methods.getPoolInfo(selectedPool).call();
+            poolInfoPromise.then(poolInfo => {
+                const apy = parseInt(poolInfo.apy) / 100;
+                const lockPeriodDays = Math.floor(parseInt(poolInfo.lockPeriod) / (60 * 60 * 24));
+                
+                // Calculate annual reward
+                const annualReward = amount * (apy / 100);
+                // Calculate reward for lock period
+                const reward = annualReward * (lockPeriodDays / 365);
+                
+                document.getElementById('rewardAmount').textContent = reward.toFixed(2);
+            });
+        }
+        
+        // Confirm Stake
+        stakeModalConfirm.addEventListener('click', async () => {
+            const stakeAmountInput = document.getElementById('stakeAmount');
+            const amount = stakeAmountInput.value;
+            
+            if (!amount || parseFloat(amount) <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+            
+            try {
+                stakeModalConfirm.disabled = true;
+                stakeModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                const amountInWei = web3.utils.toWei(amount, 'ether');
+                
+                if (selectedTokenType === 'rfn') {
+                    // First approve RFN tokens
+                    showNotification('Approving RFN tokens...', 'info');
+                    
+                    const approveTx = await rfnTokenContract.methods.approve(
+                        STAKING_CONTRACT_ADDRESS,
+                        amountInWei
+                    ).send({ from: userAddress });
+                    
+                    showNotification('RFN tokens approved, now staking...', 'info');
+                    
+                    // Then stake
+                    const stakeTx = await stakingContract.methods.stakeRfn(
+                        amountInWei,
+                        selectedPool
+                    ).send({ from: userAddress });
+                    
+                    showNotification('RFN tokens staked successfully!', 'success');
+                    
+                } else {
+                    // Stake BNB
+                    const stakeTx = await stakingContract.methods.stakeNative(
+                        selectedPool
+                    ).send({ 
+                        from: userAddress,
+                        value: amountInWei
+                    });
+                    
+                    showNotification('BNB staked successfully!', 'success');
+                }
+                
+                // Close modal and refresh data
+                stakeModal.classList.remove('active');
+                loadUserData();
+                loadGlobalStats();
+                loadPools();
+                
+            } catch (error) {
+                console.error('Error staking:', error);
+                showNotification('Failed to stake tokens: ' + error.message, 'error');
+            } finally {
+                stakeModalConfirm.disabled = false;
+                stakeModalConfirm.textContent = 'Confirm Stake';
+            }
+        });
+        
+        // Load Global Stats
+        async function loadGlobalStats() {
+            if (!stakingContract) return;
+            
+            try {
+                const [totalStaked, totalRewardsDistributedValue, rewardPoolValue, totalStakersCount] = await Promise.all([
+                    stakingContract.methods.totalStaked().call(),
+                    stakingContract.methods.totalRewardsDistributed().call(),
+                    stakingContract.methods.rewardPool().call(),
+                    stakingContract.methods.totalStakers().call()
+                ]);
+                
+                // Convert to readable format
+                const totalStakedInEther = web3.utils.fromWei(totalStaked, 'ether');
+                const rewardsDistributed = web3.utils.fromWei(totalRewardsDistributedValue, 'ether');
+                const rewardPoolAmount = web3.utils.fromWei(rewardPoolValue, 'ether');
+                
+                // Update UI
+                totalValueLocked.textContent = `${parseFloat(totalStakedInEther).toLocaleString()} RFN`;
+                globalTotalStaked.textContent = `${parseFloat(totalStakedInEther).toLocaleString()} RFN`;
+                globalTotalStakers.textContent = parseInt(totalStakersCount).toLocaleString();
+                globalRewardsDistributed.textContent = `${parseFloat(rewardsDistributed).toLocaleString()} RFN`;
+                globalRewardPool.textContent = `${parseFloat(rewardPoolAmount).toLocaleString()} RFN`;
+                
+            } catch (error) {
+                console.error('Error loading global stats:', error);
+            }
+        }
+        
+        // Load User Data
+        async function loadUserData() {
+            if (!isWalletConnected || !stakingContract || !userAddress) return;
+            
+            try {
+                // Get user stakes
+                const userStakes = await stakingContract.methods.getUserStakes(userAddress).call();
+                
+                // Get claimable and pending rewards
+                const claimableRewards = await stakingContract.methods.getClaimableRewards(userAddress).call();
+                const pendingRewards = await stakingContract.methods.getPendingRewards(userAddress).call();
+                
+                // Update user stats
+                let totalStakedValue = 0;
+                let activeStakesCount = 0;
+                
+                userStakes.forEach(stake => {
+                    if (!stake.unstaked) {
+                        totalStakedValue += parseFloat(web3.utils.fromWei(stake.amount, 'ether'));
+                        activeStakesCount++;
+                    }
+                });
+                
+                myTotalStaked.textContent = `${totalStakedValue.toLocaleString()} ${totalStakedValue > 1000000 ? 'BNB' : 'RFN'}`;
+                myClaimableRewards.textContent = `${web3.utils.fromWei(claimableRewards, 'ether')} RFN`;
+                myPendingRewards.textContent = `${web3.utils.fromWei(pendingRewards, 'ether')} RFN`;
+                myActiveStakes.textContent = activeStakesCount;
+                
+                // Update wallet RFN balance
+                if (rfnTokenContract) {
+                    const rfnBalance = await rfnTokenContract.methods.balanceOf(userAddress).call();
+                    walletBalance.textContent = parseFloat(web3.utils.fromWei(rfnBalance, 'ether')).toLocaleString();
+                }
+                
+                // Update stakes table
+                updateStakesTable(userStakes);
+                
+            } catch (error) {
+                console.error('Error loading user data:', error);
+            }
+        }
+        
+        // Clear User Data
+        function clearUserData() {
+            myTotalStaked.textContent = '0 RFN';
+            myClaimableRewards.textContent = '0 RFN';
+            myPendingRewards.textContent = '0 RFN';
+            myActiveStakes.textContent = '0';
+            walletBalance.textContent = '0';
+            
+            // Clear stakes table
+            updateStakesTable([]);
+        }
+        
+        // Update Stakes Table
+        function updateStakesTable(stakes) {
+            if (!stakes || stakes.length === 0) {
+                noStakesRow.style.display = 'table-row';
+                return;
+            }
+            
+            noStakesRow.style.display = 'none';
+            stakesTableBody.innerHTML = '';
+            
+            const poolNames = ['30 Days', '90 Days', '180 Days', '365 Days'];
+            
+            stakes.forEach((stake, index) => {
+                if (stake.unstaked) return; // Skip unstaked stakes
+                
+                const stakeTime = new Date(parseInt(stake.stakeTime) * 1000);
+                const unlockTime = new Date(parseInt(stake.unlockTime) * 1000);
+                const now = new Date();
+                
+                let status = 'Active';
+                let statusClass = 'status-active';
+                
+                if (now >= unlockTime) {
+                    status = 'Ready';
+                    statusClass = 'status-completed';
+                } else if (now < unlockTime) {
+                    status = 'Locked';
+                    statusClass = 'status-locked';
+                }
+                
+                const amount = parseFloat(web3.utils.fromWei(stake.amount, 'ether')).toLocaleString();
+                const rewards = parseFloat(web3.utils.fromWei(stake.rewardDebt, 'ether')).toFixed(2);
+                const tokenType = stake.isNative ? 'BNB' : 'RFN';
+                const canClaim = now >= unlockTime && !stake.rewardsClaimed;
+                const canUnstake = now >= unlockTime;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${poolNames[stake.poolId]} Pool</td>
+                    <td>${amount} ${tokenType}</td>
+                    <td>${stakeTime.toLocaleDateString()}</td>
+                    <td>${unlockTime.toLocaleDateString()}</td>
+                    <td>${rewards} RFN</td>
+                    <td><span class="status-badge ${statusClass}">${status}</span></td>
+                    <td class="action-cell">
+                        ${canClaim ? `<button class="table-btn claim" onclick="showClaimModal(${index})">Claim</button>` : ''}
+                        ${canUnstake ? `<button class="table-btn unstake" onclick="showUnstakeModal(${index})">Unstake</button>` : ''}
+                    </td>
+                `;
+                
+                stakesTableBody.appendChild(row);
+            });
+        }
+        
+        // Show Claim Modal
+        function showClaimModal(stakeIndex) {
+            currentStakeIndex = stakeIndex;
+            actionModalTitle.textContent = 'Claim Rewards';
+            actionModalContent.innerHTML = `
+                <p>Are you sure you want to claim your rewards for this stake?</p>
+                <p style="background-color: rgba(39, 174, 96, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <i class="fas fa-gift" style="color: var(--success); margin-right: 8px;"></i>
+                    Rewards will be sent to your wallet in RFN tokens.
+                </p>
+            `;
+            actionModalConfirm.textContent = 'Claim Rewards';
+            actionModalConfirm.onclick = claimRewards;
+            actionModal.classList.add('active');
+        }
+        
+        // Show Unstake Modal
+        function showUnstakeModal(stakeIndex) {
+            currentStakeIndex = stakeIndex;
+            actionModalTitle.textContent = 'Unstake Tokens';
+            actionModalContent.innerHTML = `
+                <p>Are you sure you want to unstake your tokens?</p>
+                <p style="background-color: rgba(243, 156, 18, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <i class="fas fa-exclamation-triangle" style="color: var(--warning); margin-right: 8px;"></i>
+                    You must claim your rewards before unstaking.
+                </p>
+            `;
+            actionModalConfirm.textContent = 'Unstake';
+            actionModalConfirm.onclick = unstakeTokens;
+            actionModal.classList.add('active');
+        }
+        
+        // Claim Rewards
+        async function claimRewards() {
+            try {
+                actionModalConfirm.disabled = true;
+                actionModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                const tx = await stakingContract.methods.claimRewards(currentStakeIndex)
+                    .send({ from: userAddress });
+                
+                showNotification('Rewards claimed successfully!', 'success');
+                actionModal.classList.remove('active');
+                loadUserData();
+                loadGlobalStats();
+                
+            } catch (error) {
+                console.error('Error claiming rewards:', error);
+                showNotification('Failed to claim rewards: ' + error.message, 'error');
+            } finally {
+                actionModalConfirm.disabled = false;
+                actionModalConfirm.textContent = 'Claim Rewards';
+            }
+        }
+        
+        // Claim All Rewards
+        async function claimAllRewards() {
+            if (!isWalletConnected) {
+                showNotification('Please connect your wallet first', 'error');
+                return;
+            }
+            
+            actionModalTitle.textContent = 'Claim All Rewards';
+            actionModalContent.innerHTML = `
+                <p>Are you sure you want to claim all your available rewards?</p>
+                <p style="background-color: rgba(39, 174, 96, 0.1); padding: 15px; border-radius: 8px; margin-top: 15px;">
+                    <i class="fas fa-gift" style="color: var(--success); margin-right: 8px;"></i>
+                    All available rewards will be sent to your wallet in RFN tokens.
+                </p>
+            `;
+            actionModalConfirm.textContent = 'Claim All';
+            actionModalConfirm.onclick = executeClaimAll;
+            actionModal.classList.add('active');
+        }
+        
+        // Execute Claim All
+        async function executeClaimAll() {
+            try {
+                actionModalConfirm.disabled = true;
+                actionModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                const tx = await stakingContract.methods.claimAllRewards()
+                    .send({ from: userAddress });
+                
+                showNotification('All rewards claimed successfully!', 'success');
+                actionModal.classList.remove('active');
+                loadUserData();
+                loadGlobalStats();
+                
+            } catch (error) {
+                console.error('Error claiming all rewards:', error);
+                showNotification('Failed to claim all rewards: ' + error.message, 'error');
+            } finally {
+                actionModalConfirm.disabled = false;
+                actionModalConfirm.textContent = 'Claim All';
+            }
+        }
+        
+        // Unstake Tokens
+        async function unstakeTokens() {
+            try {
+                actionModalConfirm.disabled = true;
+                actionModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                const tx = await stakingContract.methods.unstake(currentStakeIndex)
+                    .send({ from: userAddress });
+                
+                showNotification('Tokens unstaked successfully!', 'success');
+                actionModal.classList.remove('active');
+                loadUserData();
+                loadGlobalStats();
+                loadPools();
+                
+            } catch (error) {
+                console.error('Error unstaking tokens:', error);
+                showNotification('Failed to unstake tokens: ' + error.message, 'error');
+            } finally {
+                actionModalConfirm.disabled = false;
+                actionModalConfirm.textContent = 'Unstake';
+            }
+        }
+        
+        // Show Add Rewards Modal (Admin function simulation)
+        function showAddRewardsModal() {
+            if (!isWalletConnected) {
+                showNotification('Please connect your wallet first', 'error');
+                return;
+            }
+            
+            actionModalTitle.textContent = 'Add to Reward Pool';
+            actionModalContent.innerHTML = `
+                <p>This feature allows adding RFN tokens to the reward pool. Only contract owner can add significant amounts.</p>
+                <div class="stake-input-group">
+                    <label class="stake-label">RFN Amount to Add</label>
+                    <input type="number" class="stake-input" id="addRewardAmount" placeholder="Enter RFN amount" step="100">
+                </div>
+                <p style="font-size: 0.9rem; color: var(--secondary); margin-top: 15px;">
+                    <i class="fas fa-info-circle" style="color: var(--info); margin-right: 5px;"></i>
+                    You need to approve RFN tokens first before adding to reward pool.
+                </p>
+            `;
+            actionModalConfirm.textContent = 'Add Rewards';
+            actionModalConfirm.onclick = addRewardsToPool;
+            actionModal.classList.add('active');
+        }
+        
+        // Add Rewards to Pool
+        async function addRewardsToPool() {
+            const amountInput = document.getElementById('addRewardAmount');
+            const amount = amountInput.value;
+            
+            if (!amount || parseFloat(amount) <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+            
+            try {
+                actionModalConfirm.disabled = true;
+                actionModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                const amountInWei = web3.utils.toWei(amount, 'ether');
+                
+                // First approve
+                const approveTx = await rfnTokenContract.methods.approve(
+                    STAKING_CONTRACT_ADDRESS,
+                    amountInWei
+                ).send({ from: userAddress });
+                
+                // Note: The actual addRewards function is only callable by owner
+                // This is a simulation - in production, this would be restricted
+                showNotification('RFN tokens approved. Only contract owner can add to reward pool.', 'info');
+                
+                actionModal.classList.remove('active');
+                
+            } catch (error) {
+                console.error('Error adding rewards:', error);
+                showNotification('Failed to add rewards: ' + error.message, 'error');
+            } finally {
+                actionModalConfirm.disabled = false;
+                actionModalConfirm.textContent = 'Add Rewards';
+            }
+        }
+        
+        // Make functions available globally for inline event handlers
+        window.showStakeModal = showStakeModal;
+        window.selectTokenType = selectTokenType;
+        window.setMaxAmount = setMaxAmount;
+        window.showClaimModal = showClaimModal;
+        window.showUnstakeModal = showUnstakeModal;
+    </script>
+</body>
+</html>
