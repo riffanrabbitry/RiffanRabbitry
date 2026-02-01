@@ -25,7 +25,7 @@ riffanrabbitry/
 - **X (Twitter):** https://x.com/kelinci_lembang
 
 ### 🔗 **Community Token ($RFN):**
-- **Telegram Community:** https://t.me/riffanrabbitry
+- **Telegram Community:** https://t.me/riffanrabbit
 - **Twitter Token:** https://twitter.com/RiffanToken
 - **Token Page:** https://riffanrabbitry.xyz/token
 - **Smart Contract:** `0x...` (akan di-update setelah deploy)
