@@ -152,13 +152,12 @@
             transition: all 0.3s ease;
         }
 
-        /* Hero Section - PERBAIKAN untuk mobile */
+        /* Hero Section */
         .hero {
             padding: 180px 0 100px;
             background: linear-gradient(135deg, rgba(255, 107, 139, 0.05) 0%, rgba(126, 211, 33, 0.05) 100%);
             position: relative;
             overflow: hidden;
-            margin-top: 0; /* Pastikan tidak ada margin yang menutupi */
         }
 
         .hero::before {
@@ -176,7 +175,6 @@
             position: relative;
             z-index: 1;
             max-width: 850px;
-            padding-top: 0; /* Pastikan tidak ada padding yang menutupi */
         }
 
         .hero h1 {
@@ -341,7 +339,7 @@
             margin-top: 10px;
         }
 
-        /* Swiper Slider - Tanpa Panah */
+        /* Swiper Slider */
         .swiper-container {
             width: 100%;
             height: 450px;
@@ -363,7 +361,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s ease;
+            transition: transform 0.5s ease;
         }
 
         .swiper-slide:hover img {
@@ -380,6 +378,19 @@
         .swiper-pagination-bullet-active {
             background-color: var(--primary);
             opacity: 1;
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: white;
+            background-color: rgba(0, 0, 0, 0.3);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            backdrop-filter: blur(5px);
+        }
+
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 1.2rem;
         }
 
         /* Token Section */
@@ -452,28 +463,46 @@
         .token-desc {
             font-size: 1.3rem;
             color: var(--gray);
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             line-height: 1.8;
-            max-width: 800px;
+            max-width: 700px;
         }
 
-        .token-info {
+        .token-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .token-feature {
             background-color: var(--light);
-            padding: 30px;
+            padding: 25px;
             border-radius: 15px;
-            margin-bottom: 40px;
-            border-left: 5px solid var(--primary);
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
 
-        .token-info h3 {
-            color: var(--dark);
+        .token-feature:hover {
+            transform: translateY(-10px);
+        }
+
+        .token-feature i {
+            font-size: 2.5rem;
+            color: var(--primary);
             margin-bottom: 15px;
-            font-size: 1.4rem;
         }
 
-        .token-info p {
+        .token-feature h4 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+
+        .token-feature p {
             color: var(--gray);
-            line-height: 1.7;
+            font-size: 1rem;
         }
 
         /* Footer */
@@ -639,7 +668,7 @@
             color: var(--primary);
         }
 
-        /* Responsive Styles - PERBAIKAN untuk mobile */
+        /* Responsive Styles */
         @media (max-width: 1200px) {
             .hero h1 {
                 font-size: 3.2rem;
@@ -664,7 +693,7 @@
             }
             
             .hero {
-                padding: 150px 0 80px; /* Diperbaiki padding untuk mobile */
+                padding: 150px 0 80px;
             }
             
             .section-title {
@@ -681,43 +710,26 @@
         }
 
         @media (max-width: 768px) {
-            .hero {
-                padding: 140px 0 70px; /* Diperbaiki agar text tidak tertutup header */
-                margin-top: 0;
-            }
-            
             .hero h1 {
                 font-size: 2.4rem;
-                margin-top: 0;
-                padding-top: 0;
-            }
-            
-            .hero-content {
-                padding-top: 0;
-                margin-top: 0;
             }
             
             .hero p {
                 font-size: 1.2rem;
-                margin-top: 20px;
             }
             
             .section-title {
                 font-size: 2.1rem;
-                margin-top: 0;
-                padding-top: 0;
             }
             
             .breed-header {
                 flex-direction: column;
                 text-align: center;
                 gap: 15px;
-                margin-top: 0;
             }
             
             .token-card {
                 padding: 50px 30px;
-                margin-top: 0;
             }
             
             .token-header {
@@ -737,72 +749,33 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: flex-start;
-                margin-top: 30px;
             }
             
             .cta-button {
                 width: 100%;
                 max-width: 350px;
-                margin-top: 10px;
-            }
-            
-            /* Perbaikan untuk semua section agar tidak tertutup header */
-            .breeds, .token-section {
-                scroll-margin-top: 80px; /* Memberikan ruang untuk header */
-            }
-            
-            #home {
-                scroll-margin-top: 0; /* Home tidak perlu scroll margin */
             }
         }
 
         @media (max-width: 576px) {
-            .hero {
-                padding: 130px 0 60px; /* Diperbaiki padding untuk mobile kecil */
-            }
-            
             .hero h1 {
                 font-size: 2rem;
-                line-height: 1.2;
-                margin-bottom: 20px;
             }
             
-            .hero p {
-                font-size: 1.1rem;
-                margin-bottom: 30px;
-            }
-            
-            .logo-title {
-                font-size: 1.5rem; /* Logo text lebih kecil di mobile */
-            }
-            
-            .logo-subtitle {
-                font-size: 0.85rem;
-            }
-            
-            .logo-img {
-                height: 45px; /* Logo lebih kecil di mobile */
-            }
-            
-            .header-scrolled .logo-img {
-                height: 40px; /* Logo lebih kecil saat scroll di mobile */
-            }
-            
-            .nav-container {
-                padding: 15px 0; /* Header lebih kecil di mobile */
-            }
-            
-            .header-scrolled .nav-container {
-                padding: 10px 0;
+            .hero {
+                padding: 130px 0 60px;
             }
             
             .breeds, .token-section {
                 padding: 80px 0;
-                scroll-margin-top: 70px; /* Sesuaikan untuk mobile kecil */
             }
             
             .swiper-container {
                 height: 300px;
+            }
+            
+            .token-features {
+                grid-template-columns: 1fr;
             }
             
             .footer-content {
@@ -811,46 +784,6 @@
             
             .dropdown-menu {
                 width: 85%;
-                padding-top: 90px; /* Beri ruang untuk close button */
-            }
-            
-            .menu-close {
-                top: 25px;
-                right: 25px;
-            }
-        }
-
-        @media (max-width: 400px) {
-            .hero {
-                padding: 120px 0 50px;
-            }
-            
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            .cta-button {
-                padding: 16px 30px;
-                font-size: 1.1rem;
-            }
-            
-            .logo-title {
-                font-size: 1.3rem;
-            }
-            
-            .nav-container {
-                padding: 12px 0;
-            }
-        }
-
-        /* Fix untuk anchor links tidak tertutup header */
-        html {
-            scroll-padding-top: 100px; /* Memberikan padding untuk semua anchor links */
-        }
-
-        @media (max-width: 768px) {
-            html {
-                scroll-padding-top: 80px; /* Lebih kecil untuk mobile */
             }
         }
     </style>
@@ -940,19 +873,21 @@
                 <div class="swiper-container" id="swiperNetherland">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/nd.png" alt="Netherland Dwarf 1" onerror="this.src='https://via.placeholder.com/800x450/FF6B8B/ffffff?text=Netherland+Dwarf+1'">
+                            <img src="https://riffanrabbitry.xyz/assets/nd.png" alt="Netherland Dwarf 1">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/nd1.png" alt="Netherland Dwarf 2" onerror="this.src='https://via.placeholder.com/800x450/7ED321/ffffff?text=Netherland+Dwarf+2'">
+                            <img src="https://riffanrabbitry.xyz/assets/nd1.png" alt="Netherland Dwarf 2">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/nd2.png" alt="Netherland Dwarf 3" onerror="this.src='https://via.placeholder.com/800x450/24C6DC/ffffff?text=Netherland+Dwarf+3'">
+                            <img src="https://riffanrabbitry.xyz/assets/nd2.png" alt="Netherland Dwarf 3">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/nd3.png" alt="Netherland Dwarf 4" onerror="this.src='https://via.placeholder.com/800x450/FF8E53/ffffff?text=Netherland+Dwarf+4'">
+                            <img src="https://riffanrabbitry.xyz/assets/nd3.png" alt="Netherland Dwarf 4">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
             
@@ -971,19 +906,21 @@
                 <div class="swiper-container" id="swiperHolland">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/hl.png" alt="Holland Lop 1" onerror="this.src='https://via.placeholder.com/800x450/FF6B8B/ffffff?text=Holland+Lop+1'">
+                            <img src="https://riffanrabbitry.xyz/assets/hl.png" alt="Holland Lop 1">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/hl1.png" alt="Holland Lop 2" onerror="this.src='https://via.placeholder.com/800x450/7ED321/ffffff?text=Holland+Lop+2'">
+                            <img src="https://riffanrabbitry.xyz/assets/hl1.png" alt="Holland Lop 2">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/hl2.png" alt="Holland Lop 3" onerror="this.src='https://via.placeholder.com/800x450/24C6DC/ffffff?text=Holland+Lop+3'">
+                            <img src="https://riffanrabbitry.xyz/assets/hl2.png" alt="Holland Lop 3">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/hl3.png" alt="Holland Lop 4" onerror="this.src='https://via.placeholder.com/800x450/FF8E53/ffffff?text=Holland+Lop+4'">
+                            <img src="https://riffanrabbitry.xyz/assets/hl3.png" alt="Holland Lop 4">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
             
@@ -1002,19 +939,21 @@
                 <div class="swiper-container" id="swiperJersey">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/jw.png" alt="Jersey Wooly 1" onerror="this.src='https://via.placeholder.com/800x450/FF6B8B/ffffff?text=Jersey+Wooly+1'">
+                            <img src="https://riffanrabbitry.xyz/assets/jw.png" alt="Jersey Wooly 1">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/jw1.png" alt="Jersey Wooly 2" onerror="this.src='https://via.placeholder.com/800x450/7ED321/ffffff?text=Jersey+Wooly+2'">
+                            <img src="https://riffanrabbitry.xyz/assets/jw1.png" alt="Jersey Wooly 2">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/jw2.png" alt="Jersey Wooly 3" onerror="this.src='https://via.placeholder.com/800x450/24C6DC/ffffff?text=Jersey+Wooly+3'">
+                            <img src="https://riffanrabbitry.xyz/assets/jw2.png" alt="Jersey Wooly 3">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/jw3.png" alt="Jersey Wooly 4" onerror="this.src='https://via.placeholder.com/800x450/FF8E53/ffffff?text=Jersey+Wooly+4'">
+                            <img src="https://riffanrabbitry.xyz/assets/jw3.png" alt="Jersey Wooly 4">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
             
@@ -1033,19 +972,21 @@
                 <div class="swiper-container" id="swiperFlemish">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/fg.png" alt="Flemish Giant 1" onerror="this.src='https://via.placeholder.com/800x450/FF6B8B/ffffff?text=Flemish+Giant+1'">
+                            <img src="https://riffanrabbitry.xyz/assets/fg.png" alt="Flemish Giant 1">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/fg1.png" alt="Flemish Giant 2" onerror="this.src='https://via.placeholder.com/800x450/7ED321/ffffff?text=Flemish+Giant+2'">
+                            <img src="https://riffanrabbitry.xyz/assets/fg1.png" alt="Flemish Giant 2">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/fg2.png" alt="Flemish Giant 3" onerror="this.src='https://via.placeholder.com/800x450/24C6DC/ffffff?text=Flemish+Giant+3'">
+                            <img src="https://riffanrabbitry.xyz/assets/fg2.png" alt="Flemish Giant 3">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/fg3.png" alt="Flemish Giant 4" onerror="this.src='https://via.placeholder.com/800x450/FF8E53/ffffff?text=Flemish+Giant+4'">
+                            <img src="https://riffanrabbitry.xyz/assets/fg3.png" alt="Flemish Giant 4">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
             
@@ -1064,19 +1005,21 @@
                 <div class="swiper-container" id="swiperAngora">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/ea.png" alt="English Angora 1" onerror="this.src='https://via.placeholder.com/800x450/FF6B8B/ffffff?text=English+Angora+1'">
+                            <img src="https://riffanrabbitry.xyz/assets/ea.png" alt="English Angora 1">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/ea1.png" alt="English Angora 2" onerror="this.src='https://via.placeholder.com/800x450/7ED321/ffffff?text=English+Angora+2'">
+                            <img src="https://riffanrabbitry.xyz/assets/ea1.png" alt="English Angora 2">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/ea2.png" alt="English Angora 3" onerror="this.src='https://via.placeholder.com/800x450/24C6DC/ffffff?text=English+Angora+3'">
+                            <img src="https://riffanrabbitry.xyz/assets/ea2.png" alt="English Angora 3">
                         </div>
                         <div class="swiper-slide">
-                            <img src="https://riffanrabbitry.xyz/assets/ea3.png" alt="English Angora 4" onerror="this.src='https://via.placeholder.com/800x450/FF8E53/ffffff?text=English+Angora+4'">
+                            <img src="https://riffanrabbitry.xyz/assets/ea3.png" alt="English Angora 4">
                         </div>
                     </div>
                     <div class="swiper-pagination"></div>
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
                 </div>
             </div>
         </div>
@@ -1088,7 +1031,7 @@
             <div class="token-card">
                 <div class="token-header">
                     <div class="token-logo">
-                        <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="RFN Token Logo" onerror="this.src='https://via.placeholder.com/300x300/FF6B8B/ffffff?text=RFN+Token'">
+                        <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="RFN Token Logo">
                     </div>
                     <div>
                         <h2 class="token-title">Token <span class="token-symbol">$RFN</span></h2>
@@ -1096,17 +1039,34 @@
                     </div>
                 </div>
                 
-                <div class="token-info">
-                    <h3>Tentang Token $RFN</h3>
-                    <p>$RFN adalah token komunitas yang dibuat untuk menghubungkan para pecinta kelinci dan mendukung Riffan Rabbit Farms. Token ini merupakan bentuk dukungan komunitas dan tidak memiliki fungsi utility, voting, atau hak intervensi terhadap pengelolaan peternakan.</p>
-                    <p style="margin-top: 15px;">Token $RFN murni sebagai simbol dukungan komunitas kepada Riffan Rabbit Farms dalam mengembangkan peternakan kelinci berkualitas.</p>
+                <div class="token-features">
+                    <div class="token-feature">
+                        <i class="fas fa-users"></i>
+                        <h4>Komunitas Eksklusif</h4>
+                        <p>Akses ke grup komunitas khusus pemegang token $RFN</p>
+                    </div>
+                    <div class="token-feature">
+                        <i class="fas fa-percentage"></i>
+                        <h4>Diskon Khusus</h4>
+                        <p>Diskon untuk pembelian kelinci dan aksesori dari peternakan</p>
+                    </div>
+                    <div class="token-feature">
+                        <i class="fas fa-vote-yea"></i>
+                        <h4>Hak Voting</h4>
+                        <p>Ikut menentukan perkembangan peternakan dan jenis kelinci baru</p>
+                    </div>
+                    <div class="token-feature">
+                        <i class="fas fa-gift"></i>
+                        <h4>Reward Eksklusif</h4>
+                        <p>Hadiah khusus dan merchandise terbatas untuk holder token</p>
+                    </div>
                 </div>
                 
                 <div class="cta-buttons" style="justify-content: center;">
                     <a href="https://riffanrabbitry.xyz/Riffan.html" class="cta-button" target="_blank">
                         <i class="fas fa-shopping-cart"></i> Beli Token $RFN
                     </a>
-                    <a href="https://wa.me/087822793234?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20token%20RFN%20dan%20cara%20mendapatkannya" class="cta-button secondary" target="_blank">
+                    <a href="https://wa.me/087822793234?text=Halo,%20saya%20ingin%20tahu%20lebih%20lanjut%20tentang%20token%20RFN" class="cta-button secondary" target="_blank">
                         <i class="fab fa-whatsapp"></i> Tanya via WhatsApp
                     </a>
                 </div>
@@ -1170,20 +1130,23 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <script>
-        // Initialize Swiper sliders - DIPERLAMBAT
+        // Initialize Swiper sliders
         const swiperConfig = {
             loop: true,
             autoplay: {
-                delay: 6000, // 6 detik per slide
+                delay: 3000,
                 disableOnInteraction: false,
             },
             pagination: {
                 el: '.swiper-pagination',
                 clickable: true,
             },
-            navigation: false, // Menghapus panah navigasi
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
             effect: 'slide',
-            speed: 1000, // Transisi 1 detik
+            speed: 800,
             grabCursor: true,
         };
 
@@ -1254,7 +1217,7 @@
             spans[2].style.transform = 'none';
         }
 
-        // Smooth scroll for navigation links - DIPERBAIKI untuk mobile
+        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 if(this.getAttribute('href') === '#') return;
@@ -1264,26 +1227,36 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if(targetElement) {
-                    // Perhitungan offset yang berbeda untuk mobile
-                    const isMobile = window.innerWidth <= 768;
-                    const headerHeight = isMobile ? 70 : 100; // Header lebih kecil di mobile
-                    
                     window.scrollTo({
-                        top: targetElement.offsetTop - headerHeight,
+                        top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
                     });
                 }
             });
         });
 
+        // Token button interaction
+        document.querySelectorAll('.token-section .cta-button').forEach(button => {
+            if(button.getAttribute('href') && button.getAttribute('href').includes('Riffan.html')) {
+                button.addEventListener('click', function(e) {
+                    // If the Riffan.html page doesn't exist yet, show a message
+                    // You can remove this after creating the Riffan.html page
+                    if(!confirm('Anda akan diarahkan ke halaman token RFN. Lanjutkan?')) {
+                        e.preventDefault();
+                    }
+                });
+            }
+        });
+
         // Image error handling
         document.querySelectorAll('img').forEach(img => {
-            const originalSrc = img.src;
             img.addEventListener('error', function() {
-                // Only replace if it's not already a placeholder
-                if (!this.src.includes('via.placeholder.com')) {
-                    this.src = `https://via.placeholder.com/800x450/1A2B3C/ffffff?text=${encodeURIComponent(this.alt || 'Gambar')}`;
-                }
+                this.style.display = 'none';
+                const parent = this.parentElement;
+                const errorMsg = document.createElement('div');
+                errorMsg.style.cssText = 'width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#f5f5f5; color:#888; font-weight:bold;';
+                errorMsg.textContent = 'Gambar tidak tersedia';
+                parent.appendChild(errorMsg);
             });
         });
     </script>
