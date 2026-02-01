@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RFN Token - Riffan Rabbit Farms Community Token</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
             --primary: #8a6d3b;
@@ -15,6 +16,11 @@
             --gold: #c8a96a;
             --shadow: rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --presale: #3498db;
+            --liquidity: #2ecc71;
+            --rewards: #9b59b6;
+            --team: #e74c3c;
+            --marketing: #f39c12;
         }
         
         * {
@@ -33,13 +39,14 @@
         
         /* Header Styles */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
+            background-color: rgba(255, 255, 255, 0.98);
             box-shadow: 0 2px 15px var(--shadow);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            padding: 15px 0;
+            padding: 12px 0;
+            transition: var(--transition);
         }
         
         .header-container {
@@ -54,25 +61,26 @@
         .logo-container {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
         
         .logo {
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--gold);
         }
         
         .logo-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             color: var(--primary);
             font-weight: 700;
+            line-height: 1.2;
         }
         
         .logo-text p {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: var(--secondary);
         }
         
@@ -80,7 +88,7 @@
         .nav-menu {
             display: flex;
             list-style: none;
-            gap: 30px;
+            gap: 20px;
         }
         
         .nav-menu a {
@@ -88,8 +96,9 @@
             color: var(--dark);
             font-weight: 500;
             transition: var(--transition);
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 4px;
+            font-size: 0.95rem;
         }
         
         .nav-menu a:hover {
@@ -102,6 +111,9 @@
             flex-direction: column;
             cursor: pointer;
             gap: 4px;
+            padding: 8px;
+            background: transparent;
+            border: none;
         }
         
         .hamburger span {
@@ -109,12 +121,14 @@
             height: 3px;
             background-color: var(--dark);
             transition: var(--transition);
+            border-radius: 2px;
         }
         
-        /* Hero Section */
+        /* Hero Section - MOBILE FIXED */
         .token-hero {
-            height: 80vh;
-            background: linear-gradient(rgba(62, 39, 35, 0.8), rgba(62, 39, 35, 0.8)), 
+            height: 70vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(62, 39, 35, 0.85), rgba(62, 39, 35, 0.85)), 
                         url('https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');
             background-size: cover;
             background-position: center;
@@ -122,52 +136,65 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 20px;
-            margin-top: 90px;
+            padding: 20px;
+            margin-top: 74px;
         }
         
         .hero-content {
             max-width: 800px;
-            background-color: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background-color: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            width: 100%;
         }
         
         .hero-content h1 {
-            font-size: 3rem;
+            font-size: 2.2rem;
             color: var(--light);
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
         }
         
         .hero-content p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--accent);
-            margin-bottom: 30px;
-            line-height: 1.8;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
         }
         
         .btn {
             display: inline-block;
             background-color: var(--gold);
             color: var(--dark);
-            padding: 12px 30px;
+            padding: 12px 24px;
             border-radius: 50px;
             text-decoration: none;
             font-weight: 600;
             transition: var(--transition);
             border: none;
             cursor: pointer;
-            margin: 5px;
+            font-size: 0.95rem;
+            text-align: center;
+            flex: 1;
+            min-width: 160px;
         }
         
         .btn:hover {
             background-color: var(--primary);
             color: white;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
         
         .btn-secondary {
@@ -184,16 +211,17 @@
         /* Token Info Section */
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             color: var(--primary);
-            margin: 60px 0 40px;
+            margin: 50px 0 30px;
             position: relative;
+            padding: 0 20px;
         }
         
         .section-title::after {
             content: '';
             position: absolute;
-            width: 100px;
+            width: 80px;
             height: 3px;
             background-color: var(--gold);
             bottom: -10px;
@@ -204,30 +232,37 @@
         .token-info-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px 60px;
+            padding: 0 20px 40px;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        @media (min-width: 768px) {
+            .token-info-container {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
         }
         
         .token-card {
             background-color: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 10px 30px var(--shadow);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 25px var(--shadow);
             transition: var(--transition);
-            border-top: 5px solid var(--gold);
+            border-top: 4px solid var(--gold);
         }
         
         .token-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
         }
         
         .token-card h3 {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -235,45 +270,326 @@
         
         .token-card h3 i {
             color: var(--gold);
+            font-size: 1.2rem;
         }
         
         .token-card p {
             margin-bottom: 15px;
             color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.6;
         }
         
         .token-details {
             display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
+            flex-direction: column;
+            gap: 12px;
             margin-top: 20px;
+        }
+        
+        @media (min-width: 480px) {
+            .token-details {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
         }
         
         .detail-item {
             background-color: rgba(138, 109, 59, 0.05);
-            padding: 12px 20px;
+            padding: 12px 16px;
             border-radius: 8px;
             flex: 1;
-            min-width: 200px;
+            min-width: 100%;
+        }
+        
+        @media (min-width: 480px) {
+            .detail-item {
+                min-width: calc(50% - 6px);
+            }
         }
         
         .detail-label {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: var(--secondary);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
+            font-weight: 500;
         }
         
         .detail-value {
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--primary);
+        }
+        
+        /* Tokenomics Section - MOBILE FIXED */
+        .tokenomics-section {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 50px 20px;
+        }
+        
+        .tokenomics-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .tokenomics-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--gold);
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+        
+        .tokenomics-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+        
+        @media (min-width: 992px) {
+            .tokenomics-grid {
+                flex-direction: row;
+                gap: 50px;
+                align-items: center;
+            }
+        }
+        
+        .chart-container {
+            background-color: rgba(255, 255, 255, 0.08);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            order: 2;
+        }
+        
+        @media (min-width: 992px) {
+            .chart-container {
+                order: 1;
+                flex: 1;
+            }
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 300px;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .chart-wrapper {
+                height: 350px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .chart-wrapper {
+                height: 400px;
+            }
+        }
+        
+        .distribution-details {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            order: 1;
+        }
+        
+        @media (min-width: 992px) {
+            .distribution-details {
+                order: 2;
+                flex: 1;
+            }
+        }
+        
+        .distribution-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px;
+            background-color: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+            border-left: 4px solid;
+            transition: var(--transition);
+        }
+        
+        .distribution-item:hover {
+            background-color: rgba(255, 255, 255, 0.08);
+            transform: translateX(5px);
+        }
+        
+        .distribution-item.presale {
+            border-left-color: var(--presale);
+        }
+        
+        .distribution-item.rewards {
+            border-left-color: var(--rewards);
+        }
+        
+        .distribution-item.liquidity {
+            border-left-color: var(--liquidity);
+        }
+        
+        .distribution-item.team {
+            border-left-color: var(--team);
+        }
+        
+        .distribution-item.marketing {
+            border-left-color: var(--marketing);
+        }
+        
+        .distribution-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .color-indicator {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .color-indicator.presale {
+            background-color: var(--presale);
+        }
+        
+        .color-indicator.rewards {
+            background-color: var(--rewards);
+        }
+        
+        .color-indicator.liquidity {
+            background-color: var(--liquidity);
+        }
+        
+        .color-indicator.team {
+            background-color: var(--team);
+        }
+        
+        .color-indicator.marketing {
+            background-color: var(--marketing);
+        }
+        
+        .distribution-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+            color: var(--gold);
+            line-height: 1.2;
+        }
+        
+        .distribution-text p {
+            font-size: 0.85rem;
+            color: var(--accent);
+            opacity: 0.9;
+        }
+        
+        .distribution-numbers {
+            text-align: right;
+            flex-shrink: 0;
+            margin-left: 10px;
+        }
+        
+        .distribution-percentage {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+        }
+        
+        .distribution-amount {
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-top: 4px;
+        }
+        
+        /* Presale Details - MOBILE FIXED */
+        .presale-details {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        
+        .presale-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border-top: 4px solid var(--presale);
+        }
+        
+        .presale-card h3 {
+            color: var(--presale);
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .presale-card h3 i {
+            font-size: 1.4rem;
+        }
+        
+        .presale-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        @media (min-width: 768px) {
+            .presale-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 20px;
+            }
+        }
+        
+        .presale-item {
+            background-color: rgba(52, 152, 219, 0.05);
+            padding: 18px 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .presale-item .label {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-bottom: 6px;
+            font-weight: 500;
+        }
+        
+        .presale-item .value {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--presale);
+            line-height: 1.2;
+        }
+        
+        .presale-explanation {
+            background-color: rgba(52, 152, 219, 0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        
+        .presale-explanation h4 {
+            color: var(--presale);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .presale-explanation p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--dark);
         }
         
         /* Contract Address Section */
         .contract-section {
             background-color: var(--dark);
             color: var(--light);
-            padding: 60px 20px;
+            padding: 50px 20px;
             text-align: center;
         }
         
@@ -283,46 +599,64 @@
         }
         
         .contract-section h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             margin-bottom: 20px;
             color: var(--gold);
+            line-height: 1.2;
         }
         
         .contract-section p {
-            font-size: 1.1rem;
-            margin-bottom: 30px;
+            font-size: 1rem;
+            margin-bottom: 25px;
             color: var(--accent);
+            line-height: 1.6;
         }
         
         .contract-address {
             background-color: rgba(255, 255, 255, 0.1);
             padding: 20px;
             border-radius: 10px;
-            margin: 30px 0;
+            margin: 25px 0;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            flex-direction: column;
             gap: 15px;
         }
         
+        @media (min-width: 768px) {
+            .contract-address {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
         .address-text {
-            font-family: monospace;
-            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
             word-break: break-all;
             color: var(--light);
+            text-align: left;
+            line-height: 1.4;
         }
         
         .copy-btn {
             background-color: var(--gold);
             color: var(--dark);
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             transition: var(--transition);
-            white-space: nowrap;
+            font-size: 0.95rem;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .copy-btn {
+                width: auto;
+                min-width: 140px;
+            }
         }
         
         .copy-btn:hover {
@@ -330,37 +664,73 @@
             color: white;
         }
         
+        .contract-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        @media (min-width: 480px) {
+            .contract-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+        
         /* Important Notes */
         .notes-section {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 40px auto;
             padding: 0 20px;
         }
         
         .notes-card {
-            background-color: rgba(200, 169, 106, 0.1);
-            border-left: 5px solid var(--gold);
-            padding: 30px;
+            background-color: rgba(200, 169, 106, 0.08);
+            border-left: 4px solid var(--gold);
+            padding: 25px;
             border-radius: 0 10px 10px 0;
         }
         
         .notes-card h3 {
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
+            font-size: 1.5rem;
+        }
+        
+        .notes-card h3 i {
+            font-size: 1.3rem;
         }
         
         .notes-card p {
             margin-bottom: 15px;
             color: var(--dark);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        .warning-box {
+            margin-top: 20px;
+            padding: 18px;
+            background-color: rgba(231, 76, 60, 0.08);
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+        
+        .warning-box p {
+            margin-bottom: 0;
+            color: var(--dark);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
         
         /* Community Links */
         .community-section {
             background-color: rgba(62, 39, 35, 0.05);
-            padding: 60px 20px;
+            padding: 50px 20px;
             text-align: center;
         }
         
@@ -370,68 +740,129 @@
         }
         
         .community-section h2 {
-            font-size: 2rem;
-            margin-bottom: 40px;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
             color: var(--primary);
+            line-height: 1.2;
+        }
+        
+        .community-section p {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            line-height: 1.6;
         }
         
         .community-links {
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
+            flex-direction: column;
+            gap: 15px;
             margin-top: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .community-links {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
         }
         
         .community-link {
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
+            gap: 12px;
             background-color: white;
-            padding: 15px 25px;
+            padding: 18px 20px;
             border-radius: 10px;
             text-decoration: none;
             color: var(--dark);
             box-shadow: 0 5px 15px var(--shadow);
             transition: var(--transition);
-            min-width: 200px;
+            width: 100%;
+        }
+        
+        @media (min-width: 768px) {
+            .community-link {
+                width: auto;
+                min-width: 200px;
+            }
         }
         
         .community-link:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
             color: var(--primary);
         }
         
         .community-link i {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--gold);
+        }
+        
+        .community-link span {
+            font-size: 1rem;
+            font-weight: 500;
         }
         
         /* Footer */
         footer {
             background-color: var(--secondary);
             color: var(--accent);
-            padding: 60px 20px 30px;
+            padding: 50px 20px 25px;
         }
         
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+            }
         }
         
         .footer-column h3 {
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             font-size: 1.3rem;
+        }
+        
+        .footer-column p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            padding-left: 5px;
         }
         
         .social-links {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin-top: 20px;
         }
         
@@ -446,35 +877,38 @@
             color: var(--accent);
             text-decoration: none;
             transition: var(--transition);
+            font-size: 1.1rem;
         }
         
         .social-links a:hover {
             background-color: var(--gold);
             color: var(--dark);
-            transform: translateY(-5px);
+            transform: translateY(-3px);
         }
         
         .copyright {
             text-align: center;
-            margin-top: 50px;
+            margin-top: 40px;
             padding-top: 20px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
         }
         
         /* Mobile Menu */
         .mobile-menu {
             position: fixed;
-            top: 90px;
+            top: 74px;
             right: -100%;
-            width: 250px;
-            height: calc(100vh - 90px);
+            width: 280px;
+            height: calc(100vh - 74px);
             background-color: white;
-            box-shadow: -5px 0 15px var(--shadow);
-            transition: right 0.4s ease;
-            padding: 30px;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+            transition: right 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 30px 25px;
             z-index: 999;
+            overflow-y: auto;
         }
         
         .mobile-menu.active {
@@ -495,20 +929,18 @@
             font-size: 1.1rem;
             font-weight: 500;
             transition: var(--transition);
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.1);
         }
         
         .mobile-nav a:hover {
             color: var(--primary);
+            padding-left: 10px;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content h1 {
-                font-size: 2.5rem;
-            }
-        }
-        
-        @media (max-width: 768px) {
+        /* Responsive Design Improvements */
+        @media (max-width: 767px) {
             .nav-menu {
                 display: none;
             }
@@ -518,51 +950,113 @@
             }
             
             .hero-content h1 {
-                font-size: 2rem;
-            }
-            
-            .hero-content p {
-                font-size: 1rem;
-            }
-            
-            .hero-content {
-                padding: 30px 20px;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .contract-address {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .copy-btn {
-                width: 100%;
-            }
-        }
-        
-        @media (max-width: 576px) {
-            .token-hero {
-                margin-top: 80px;
-                height: 70vh;
-            }
-            
-            .logo-text h1 {
-                font-size: 1.2rem;
-            }
-            
-            .hero-content h1 {
                 font-size: 1.8rem;
             }
             
-            .token-info-container {
+            .hero-content p {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .token-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            .tokenomics-container h2 {
+                font-size: 1.8rem;
+            }
+            
+            .distribution-text h4 {
+                font-size: 1rem;
+            }
+            
+            .distribution-percentage {
+                font-size: 1.2rem;
+            }
+            
+            .presale-card h3 {
+                font-size: 1.5rem;
+            }
+            
+            .presale-item .value {
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .token-hero {
+                height: 65vh;
+                min-height: 450px;
+                margin-top: 70px;
+            }
+            
+            .hero-content {
+                padding: 25px 20px;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.6rem;
+            }
+            
+            .btn {
+                min-width: 100%;
+                padding: 14px 20px;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .presale-grid {
                 grid-template-columns: 1fr;
             }
             
             .community-link {
-                min-width: 100%;
+                padding: 16px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            header, footer, .btn, .community-section {
+                display: none;
+            }
+            
+            body {
+                background-color: white;
+                color: black;
+            }
+            
+            .token-hero {
+                margin-top: 0;
+                height: auto;
+                background: none;
+                color: black;
+            }
+            
+            .hero-content {
+                background: none;
+                backdrop-filter: none;
+                border: none;
+                padding: 20px 0;
+                color: black;
+            }
+            
+            .hero-content h1, .hero-content p {
+                color: black;
+                text-shadow: none;
+            }
+            
+            .tokenomics-section {
+                background: none;
+                color: black;
+            }
+            
+            .tokenomics-container h2 {
+                color: black;
             }
         }
     </style>
@@ -586,11 +1080,11 @@
                 <li><a href="/disclaimer">Disclaimer</a></li>
             </ul>
             
-            <div class="hamburger" id="hamburger">
+            <button class="hamburger" id="hamburger" aria-label="Menu">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </header>
     
@@ -660,13 +1154,139 @@
             <div class="token-card">
                 <h3><i class="fas fa-hand-holding-usd"></i> Staking Rewards</h3>
                 <p>Stake your RFN tokens to earn rewards from the ecosystem:</p>
-                <ul style="padding-left: 20px; margin-bottom: 20px;">
+                <ul style="padding-left: 20px; margin-bottom: 20px; color: var(--dark);">
                     <li>Up to 1% of sales distributed to stakers</li>
                     <li>Rewards in RFN, BNB, or other tokens</li>
                     <li>Regular reward distributions</li>
                     <li>Community voting rights for active stakers</li>
                 </ul>
-                <a href="/stake" class="btn" style="width: 100%; text-align: center;">Stake Now</a>
+                <a href="/stake" class="btn" style="width: 100%; text-align: center; margin-top: 10px;">Stake Now</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tokenomics Section -->
+    <section class="tokenomics-section">
+        <div class="tokenomics-container">
+            <h2>RFN Tokenomics</h2>
+            
+            <div class="tokenomics-grid">
+                <div class="chart-container">
+                    <div class="chart-wrapper">
+                        <canvas id="tokenomicsChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="distribution-details">
+                    <div class="distribution-item presale">
+                        <div class="distribution-info">
+                            <div class="color-indicator presale"></div>
+                            <div class="distribution-text">
+                                <h4>Presale (30%)</h4>
+                                <p>Private/Public Sale</p>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">30%</div>
+                            <div class="distribution-amount">8.1M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item rewards">
+                        <div class="distribution-info">
+                            <div class="color-indicator rewards"></div>
+                            <div class="distribution-text">
+                                <h4>Rewards Pool (50%)</h4>
+                                <p>Staking & Ecosystem Rewards</p>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">50%</div>
+                            <div class="distribution-amount">13.5M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item liquidity">
+                        <div class="distribution-info">
+                            <div class="color-indicator liquidity"></div>
+                            <div class="distribution-text">
+                                <h4>Liquidity (10%)</h4>
+                                <p>Locked for 1 year</p>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">10%</div>
+                            <div class="distribution-amount">2.7M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item team">
+                        <div class="distribution-info">
+                            <div class="color-indicator team"></div>
+                            <div class="distribution-text">
+                                <h4>Team (7%)</h4>
+                                <p>24-month vesting</p>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">7%</div>
+                            <div class="distribution-amount">1.89M RFN</div>
+                        </div>
+                    </div>
+                    
+                    <div class="distribution-item marketing">
+                        <div class="distribution-info">
+                            <div class="color-indicator marketing"></div>
+                            <div class="distribution-text">
+                                <h4>Marketing (3%)</h4>
+                                <p>2-year allocation</p>
+                            </div>
+                        </div>
+                        <div class="distribution-numbers">
+                            <div class="distribution-percentage">3%</div>
+                            <div class="distribution-amount">0.81M RFN</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Presale Details -->
+    <section class="presale-details">
+        <div class="presale-card">
+            <h3><i class="fas fa-chart-line"></i> Presale Details</h3>
+            
+            <div class="presale-grid">
+                <div class="presale-item">
+                    <div class="label">Total Supply</div>
+                    <div class="value">27,000,000 RFN</div>
+                </div>
+                
+                <div class="presale-item">
+                    <div class="label">Presale Allocation</div>
+                    <div class="value">8.1M RFN (30%)</div>
+                </div>
+                
+                <div class="presale-item">
+                    <div class="label">Mini Cap</div>
+                    <div class="value">5 BNB</div>
+                </div>
+                
+                <div class="presale-item">
+                    <div class="label">Soft Cap</div>
+                    <div class="value">10 BNB</div>
+                </div>
+                
+                <div class="presale-item">
+                    <div class="label">Hard Cap</div>
+                    <div class="value">20 BNB</div>
+                </div>
+            </div>
+            
+            <div class="presale-explanation">
+                <h4>Presale Structure:</h4>
+                <p>Presale tokens will be sold in phases (private/public) with 40% distribution at TGE and the remaining 60% vested monthly over 6 months. Rewards pool receives additional 1% from farm profits for buyback and staking rewards.</p>
             </div>
         </div>
     </section>
@@ -684,14 +1304,14 @@
                 </button>
             </div>
             
-            <p>
+            <div class="contract-buttons">
                 <a href="https://bscscan.com/token/0x56C44f52D7Dc7DD82b01f6694D9a91C8e3cDF9a6" target="_blank" class="btn btn-secondary">
                     <i class="fas fa-external-link-alt"></i> View on BscScan
                 </a>
                 <a href="https://pancakeswap.finance" target="_blank" class="btn">
                     <i class="fas fa-shopping-cart"></i> Buy on PancakeSwap
                 </a>
-            </p>
+            </div>
         </div>
     </section>
     
@@ -703,6 +1323,10 @@
             <p>The token is separate from the farm and is not an RWA (Real World Asset) or tokenization of rabbits.</p>
             <p>The price of RFN on DEX and CEX is purely the result of market movements and sentiment. However, it is ensured that the token is not for self-enrichment, farm enrichment, or fraudulent purposes.</p>
             <p><strong>Always ensure you are accessing the official Riffan Rabbitry website only.</strong></p>
+            
+            <div class="warning-box">
+                <p><strong>⚠️ Perhatian:</strong> Token RFN bukan untuk investasi kepemilikan farm seperti saham. Tidak bisa mengintervensi keputusan pemilik farm. Mungkin hanya sebagai vote untuk nama kelinci, dll.</p>
+            </div>
         </div>
     </section>
     
@@ -742,11 +1366,11 @@
             
             <div class="footer-column">
                 <h3>Quick Links</h3>
-                <ul style="list-style: none;">
-                    <li><a href="/" style="color: var(--accent); text-decoration: none;">Home</a></li>
-                    <li><a href="/#breeds" style="color: var(--accent); text-decoration: none;">Rabbit Breeds</a></li>
-                    <li><a href="#token" style="color: var(--accent); text-decoration: none;">RFN Token</a></li>
-                    <li><a href="/disclaimer" style="color: var(--accent); text-decoration: none;">Disclaimer</a></li>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/#breeds">Rabbit Breeds</a></li>
+                    <li><a href="#token">RFN Token</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
                 </ul>
             </div>
             
@@ -787,9 +1411,9 @@
             // Animate hamburger to X
             const spans = hamburger.querySelectorAll('span');
             if (mobileMenu.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
                 spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(7px, -6px)';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
             } else {
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
@@ -808,9 +1432,22 @@
             });
         });
         
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (event) => {
+            const isClickInsideMenu = mobileMenu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideMenu && !isClickOnHamburger && mobileMenu.classList.contains('active')) {
+                mobileMenu.classList.remove('active');
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        });
+        
         // Copy Contract Address Functionality
         const copyBtn = document.getElementById('copyBtn');
-        const contractAddress = document.getElementById('contractAddress');
         
         copyBtn.addEventListener('click', () => {
             const address = copyBtn.getAttribute('data-address');
@@ -877,9 +1514,18 @@
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
-                        top: targetElement.offsetTop - 100,
+                        top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                    
+                    // Close mobile menu if open
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        const spans = hamburger.querySelectorAll('span');
+                        spans[0].style.transform = 'none';
+                        spans[1].style.opacity = '1';
+                        spans[2].style.transform = 'none';
+                    }
                 }
             });
         });
@@ -888,12 +1534,141 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             if (window.scrollY > 50) {
-                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
-                header.style.padding = '10px 0';
+                header.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.12)';
+                header.style.padding = '8px 0';
             } else {
-                header.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
-                header.style.padding = '15px 0';
+                header.style.boxShadow = '0 2px 15px var(--shadow)';
+                header.style.padding = '12px 0';
             }
+        });
+        
+        // Tokenomics Chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('tokenomicsChart').getContext('2d');
+            
+            // Data for the chart
+            const data = {
+                labels: ['Presale (30%)', 'Rewards Pool (50%)', 'Liquidity (10%)', 'Team (7%)', 'Marketing (3%)'],
+                datasets: [{
+                    data: [30, 50, 10, 7, 3],
+                    backgroundColor: [
+                        '#3498db', // Presale - Blue
+                        '#9b59b6', // Rewards - Purple
+                        '#2ecc71', // Liquidity - Green
+                        '#e74c3c', // Team - Red
+                        '#f39c12'  // Marketing - Orange
+                    ],
+                    borderWidth: 2,
+                    borderColor: '#ffffff',
+                    hoverOffset: 15
+                }]
+            };
+            
+            // Chart configuration
+            const config = {
+                type: 'doughnut',
+                data: data,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: window.innerWidth < 768 ? 'bottom' : 'right',
+                            labels: {
+                                padding: 15,
+                                usePointStyle: true,
+                                pointStyle: 'circle',
+                                font: {
+                                    size: window.innerWidth < 768 ? 12 : 14
+                                },
+                                color: '#ffffff'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.raw || 0;
+                                    const total = 27_000_000;
+                                    const amount = Math.round(total * (value / 100));
+                                    const formattedAmount = amount.toLocaleString();
+                                    return `${label}: ${value}% (${formattedAmount} RFN)`;
+                                }
+                            },
+                            backgroundColor: 'rgba(0, 0, 0, 0.85)',
+                            titleColor: '#c8a96a',
+                            bodyColor: '#ffffff',
+                            borderColor: '#c8a96a',
+                            borderWidth: 1,
+                            padding: 12,
+                            bodyFont: {
+                                size: 13
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true,
+                        duration: 1500
+                    },
+                    cutout: window.innerWidth < 768 ? '60%' : '65%'
+                }
+            };
+            
+            // Create the chart
+            const tokenomicsChart = new Chart(ctx, config);
+            
+            // Add hover effect to distribution items
+            const distributionItems = document.querySelectorAll('.distribution-item');
+            distributionItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const type = this.classList[1]; // presale, rewards, etc.
+                    const datasetIndex = ['presale', 'rewards', 'liquidity', 'team', 'marketing'].indexOf(type);
+                    
+                    if (datasetIndex !== -1) {
+                        tokenomicsChart.setActiveElements([{ datasetIndex: 0, index: datasetIndex }]);
+                        tokenomicsChart.update();
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    tokenomicsChart.setActiveElements([]);
+                    tokenomicsChart.update();
+                });
+                
+                // Touch support for mobile
+                item.addEventListener('touchstart', function() {
+                    const type = this.classList[1];
+                    const datasetIndex = ['presale', 'rewards', 'liquidity', 'team', 'marketing'].indexOf(type);
+                    
+                    if (datasetIndex !== -1) {
+                        tokenomicsChart.setActiveElements([{ datasetIndex: 0, index: datasetIndex }]);
+                        tokenomicsChart.update();
+                        
+                        // Reset after 1 second
+                        setTimeout(() => {
+                            tokenomicsChart.setActiveElements([]);
+                            tokenomicsChart.update();
+                        }, 1000);
+                    }
+                });
+            });
+            
+            // Handle window resize for chart
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    tokenomicsChart.destroy();
+                    
+                    // Update chart configuration for new screen size
+                    config.options.plugins.legend.position = window.innerWidth < 768 ? 'bottom' : 'right';
+                    config.options.cutout = window.innerWidth < 768 ? '60%' : '65%';
+                    
+                    // Recreate chart
+                    new Chart(ctx, config);
+                }, 250);
+            });
         });
         
         // Add download shortcut functionality (Ctrl+S or Cmd+S)
@@ -908,7 +1683,7 @@
                 
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'riffan-rabbit-token-page.html';
+                a.download = 'riffan-rabbit-token-page-mobile-optimized.html';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -917,6 +1692,16 @@
                 alert('Token page downloaded as HTML file!');
             }
         });
+        
+        // Touch device detection and enhancements
+        if ('ontouchstart' in window || navigator.maxTouchPoints) {
+            document.body.classList.add('touch-device');
+            
+            // Improve touch interactions
+            document.querySelectorAll('.btn, .community-link, .distribution-item').forEach(element => {
+                element.style.cursor = 'pointer';
+            });
+        }
     </script>
 </body>
 </html>
