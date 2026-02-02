@@ -10,8 +10,8 @@ contract RFNPresale is ReentrancyGuard, Ownable {
     using SafeMath for uint256;
 
     // Hardcoded addresses - HARUS DIUPDATE SEBELUM DEPLOY
-    address public constant RFN_TOKEN = 0x...; // ALAMAT TOKEN RFN
-    address public constant WALLET_OWNER = 0x...; // ALAMAT WALLET OWNER
+    address public constant RFN_TOKEN = 0x603fcF9aCEDAB68007fd82d86913A88c1d41A6b2; // ALAMAT TOKEN RFN
+    address public constant WALLET_OWNER = 0x379c7600ac527a60592a880f72140d432577e8da; // ALAMAT WALLET OWNER
 
     // Token information
     IERC20 public rfnToken;
