@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFN Token Presale - Riffan Rabbit Farms</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/web3@1.7.0/dist/web3.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --primary: #8a6d3b;
+            --secondary: #5d4037;
+            --accent: #d7ccc8;
+            --light: #f5f1e8;
+            --dark: #3e2723;
+            --gold: #c8a96a;
+            --shadow: rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+            --success: #27ae60;
+            --warning: #f39c12;
+            --danger: #e74c3c;
+            --info: #3498db;
+            --presale: #9b59b6;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 15px var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+            transition: var(--transition);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-text p {
+            font-size: 0.75rem;
+            color: var(--secondary);
+        }
+        
+        /* Navigation */
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 20px;
+        }
+        
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+        
+        .nav-menu a:hover {
+            color: var(--primary);
+            background-color: rgba(138, 109, 59, 0.1);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+            padding: 8px;
+            background: transparent;
+            border: none;
+        }
+        
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--dark);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+        
+        /* Wallet Connect */
+        .wallet-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .connect-btn {
+            background-color: var(--presale);
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .connect-btn:hover {
+            background-color: #8e44ad;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
+        }
+        
+        .wallet-info {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(155, 89, 182, 0.1);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .wallet-address {
+            font-family: monospace;
+            color: var(--presale);
+            font-weight: 600;
+        }
+        
+        .wallet-balance {
+            color: var(--secondary);
+            font-size: 0.85rem;
+        }
+        
+        /* Hero Section */
+        .presale-hero {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.9) 0%, rgba(142, 68, 173, 0.9) 100%),
+                        url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 20px 60px;
+            text-align: center;
+            color: white;
+            margin-top: 74px;
+            border-bottom: 5px solid var(--gold);
+        }
+        
+        .presale-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .presale-hero .subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: var(--gold);
+            font-weight: 300;
+        }
+        
+        .presale-hero p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--gold);
+            line-height: 1;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        
+        /* Timer */
+        .timer-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: -40px auto 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 3px solid var(--gold);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .timer-title {
+            text-align: center;
+            color: var(--presale);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .timer-unit {
+            background-color: rgba(155, 89, 182, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            min-width: 100px;
+            text-align: center;
+            border: 2px solid rgba(155, 89, 182, 0.2);
+        }
+        
+        .timer-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--presale);
+            line-height: 1;
+        }
+        
+        .timer-label {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Progress Section */
+        .progress-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .progress-container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            color: var(--presale);
+            margin-bottom: 30px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 3px;
+            background-color: var(--gold);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .progress-bars {
+            margin-bottom: 40px;
+        }
+        
+        .progress-bar {
+            margin-bottom: 25px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .progress-fill {
+            height: 25px;
+            background-color: #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-fill-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--presale) 0%, #8e44ad 100%);
+            border-radius: 12px;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress-fill-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-image: linear-gradient(
+                -45deg,
+                rgba(255, 255, 255, 0.2) 25%,
+                transparent 25%,
+                transparent 50%,
+                rgba(255, 255, 255, 0.2) 50%,
+                rgba(255, 255, 255, 0.2) 75%,
+                transparent 75%,
+                transparent
+            );
+            background-size: 50px 50px;
+            animation: moveStripes 2s linear infinite;
+        }
+        
+        @keyframes moveStripes {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
+        
+        .caps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .cap-card {
+            background-color: rgba(155, 89, 182, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            border: 2px solid rgba(155, 89, 182, 0.1);
+            transition: var(--transition);
+        }
+        
+        .cap-card:hover {
+            border-color: var(--presale);
+            transform: translateY(-5px);
+        }
+        
+        .cap-card.reached {
+            background-color: rgba(39, 174, 96, 0.1);
+            border-color: var(--success);
+        }
+        
+        .cap-icon {
+            font-size: 2.5rem;
+            color: var(--presale);
+            margin-bottom: 15px;
+        }
+        
+        .cap-card.reached .cap-icon {
+            color: var(--success);
+        }
+        
+        .cap-value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--presale);
+            margin-bottom: 5px;
+        }
+        
+        .cap-card.reached .cap-value {
+            color: var(--success);
+        }
+        
+        .cap-label {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        /* Main Content */
+        .presale-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        @media (min-width: 992px) {
+            .presale-container {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+        
+        /* Purchase Section */
+        .purchase-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .price-info {
+            background-color: rgba(155, 89, 182, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+            border: 2px solid rgba(155, 89, 182, 0.1);
+        }
+        
+        .price-title {
+            color: var(--presale);
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .price-value {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--presale);
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+        
+        .price-subtitle {
+            color: var(--secondary);
+            font-size: 1rem;
+        }
+        
+        .purchase-form {
+            margin-top: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--secondary);
+            font-weight: 500;
+        }
+        
+        .input-with-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .amount-input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid rgba(155, 89, 182, 0.2);
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+        
+        .amount-input:focus {
+            outline: none;
+            border-color: var(--presale);
+            box-shadow: 0 0 0 3px rgba(155, 89, 182, 0.2);
+        }
+        
+        .amount-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .amount-btn {
+            padding: 0 20px;
+            background-color: rgba(155, 89, 182, 0.1);
+            border: 2px solid rgba(155, 89, 182, 0.2);
+            border-radius: 8px;
+            color: var(--presale);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .amount-btn:hover {
+            background-color: var(--presale);
+            color: white;
+            border-color: var(--presale);
+        }
+        
+        .tokens-display {
+            background-color: rgba(39, 174, 96, 0.05);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid rgba(39, 174, 96, 0.1);
+            text-align: center;
+        }
+        
+        .tokens-label {
+            color: var(--success);
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .tokens-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .purchase-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, var(--presale) 0%, #8e44ad 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .purchase-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(155, 89, 182, 0.3);
+        }
+        
+        .purchase-btn:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .limits-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: rgba(243, 156, 18, 0.05);
+            border-radius: 8px;
+            border-left: 4px solid var(--warning);
+            font-size: 0.9rem;
+            color: var(--secondary);
+        }
+        
+        /* Sidebar */
+        .presale-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        
+        .info-card, .vesting-card, .stats-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--presale);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(155, 89, 182, 0.1);
+        }
+        
+        .info-list {
+            list-style: none;
+        }
+        
+        .info-list li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .info-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+        
+        .vesting-timeline {
+            margin-top: 20px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid rgba(155, 89, 182, 0.1);
+        }
+        
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+        
+        .timeline-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(155, 89, 182, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--presale);
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .timeline-content h4 {
+            color: var(--presale);
+            margin-bottom: 5px;
+            font-size: 1rem;
+        }
+        
+        .timeline-content p {
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .stat-box {
+            text-align: center;
+            padding: 15px;
+            background-color: rgba(155, 89, 182, 0.05);
+            border-radius: 8px;
+        }
+        
+        .stat-box .value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--presale);
+            line-height: 1;
+        }
+        
+        .stat-box .label {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            margin-top: 5px;
+        }
+        
+        /* My Contributions Section */
+        .contributions-section {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+        
+        .contributions-table-container {
+            overflow-x: auto;
+            margin-top: 20px;
+        }
+        
+        .contributions-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .contributions-table th {
+            background-color: rgba(155, 89, 182, 0.05);
+            padding: 15px;
+            text-align: left;
+            color: var(--presale);
+            font-weight: 600;
+            border-bottom: 2px solid rgba(155, 89, 182, 0.2);
+        }
+        
+        .contributions-table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(155, 89, 182, 0.1);
+            vertical-align: middle;
+        }
+        
+        .contributions-table tr:hover {
+            background-color: rgba(155, 89, 182, 0.02);
+        }
+        
+        .action-cell {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .table-btn {
+            padding: 8px 15px;
+            border-radius: 6px;
+            border: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .table-btn.claim {
+            background-color: var(--success);
+            color: white;
+        }
+        
+        .table-btn.refund {
+            background-color: var(--warning);
+            color: white;
+        }
+        
+        .table-btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(-20px);
+            transition: transform 0.3s;
+        }
+        
+        .modal-overlay.active .modal {
+            transform: translateY(0);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(155, 89, 182, 0.2);
+        }
+        
+        .modal-title {
+            font-size: 1.5rem;
+            color: var(--presale);
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--secondary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-close:hover {
+            color: var(--presale);
+        }
+        
+        .modal-body {
+            margin-bottom: 25px;
+        }
+        
+        .modal-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .modal-btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        .modal-btn.primary {
+            background-color: var(--presale);
+            color: white;
+        }
+        
+        .modal-btn.secondary {
+            background-color: rgba(155, 89, 182, 0.1);
+            color: var(--presale);
+        }
+        
+        .modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Loading States */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(155, 89, 182, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--presale);
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 3000;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .notification.active {
+            transform: translateX(0);
+        }
+        
+        .notification.success {
+            background-color: var(--success);
+        }
+        
+        .notification.error {
+            background-color: var(--danger);
+        }
+        
+        .notification.info {
+            background-color: var(--info);
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 74px;
+            right: -100%;
+            width: 280px;
+            height: calc(100vh - 74px);
+            background-color: white;
+            box-shadow: -5px 0 20px rgba(0, 0, 0, 0.15);
+            transition: right 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+            padding: 30px 25px;
+            z-index: 999;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-nav {
+            list-style: none;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 20px;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: var(--transition);
+            display: block;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(138, 109, 59, 0.1);
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--presale);
+            padding-left: 10px;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--secondary);
+            color: var(--accent);
+            padding: 50px 20px 25px;
+            margin-top: 60px;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        @media (min-width: 768px) {
+            .footer-container {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+            }
+        }
+        
+        .footer-column h3 {
+            color: var(--gold);
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-column p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: var(--transition);
+        }
+        
+        .footer-column a:hover {
+            color: var(--gold);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.5;
+        }
+        
+        /* Responsive */
+        @media (max-width: 767px) {
+            .nav-menu, .wallet-section {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .presale-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .presale-hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .timer-unit {
+                min-width: 80px;
+                padding: 15px;
+            }
+            
+            .timer-number {
+                font-size: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .presale-hero {
+                padding: 100px 20px 40px;
+            }
+            
+            .price-value {
+                font-size: 2.2rem;
+            }
+            
+            .input-with-actions {
+                flex-direction: column;
+            }
+            
+            .amount-actions {
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-container">
+                <img src="riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbit Farms Logo" class="logo">
+                <div class="logo-text">
+                    <h1>Riffan Rabbit Farms</h1>
+                    <p>RFN Token Presale</p>
+                </div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/token">RFN Token</a></li>
+                <li><a href="/stake">Stake RFN</a></li>
+                <li><a href="/presale" class="active">Presale</a></li>
+                <li><a href="/disclaimer">Disclaimer</a></li>
+            </ul>
+            
+            <div class="wallet-section">
+                <div class="wallet-info" id="walletInfo">
+                    <div>
+                        <div class="wallet-address" id="walletAddressShort"></div>
+                        <div class="wallet-balance">Balance: <span id="walletBalance">0</span> BNB</div>
+                    </div>
+                    <button class="connect-btn" id="disconnectBtn">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+                <button class="connect-btn" id="connectBtn">
+                    <i class="fas fa-wallet"></i>
+                    <span>Connect Wallet</span>
+                </button>
+            </div>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/token">RFN Token</a></li>
+            <li><a href="/stake">Stake RFN</a></li>
+            <li><a href="/presale" class="active">Presale</a></li>
+            <li><a href="/disclaimer">Disclaimer</a></li>
+        </ul>
+        <div style="margin-top: 30px;">
+            <button class="connect-btn" id="mobileConnectBtn" style="width: 100%;">
+                <i class="fas fa-wallet"></i>
+                <span>Connect Wallet</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Hero Section -->
+    <section class="presale-hero">
+        <h1>RFN Token Presale</h1>
+        <div class="subtitle">Join the Riffan Rabbit Farms Community Early</div>
+        <p>Participate in the RFN token presale and secure your tokens at a special price. Limited supply available with attractive vesting schedule.</p>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <div class="stat-value" id="totalRaised">0 BNB</div>
+                <div class="stat-label">Total Raised</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="totalParticipants">0</div>
+                <div class="stat-label">Participants</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="tokensSold">0 RFN</div>
+                <div class="stat-label">Tokens Sold</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value" id="remainingTokens">8.1M RFN</div>
+                <div class="stat-label">Remaining Tokens</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Timer -->
+    <div class="timer-container">
+        <div class="timer-title">Presale Ends In</div>
+        <div class="timer-display">
+            <div class="timer-unit">
+                <div class="timer-number" id="days">00</div>
+                <div class="timer-label">Days</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-number" id="hours">00</div>
+                <div class="timer-label">Hours</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-number" id="minutes">00</div>
+                <div class="timer-label">Minutes</div>
+            </div>
+            <div class="timer-unit">
+                <div class="timer-number" id="seconds">00</div>
+                <div class="timer-label">Seconds</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Progress Section -->
+    <section class="progress-section">
+        <div class="progress-container">
+            <h2 class="section-title">Presale Progress</h2>
+            
+            <div class="progress-bars">
+                <div class="progress-bar">
+                    <div class="progress-label">
+                        <span>Overall Progress</span>
+                        <span id="overallProgress">0%</span>
+                    </div>
+                    <div class="progress-fill">
+                        <div class="progress-fill-bar" id="overallProgressBar" style="width: 0%;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="caps-container">
+                <div class="cap-card" id="miniCapCard">
+                    <div class="cap-icon"><i class="fas fa-flag"></i></div>
+                    <div class="cap-value">5 BNB</div>
+                    <div class="cap-label">Mini Cap</div>
+                </div>
+                
+                <div class="cap-card" id="softCapCard">
+                    <div class="cap-icon"><i class="fas fa-bullseye"></i></div>
+                    <div class="cap-value">10 BNB</div>
+                    <div class="cap-label">Soft Cap</div>
+                </div>
+                
+                <div class="cap-card" id="hardCapCard">
+                    <div class="cap-icon"><i class="fas fa-trophy"></i></div>
+                    <div class="cap-value">20 BNB</div>
+                    <div class="cap-label">Hard Cap</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="presale-container">
+        <!-- Purchase Section -->
+        <section class="purchase-section">
+            <h2 class="section-title">Purchase RFN Tokens</h2>
+            
+            <div class="price-info">
+                <div class="price-title">Current Exchange Rate</div>
+                <div class="price-value">405,000 RFN</div>
+                <div class="price-subtitle">Per 1 BNB</div>
+            </div>
+            
+            <div class="purchase-form">
+                <div class="form-group">
+                    <label class="form-label">Enter BNB Amount</label>
+                    <div class="input-with-actions">
+                        <input type="number" class="amount-input" id="bnbAmount" 
+                               placeholder="0.005" step="0.001" min="0.005" max="0.5">
+                        <div class="amount-actions">
+                            <button class="amount-btn" data-action="0.01">0.01</button>
+                            <button class="amount-btn" data-action="0.05">0.05</button>
+                            <button class="amount-btn" data-action="0.1">0.1</button>
+                            <button class="amount-btn" data-action="0.5">0.5</button>
+                        </div>
+                    </div>
+                    <div style="font-size: 0.85rem; color: var(--secondary); margin-top: 5px;">
+                        Min: 0.005 BNB | Max: 0.5 BNB per address
+                    </div>
+                </div>
+                
+                <div class="tokens-display">
+                    <div class="tokens-label">You Will Receive</div>
+                    <div class="tokens-value" id="tokensToReceive">0 RFN</div>
+                </div>
+                
+                <button class="purchase-btn" id="purchaseBtn">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span>Buy RFN Tokens</span>
+                </button>
+                
+                <div class="limits-info">
+                    <i class="fas fa-info-circle" style="margin-right: 5px;"></i>
+                    Presale has 25% Cliff (2 weeks) + 75% Vesting over 6 months
+                </div>
+            </div>
+        </section>
+        
+        <!-- Sidebar -->
+        <aside class="presale-sidebar">
+            <!-- Info Card -->
+            <div class="info-card">
+                <h3 class="card-title">Presale Details</h3>
+                <ul class="info-list">
+                    <li>Total Supply: 27,000,000 RFN</li>
+                    <li>Presale Allocation: 8,100,000 RFN (30%)</li>
+                    <li>Presale Price: 405,000 RFN per 1 BNB</li>
+                    <li>Presale Duration: 30 Days</li>
+                    <li>Minimum Purchase: 0.005 BNB</li>
+                    <li>Maximum Purchase: 0.5 BNB per address</li>
+                </ul>
+            </div>
+            
+            <!-- Vesting Card -->
+            <div class="vesting-card">
+                <h3 class="card-title">Vesting Schedule</h3>
+                <div class="vesting-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Cliff Period (2 Weeks)</h4>
+                            <p>25% of tokens released after cliff period ends</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Vesting Period (6 Months)</h4>
+                            <p>75% of tokens vested monthly over 6 months</p>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h4>Claim Tokens</h4>
+                            <p>Claim your vested tokens each month</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Stats Card -->
+            <div class="stats-card">
+                <h3 class="card-title">Quick Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <div class="value" id="quickRaised">0 BNB</div>
+                        <div class="label">Raised</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value" id="quickParticipants">0</div>
+                        <div class="label">Buyers</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value" id="quickRemaining">8.1M</div>
+                        <div class="label">Remaining</div>
+                    </div>
+                    <div class="stat-box">
+                        <div class="value" id="quickPercentage">0%</div>
+                        <div class="label">Progress</div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+    
+    <!-- My Contributions Section -->
+    <section class="contributions-section">
+        <h2 class="section-title">My Contributions</h2>
+        <div class="contributions-table-container">
+            <table class="contributions-table" id="contributionsTable">
+                <thead>
+                    <tr>
+                        <th>BNB Contributed</th>
+                        <th>Tokens Purchased</th>
+                        <th>Tokens Claimed</th>
+                        <th>Claimable Tokens</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contributionsTableBody">
+                    <!-- Contributions will be loaded dynamically -->
+                    <tr id="noContributionsRow">
+                        <td colspan="6" style="text-align: center; padding: 40px 20px; color: var(--secondary);">
+                            <i class="fas fa-wallet" style="font-size: 3rem; margin-bottom: 15px; display: block; color: rgba(155, 89, 182, 0.3);"></i>
+                            <p>No contributions found. Connect your wallet and purchase RFN tokens to get started.</p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+    
+    <!-- Modal for Purchase -->
+    <div class="modal-overlay" id="purchaseModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirm Purchase</h3>
+                <button class="modal-close" id="purchaseModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="purchaseModalContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="purchaseModalCancel">Cancel</button>
+                <button class="modal-btn primary" id="purchaseModalConfirm">Confirm Purchase</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal for Claim/Refund -->
+    <div class="modal-overlay" id="actionModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="actionModalTitle">Claim Tokens</h3>
+                <button class="modal-close" id="actionModalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="actionModalContent">
+                    <!-- Content will be loaded dynamically -->
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn secondary" id="actionModalCancel">Cancel</button>
+                <button class="modal-btn primary" id="actionModalConfirm">Confirm</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Riffan Rabbit Farms</h3>
+                <p>Premium rabbit breeder specialty farm established in 2014. Located in Lembang, West Bandung, West Java, Indonesia.</p>
+                <p>2026 Rabbit Breeder Indonesia</p>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/token">RFN Token</a></li>
+                    <li><a href="/stake">Stake RFN</a></li>
+                    <li><a href="/presale">Presale</a></li>
+                    <li><a href="/disclaimer">Disclaimer</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Presale Contract</h3>
+                <p>Presale Contract Address:</p>
+                <p style="font-family: monospace; font-size: 0.9rem; word-break: break-all; color: var(--accent);">
+                    0x... (Deploy terlebih dahulu)
+                </p>
+                <p style="margin-top: 10px; font-size: 0.85rem;">
+                    <i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i>
+                    Contract belum di-deploy
+                </p>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2026 Riffan Rabbit Farms. All rights reserved.</p>
+            <p>RFN Token is a community token. Always ensure you are accessing the official website only.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Contract Configuration (harus diupdate setelah deploy)
+        const PRESALE_CONTRACT_ADDRESS = '0x...'; // Alamat akan diisi setelah deploy
+        const RFN_TOKEN_ADDRESS = '0x603fcF9aCEDAB68007fd82d86913A88c1d41A6b2';
+        
+        // Contract ABI (simplified untuk presale)
+        const PRESALE_ABI = [
+            // Presale info
+            {
+                "inputs": [],
+                "name": "getPresaleStatus",
+                "outputs": [
+                    {"internalType": "uint256", "name": "_totalRaised", "type": "uint256"},
+                    {"internalType": "uint256", "name": "_participants", "type": "uint256"},
+                    {"internalType": "bool", "name": "_isActive", "type": "bool"},
+                    {"internalType": "bool", "name": "_isFinalized", "type": "bool"},
+                    {"internalType": "bool", "name": "_miniCapReached", "type": "bool"},
+                    {"internalType": "bool", "name": "_softCapReached", "type": "bool"},
+                    {"internalType": "bool", "name": "_isStarted", "type": "bool"},
+                    {"internalType": "bool", "name": "_hardCapReached", "type": "bool"},
+                    {"internalType": "uint256", "name": "_timeRemaining", "type": "uint256"},
+                    {"internalType": "uint256", "name": "_contractTokenBalance", "type": "uint256"},
+                    {"internalType": "bool", "name": "_isPaused", "type": "bool"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Buy tokens
+            {
+                "inputs": [],
+                "name": "buyTokens",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            },
+            // Claim tokens
+            {
+                "inputs": [],
+                "name": "claimTokens",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            // Claim refund
+            {
+                "inputs": [],
+                "name": "claimRefund",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            // Get participant info
+            {
+                "inputs": [{"internalType": "address", "name": "_participant", "type": "address"}],
+                "name": "getParticipantInfo",
+                "outputs": [
+                    {"internalType": "uint256", "name": "contributed", "type": "uint256"},
+                    {"internalType": "uint256", "name": "tokensBought", "type": "uint256"},
+                    {"internalType": "uint256", "name": "tokensClaimed", "type": "uint256"},
+                    {"internalType": "uint256", "name": "lastClaimTime", "type": "uint256"},
+                    {"internalType": "bool", "name": "refunded", "type": "bool"},
+                    {"internalType": "uint256", "name": "claimableTokens", "type": "uint256"}
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Calculate tokens
+            {
+                "inputs": [{"internalType": "uint256", "name": "bnbAmount", "type": "uint256"}],
+                "name": "calculateTokens",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "pure",
+                "type": "function"
+            },
+            // Get remaining tokens
+            {
+                "inputs": [],
+                "name": "getRemainingTokens",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Get raised percentage
+            {
+                "inputs": [],
+                "name": "getRaisedPercentage",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Total raised
+            {
+                "inputs": [],
+                "name": "totalRaised",
+                "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Presale started
+            {
+                "inputs": [],
+                "name": "presaleStarted",
+                "outputs": [{"internalType": "bool", "name": "", "type": "bool"}],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            // Start presale (owner only)
+            {
+                "inputs": [],
+                "name": "startPresale",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            }
+        ];
+        
+        // Constants from contract
+        const TOKENS_PER_BNB = 405000; // 405,000 RFN per BNB
+        const MIN_CONTRIBUTION = 0.005; // 0.005 BNB
+        const MAX_CONTRIBUTION = 0.5; // 0.5 BNB
+        
+        // Global Variables
+        let web3;
+        let presaleContract;
+        let userAddress;
+        let currentAccount;
+        let isWalletConnected = false;
+        let presaleStatus = {};
+        let countdownInterval;
+        
+        // DOM Elements
+        const connectBtn = document.getElementById('connectBtn');
+        const mobileConnectBtn = document.getElementById('mobileConnectBtn');
+        const disconnectBtn = document.getElementById('disconnectBtn');
+        const walletInfo = document.getElementById('walletInfo');
+        const walletAddressShort = document.getElementById('walletAddressShort');
+        const walletBalance = document.getElementById('walletBalance');
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const notification = document.getElementById('notification');
+        
+        // Stats Elements
+        const totalRaisedEl = document.getElementById('totalRaised');
+        const totalParticipantsEl = document.getElementById('totalParticipants');
+        const tokensSoldEl = document.getElementById('tokensSold');
+        const remainingTokensEl = document.getElementById('remainingTokens');
+        
+        // Progress Elements
+        const overallProgress = document.getElementById('overallProgress');
+        const overallProgressBar = document.getElementById('overallProgressBar');
+        const miniCapCard = document.getElementById('miniCapCard');
+        const softCapCard = document.getElementById('softCapCard');
+        const hardCapCard = document.getElementById('hardCapCard');
+        
+        // Quick Stats
+        const quickRaised = document.getElementById('quickRaised');
+        const quickParticipants = document.getElementById('quickParticipants');
+        const quickRemaining = document.getElementById('quickRemaining');
+        const quickPercentage = document.getElementById('quickPercentage');
+        
+        // Timer Elements
+        const daysEl = document.getElementById('days');
+        const hoursEl = document.getElementById('hours');
+        const minutesEl = document.getElementById('minutes');
+        const secondsEl = document.getElementById('seconds');
+        
+        // Purchase Elements
+        const bnbAmountInput = document.getElementById('bnbAmount');
+        const tokensToReceiveEl = document.getElementById('tokensToReceive');
+        const purchaseBtn = document.getElementById('purchaseBtn');
+        const amountBtns = document.querySelectorAll('.amount-btn');
+        
+        // Table Elements
+        const contributionsTableBody = document.getElementById('contributionsTableBody');
+        const noContributionsRow = document.getElementById('noContributionsRow');
+        
+        // Modal Elements
+        const purchaseModal = document.getElementById('purchaseModal');
+        const purchaseModalClose = document.getElementById('purchaseModalClose');
+        const purchaseModalCancel = document.getElementById('purchaseModalCancel');
+        const purchaseModalConfirm = document.getElementById('purchaseModalConfirm');
+        const purchaseModalContent = document.getElementById('purchaseModalContent');
+        
+        const actionModal = document.getElementById('actionModal');
+        const actionModalClose = document.getElementById('actionModalClose');
+        const actionModalCancel = document.getElementById('actionModalCancel');
+        const actionModalConfirm = document.getElementById('actionModalConfirm');
+        const actionModalTitle = document.getElementById('actionModalTitle');
+        const actionModalContent = document.getElementById('actionModalContent');
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initWeb3();
+            updatePresaleInfo();
+            
+            // Event Listeners
+            connectBtn.addEventListener('click', connectWallet);
+            mobileConnectBtn.addEventListener('click', connectWallet);
+            disconnectBtn.addEventListener('click', disconnectWallet);
+            hamburger.addEventListener('click', toggleMobileMenu);
+            
+            // Purchase Events
+            bnbAmountInput.addEventListener('input', updateTokensToReceive);
+            purchaseBtn.addEventListener('click', showPurchaseModal);
+            
+            amountBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const amount = btn.getAttribute('data-action');
+                    bnbAmountInput.value = amount;
+                    updateTokensToReceive();
+                });
+            });
+            
+            // Modal Events
+            purchaseModalClose.addEventListener('click', () => purchaseModal.classList.remove('active'));
+            purchaseModalCancel.addEventListener('click', () => purchaseModal.classList.remove('active'));
+            actionModalClose.addEventListener('click', () => actionModal.classList.remove('active'));
+            actionModalCancel.addEventListener('click', () => actionModal.classList.remove('active'));
+            
+            purchaseModalConfirm.addEventListener('click', confirmPurchase);
+            actionModalConfirm.addEventListener('click', handleActionModalConfirm);
+            
+            // Close modals on outside click
+            purchaseModal.addEventListener('click', (e) => {
+                if (e.target === purchaseModal) purchaseModal.classList.remove('active');
+            });
+            
+            actionModal.addEventListener('click', (e) => {
+                if (e.target === actionModal) actionModal.classList.remove('active');
+            });
+            
+            // Check for saved wallet connection
+            checkSavedConnection();
+            
+            // Start updating presale info
+            setInterval(updatePresaleInfo, 30000); // Update every 30 seconds
+        });
+        
+        // Initialize Web3
+        async function initWeb3() {
+            if (window.ethereum) {
+                web3 = new Web3(window.ethereum);
+                try {
+                    // Note: Contract belum di-deploy, jadi kita akan simulate
+                    console.log('Web3 initialized. Note: Presale contract not deployed yet.');
+                    showNotification('Presale contract not deployed yet. Using simulation mode.', 'info');
+                } catch (error) {
+                    console.error('Error initializing:', error);
+                }
+            } else {
+                console.warn('No Ethereum wallet detected');
+                showNotification('Please install MetaMask or another Web3 wallet', 'error');
+            }
+        }
+        
+        // Check for saved wallet connection
+        function checkSavedConnection() {
+            const savedAddress = localStorage.getItem('walletAddress');
+            if (savedAddress && window.ethereum) {
+                connectWallet();
+            }
+        }
+        
+        // Connect Wallet
+        async function connectWallet() {
+            if (!window.ethereum) {
+                showNotification('Please install MetaMask first', 'error');
+                return;
+            }
+            
+            try {
+                showNotification('Connecting wallet...', 'info');
+                
+                // Request account access
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                userAddress = accounts[0];
+                currentAccount = accounts[0];
+                isWalletConnected = true;
+                
+                // Save to localStorage
+                localStorage.setItem('walletAddress', userAddress);
+                
+                // Update UI
+                updateWalletUI();
+                updateUserContributions();
+                
+                // Listen for account changes
+                window.ethereum.on('accountsChanged', handleAccountsChanged);
+                
+                // Listen for chain changes
+                window.ethereum.on('chainChanged', handleChainChanged);
+                
+                showNotification('Wallet connected successfully', 'success');
+                
+                // Close mobile menu if open
+                mobileMenu.classList.remove('active');
+                
+            } catch (error) {
+                console.error('Error connecting wallet:', error);
+                showNotification('Failed to connect wallet', 'error');
+            }
+        }
+        
+        // Disconnect Wallet
+        function disconnectWallet() {
+            isWalletConnected = false;
+            userAddress = null;
+            currentAccount = null;
+            
+            // Remove from localStorage
+            localStorage.removeItem('walletAddress');
+            
+            // Update UI
+            updateWalletUI();
+            clearUserData();
+            
+            showNotification('Wallet disconnected', 'info');
+        }
+        
+        // Handle account changes
+        function handleAccountsChanged(accounts) {
+            if (accounts.length === 0) {
+                disconnectWallet();
+            } else if (accounts[0] !== currentAccount) {
+                currentAccount = accounts[0];
+                userAddress = accounts[0];
+                localStorage.setItem('walletAddress', userAddress);
+                updateWalletUI();
+                updateUserContributions();
+                showNotification('Account changed', 'info');
+            }
+        }
+        
+        // Handle chain changes
+        function handleChainChanged() {
+            window.location.reload();
+        }
+        
+        // Update Wallet UI
+        function updateWalletUI() {
+            if (isWalletConnected && userAddress) {
+                const shortAddress = `${userAddress.substring(0, 6)}...${userAddress.substring(userAddress.length - 4)}`;
+                walletAddressShort.textContent = shortAddress;
+                walletInfo.style.display = 'flex';
+                connectBtn.style.display = 'none';
+                disconnectBtn.style.display = 'block';
+                
+                // Update mobile connect button
+                mobileConnectBtn.innerHTML = `<i class="fas fa-wallet"></i><span>${shortAddress}</span>`;
+                
+                // Get BNB balance
+                updateWalletBalance();
+            } else {
+                walletInfo.style.display = 'none';
+                connectBtn.style.display = 'flex';
+                disconnectBtn.style.display = 'none';
+                
+                // Reset mobile connect button
+                mobileConnectBtn.innerHTML = '<i class="fas fa-wallet"></i><span>Connect Wallet</span>';
+            }
+        }
+        
+        // Update Wallet Balance
+        async function updateWalletBalance() {
+            if (!web3 || !userAddress) return;
+            
+            try {
+                const balance = await web3.eth.getBalance(userAddress);
+                const balanceInBNB = web3.utils.fromWei(balance, 'ether');
+                walletBalance.textContent = parseFloat(balanceInBNB).toFixed(4);
+            } catch (error) {
+                console.error('Error getting wallet balance:', error);
+            }
+        }
+        
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            mobileMenu.classList.toggle('active');
+            const spans = hamburger.querySelectorAll('span');
+            
+            if (mobileMenu.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(6px, 6px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
+        }
+        
+        // Show Notification
+        function showNotification(message, type = 'info') {
+            notification.textContent = message;
+            notification.className = `notification ${type}`;
+            notification.classList.add('active');
+            
+            setTimeout(() => {
+                notification.classList.remove('active');
+            }, 5000);
+        }
+        
+        // Update Presale Info (Simulation Mode karena contract belum deploy)
+        async function updatePresaleInfo() {
+            try {
+                // Simulasi data presale (akan diganti dengan real contract data)
+                const simulatedData = {
+                    totalRaised: 8.5, // BNB
+                    participants: 42,
+                    isActive: true,
+                    isFinalized: false,
+                    miniCapReached: true,
+                    softCapReached: true,
+                    isStarted: true,
+                    hardCapReached: false,
+                    timeRemaining: 15 * 24 * 3600 + 12 * 3600 + 30 * 60, // 15 days 12 hours 30 minutes
+                    contractTokenBalance: 0,
+                    isPaused: false
+                };
+                
+                // Update UI dengan simulated data
+                updatePresaleUI(simulatedData);
+                startCountdown(simulatedData.timeRemaining);
+                
+            } catch (error) {
+                console.error('Error updating presale info:', error);
+                
+                // Fallback data jika error
+                const fallbackData = {
+                    totalRaised: 0,
+                    participants: 0,
+                    isActive: false,
+                    isFinalized: false,
+                    miniCapReached: false,
+                    softCapReached: false,
+                    isStarted: false,
+                    hardCapReached: false,
+                    timeRemaining: 30 * 24 * 3600, // 30 days default
+                    contractTokenBalance: 0,
+                    isPaused: false
+                };
+                
+                updatePresaleUI(fallbackData);
+                startCountdown(fallbackData.timeRemaining);
+            }
+        }
+        
+        // Update Presale UI
+        function updatePresaleUI(data) {
+            presaleStatus = data;
+            
+            // Update stats
+            totalRaisedEl.textContent = `${data.totalRaised.toFixed(2)} BNB`;
+            totalParticipantsEl.textContent = data.participants;
+            
+            // Calculate tokens sold and remaining
+            const tokensSold = data.totalRaised * TOKENS_PER_BNB;
+            const tokensRemaining = 8100000 - tokensSold; // 8.1 juta - sold
+            
+            tokensSoldEl.textContent = `${tokensSold.toLocaleString()} RFN`;
+            remainingTokensEl.textContent = `${tokensRemaining.toLocaleString()} RFN`;
+            
+            // Update progress bars
+            const percentage = (data.totalRaised / 20) * 100; // 20 BNB hard cap
+            overallProgress.textContent = `${percentage.toFixed(1)}%`;
+            overallProgressBar.style.width = `${percentage}%`;
+            
+            // Update cap cards
+            miniCapCard.classList.toggle('reached', data.miniCapReached);
+            softCapCard.classList.toggle('reached', data.softCapReached);
+            hardCapCard.classList.toggle('reached', data.hardCapReached);
+            
+            // Update quick stats
+            quickRaised.textContent = `${data.totalRaised.toFixed(2)} BNB`;
+            quickParticipants.textContent = data.participants;
+            quickRemaining.textContent = `${Math.floor(tokensRemaining / 1000000)}M`;
+            quickPercentage.textContent = `${percentage.toFixed(1)}%`;
+            
+            // Update purchase button state
+            purchaseBtn.disabled = !data.isActive || data.isPaused || data.hardCapReached;
+            if (data.hardCapReached) {
+                purchaseBtn.innerHTML = '<i class="fas fa-trophy"></i><span>Hard Cap Reached!</span>';
+            } else if (data.isPaused) {
+                purchaseBtn.innerHTML = '<i class="fas fa-pause"></i><span>Presale Paused</span>';
+            } else if (!data.isActive) {
+                purchaseBtn.innerHTML = '<i class="fas fa-clock"></i><span>Presale Not Started</span>';
+            } else {
+                purchaseBtn.innerHTML = '<i class="fas fa-shopping-cart"></i><span>Buy RFN Tokens</span>';
+            }
+        }
+        
+        // Start Countdown Timer
+        function startCountdown(seconds) {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+            
+            function updateTimer() {
+                const days = Math.floor(seconds / (3600 * 24));
+                const hours = Math.floor((seconds % (3600 * 24)) / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                const secs = seconds % 60;
+                
+                daysEl.textContent = days.toString().padStart(2, '0');
+                hoursEl.textContent = hours.toString().padStart(2, '0');
+                minutesEl.textContent = minutes.toString().padStart(2, '0');
+                secondsEl.textContent = secs.toString().padStart(2, '0');
+                
+                if (seconds > 0) {
+                    seconds--;
+                } else {
+                    clearInterval(countdownInterval);
+                    // Timer ended, update presale info
+                    updatePresaleInfo();
+                }
+            }
+            
+            updateTimer(); // Initial update
+            countdownInterval = setInterval(updateTimer, 1000);
+        }
+        
+        // Update Tokens to Receive
+        function updateTokensToReceive() {
+            const bnbAmount = parseFloat(bnbAmountInput.value) || 0;
+            const tokens = bnbAmount * TOKENS_PER_BNB;
+            tokensToReceiveEl.textContent = `${tokens.toLocaleString()} RFN`;
+        }
+        
+        // Show Purchase Modal
+        function showPurchaseModal() {
+            if (!isWalletConnected) {
+                showNotification('Please connect your wallet first', 'error');
+                return;
+            }
+            
+            const bnbAmount = parseFloat(bnbAmountInput.value) || 0;
+            
+            // Validate amount
+            if (bnbAmount < MIN_CONTRIBUTION) {
+                showNotification(`Minimum purchase is ${MIN_CONTRIBUTION} BNB`, 'error');
+                return;
+            }
+            
+            if (bnbAmount > MAX_CONTRIBUTION) {
+                showNotification(`Maximum purchase per address is ${MAX_CONTRIBUTION} BNB`, 'error');
+                return;
+            }
+            
+            if (bnbAmount > 0.5) {
+                showNotification('Maximum purchase is 0.5 BNB per address', 'error');
+                return;
+            }
+            
+            const tokens = bnbAmount * TOKENS_PER_BNB;
+            
+            purchaseModalContent.innerHTML = `
+                <p>You are about to purchase RFN tokens with the following details:</p>
+                
+                <div style="background-color: rgba(155, 89, 182, 0.05); border-radius: 10px; padding: 20px; margin: 20px 0;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: var(--secondary);">BNB Amount:</span>
+                        <span style="font-weight: 600; color: var(--presale);">${bnbAmount.toFixed(4)} BNB</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                        <span style="color: var(--secondary);">RFN Tokens:</span>
+                        <span style="font-weight: 600; color: var(--presale);">${tokens.toLocaleString()} RFN</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <span style="color: var(--secondary);">Exchange Rate:</span>
+                        <span style="font-weight: 600; color: var(--presale);">405,000 RFN per BNB</span>
+                    </div>
+                </div>
+                
+                <div style="background-color: rgba(243, 156, 18, 0.05); border-radius: 8px; padding: 15px; margin-top: 15px; border-left: 4px solid var(--warning);">
+                    <p style="margin: 0; color: var(--secondary); font-size: 0.9rem;">
+                        <i class="fas fa-exclamation-triangle" style="color: var(--warning); margin-right: 5px;"></i>
+                        <strong>Vesting Notice:</strong> 25% released after 2 weeks cliff, 75% vested over 6 months.
+                    </p>
+                </div>
+            `;
+            
+            purchaseModal.classList.add('active');
+        }
+        
+        // Confirm Purchase
+        async function confirmPurchase() {
+            const bnbAmount = parseFloat(bnbAmountInput.value) || 0;
+            
+            try {
+                purchaseModalConfirm.disabled = true;
+                purchaseModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                // Simulasi purchase (akan diganti dengan real contract call)
+                showNotification('Simulating purchase... In production, this would call the smart contract.', 'info');
+                
+                // Simulate success
+                setTimeout(() => {
+                    showNotification('Purchase successful!', 'success');
+                    purchaseModal.classList.remove('active');
+                    
+                    // Reset form
+                    bnbAmountInput.value = '';
+                    updateTokensToReceive();
+                    
+                    // Update user contributions
+                    updateUserContributions();
+                    updatePresaleInfo();
+                    
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error purchasing tokens:', error);
+                showNotification('Failed to purchase tokens: ' + error.message, 'error');
+            } finally {
+                purchaseModalConfirm.disabled = false;
+                purchaseModalConfirm.textContent = 'Confirm Purchase';
+            }
+        }
+        
+        // Update User Contributions
+        async function updateUserContributions() {
+            if (!isWalletConnected) {
+                clearUserData();
+                return;
+            }
+            
+            try {
+                // Simulasi data participant (akan diganti dengan real contract call)
+                const simulatedParticipant = {
+                    contributed: 0.1, // BNB
+                    tokensBought: 40500, // RFN
+                    tokensClaimed: 0,
+                    lastClaimTime: 0,
+                    refunded: false,
+                    claimableTokens: 0
+                };
+                
+                updateContributionsTable([simulatedParticipant]);
+                
+            } catch (error) {
+                console.error('Error updating contributions:', error);
+                clearUserData();
+            }
+        }
+        
+        // Update Contributions Table
+        function updateContributionsTable(contributions) {
+            if (!contributions || contributions.length === 0) {
+                noContributionsRow.style.display = 'table-row';
+                contributionsTableBody.innerHTML = '';
+                return;
+            }
+            
+            noContributionsRow.style.display = 'none';
+            contributionsTableBody.innerHTML = '';
+            
+            contributions.forEach(contrib => {
+                const canClaim = contrib.claimableTokens > 0;
+                const canRefund = !presaleStatus.softCapReached && !contrib.refunded && presaleStatus.isFinalized;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${contrib.contributed.toFixed(4)} BNB</td>
+                    <td>${contrib.tokensBought.toLocaleString()} RFN</td>
+                    <td>${contrib.tokensClaimed.toLocaleString()} RFN</td>
+                    <td>${contrib.claimableTokens.toLocaleString()} RFN</td>
+                    <td>
+                        ${contrib.refunded ? 
+                            '<span style="color: var(--warning);">Refunded</span>' : 
+                            (presaleStatus.softCapReached ? 
+                                '<span style="color: var(--success);">Vesting</span>' : 
+                                '<span style="color: var(--info);">Waiting</span>')}
+                    </td>
+                    <td class="action-cell">
+                        ${canClaim ? `<button class="table-btn claim" onclick="showClaimModal()">Claim</button>` : ''}
+                        ${canRefund ? `<button class="table-btn refund" onclick="showRefundModal()">Refund</button>` : ''}
+                    </td>
+                `;
+                
+                contributionsTableBody.appendChild(row);
+            });
+        }
+        
+        // Clear User Data
+        function clearUserData() {
+            noContributionsRow.style.display = 'table-row';
+            contributionsTableBody.innerHTML = '';
+        }
+        
+        // Show Claim Modal
+        function showClaimModal() {
+            actionModalTitle.textContent = 'Claim Tokens';
+            actionModalContent.innerHTML = `
+                <p>Are you sure you want to claim your available RFN tokens?</p>
+                <div style="background-color: rgba(39, 174, 96, 0.05); border-radius: 8px; padding: 15px; margin-top: 15px;">
+                    <p style="margin: 0; color: var(--success); font-size: 0.9rem;">
+                        <i class="fas fa-gift" style="margin-right: 5px;"></i>
+                        Claimable tokens will be transferred to your wallet.
+                    </p>
+                </div>
+            `;
+            actionModalConfirm.textContent = 'Claim Tokens';
+            actionModalConfirm.onclick = claimTokens;
+            actionModal.classList.add('active');
+        }
+        
+        // Show Refund Modal
+        function showRefundModal() {
+            actionModalTitle.textContent = 'Claim Refund';
+            actionModalContent.innerHTML = `
+                <p>Are you sure you want to claim a refund? This is only available if soft cap is not reached.</p>
+                <div style="background-color: rgba(243, 156, 18, 0.05); border-radius: 8px; padding: 15px; margin-top: 15px;">
+                    <p style="margin: 0; color: var(--warning); font-size: 0.9rem;">
+                        <i class="fas fa-exclamation-triangle" style="margin-right: 5px;"></i>
+                        Refund will return your BNB investment.
+                    </p>
+                </div>
+            `;
+            actionModalConfirm.textContent = 'Claim Refund';
+            actionModalConfirm.onclick = claimRefund;
+            actionModal.classList.add('active');
+        }
+        
+        // Handle Action Modal Confirm
+        function handleActionModalConfirm() {
+            // This is handled by individual functions (claimTokens, claimRefund)
+        }
+        
+        // Claim Tokens (simulation)
+        async function claimTokens() {
+            try {
+                actionModalConfirm.disabled = true;
+                actionModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                // Simulasi claim
+                showNotification('Simulating token claim...', 'info');
+                
+                setTimeout(() => {
+                    showNotification('Tokens claimed successfully!', 'success');
+                    actionModal.classList.remove('active');
+                    updateUserContributions();
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error claiming tokens:', error);
+                showNotification('Failed to claim tokens: ' + error.message, 'error');
+            } finally {
+                actionModalConfirm.disabled = false;
+                actionModalConfirm.textContent = 'Claim Tokens';
+            }
+        }
+        
+        // Claim Refund (simulation)
+        async function claimRefund() {
+            try {
+                actionModalConfirm.disabled = true;
+                actionModalConfirm.innerHTML = '<div class="loading"></div> Processing...';
+                
+                // Simulasi refund
+                showNotification('Simulating refund...', 'info');
+                
+                setTimeout(() => {
+                    showNotification('Refund claimed successfully!', 'success');
+                    actionModal.classList.remove('active');
+                    updateUserContributions();
+                }, 2000);
+                
+            } catch (error) {
+                console.error('Error claiming refund:', error);
+                showNotification('Failed to claim refund: ' + error.message, 'error');
+            } finally {
+                actionModalConfirm.disabled = false;
+                actionModalConfirm.textContent = 'Claim Refund';
+            }
+        }
+        
+        // Make functions available globally for inline event handlers
+        window.showClaimModal = showClaimModal;
+        window.showRefundModal = showRefundModal;
+    </script>
+</body>
+</html>
