@@ -1,9 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Riffan Rabbit Farms - Premium Rabbit Breeder Since 2014</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+  <!-- ==================== -->
+  <!-- SECURITY HEADERS -->
+  <!-- ==================== -->
+<meta http-equiv="Content-Security-Policy" 
+      content="default-src 'self' https://riffanrabbitry.xyz; 
+               script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com https://riffanrabbitry.xyz https://walletconnect.com https://cdn.walletconnect.com;
+               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+               font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+               img-src 'self' data: https: blob:;
+               connect-src 'self' https://rpc.vana.org https://evmrpc.0g.ai https://cdnjs.cloudflare.com https://relay.walletconnect.com https://*.walletconnect.com wss://*.walletconnect.com;
+               frame-src 'self' https:;
+               frame-ancestors 'none'; 
+               base-uri 'self'">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="X-Frame-Options" content="DENY">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+
+  <!-- ==================== -->
+  <!-- SEO PRIMARY TAGS -->
+  <!-- ==================== -->
+  <title>Riffan Rabbitry - Premium Rabbit Breeding | Quality Pet & Show Rabbits</title>
+  <meta name="google-site-verification" content="gXXrXKrRhXg5irPZz9iokQ1WU7zYuj6Jd8Xqh0YRySg" />
+  <meta name="description" content="Riffan Rabbitry: Premium rabbit breeding farm specializing in quality pet rabbits, show rabbits, and breeding stock. Healthy, well-cared rabbits with proper genetics.">
+  <meta name="keywords" content="riffan rabbitry, rabbit breeding, pet rabbits, show rabbits, rabbit farm, breeding stock, rabbit for sale, rabbit care, rabbit genetics, lop rabbits, rex rabbits, netherland dwarf">
+  <meta name="author" content="Riffan Rabbitry">
+  <meta name="robots" content="index, follow">
+
+  <!-- ==================== -->
+  <!-- OPEN GRAPH -->
+  <!-- ==================== -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://riffanrabbitry.xyz/">
+  <meta property="og:title" content="Riffan Rabbitry - Premium Rabbit Breeding">
+  <meta property="og:description" content="Quality pet rabbits, show rabbits, and breeding stock from our professional rabbitry. Healthy rabbits with excellent genetics and care.">
+  <meta property="og:image" content="https://riffanrabbitry.xyz/assets/og-image.png">
+  <meta property="og:site_name" content="Riffan Rabbitry">
+  <meta property="og:locale" content="en_US">
+
+  <!-- ==================== -->
+  <!-- TWITTER -->
+  <!-- ==================== -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://riffanrabbitry.xyz/">
+  <meta name="twitter:title" content="Riffan Rabbitry - Premium Rabbit Breeding">
+  <meta name="twitter:description" content="Quality pet rabbits, show rabbits, and breeding stock from our professional rabbitry.">
+  <meta name="twitter:image" content="https://riffanrabbitry.xyz/assets/twitter-image.png">
+  <meta name="twitter:site" content="@riffanrabbitry">
+  <meta name="twitter:creator" content="@riffanrabbitry">
+
+  <!-- ==================== -->
+  <!-- FAVICON -->
+  <!-- ==================== -->
+  <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://riffanrabbitry.xyz/assets/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.json">
+  <link rel="theme-color" content="#8a6d3b">
+  <link rel="canonical" href="https://riffanrabbitry.xyz/">
+
+  <!-- ==================== -->
+  <!-- STRUCTURED DATA -->
+  <!-- ==================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "Riffan Rabbitry",
+    "url": "https://riffanrabbitry.xyz/",
+    "logo": "https://riffanrabbitry.xyz/assets/logo.png",
+    "description": "Riffan Rabbitry is a premium rabbit breeding farm specializing in quality pet rabbits, show rabbits, and breeding stock with excellent genetics and care.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "ID"
+    },
+    "sameAs": [
+      "https://www.instagram.com/kelinci_lembang/",
+      "https://www.facebook.com/riffanrabbitry/"
+    ]
+  }
+  </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -241,12 +320,18 @@
         .slide {
             width: 25%;
             height: 100%;
+            background-color: #ebebeb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
         
         .slider-nav {
@@ -523,7 +608,7 @@
     <header>
         <div class="header-container">
             <div class="logo-container">
-                <img src="riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbit Farms Logo" class="logo">
+                <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="Riffan Rabbit Farms Logo" class="logo">
                 <div class="logo-text">
                     <h1>Riffan Rabbit Farms</h1>
                     <p>Premium Rabbit Breeder Since 2014</p>
@@ -533,8 +618,8 @@
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#breeds">Rabbit Breeds</a></li>
-                <li><a href="#token">RFN Token</a></li>
-                <li><a href="disclaimer">Disclaimer</a></li>
+                <li><a href="index.html">RFN Token</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
             </ul>
             
             <div class="hamburger" id="hamburger">
@@ -550,8 +635,8 @@
         <ul class="mobile-nav">
             <li><a href="#home">Home</a></li>
             <li><a href="#breeds">Rabbit Breeds</a></li>
-            <li><a href="riffan">RFN Token</a></li>
-            <li><a href="disclaimer">Disclaimer</a></li>
+            <li><a href="comingsoon">RFN Token</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
         </ul>
     </div>
     
@@ -584,16 +669,16 @@
                 <div class="image-slider">
                     <div class="slider-container" id="nd-slider">
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/nd.png" alt="Netherland Dwarf Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/nd.JPG" alt="Netherland Dwarf Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/nd2.png" alt="Netherland Dwarf Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/nd2.jpg" alt="Netherland Dwarf Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/nd3.png" alt="Netherland Dwarf Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/nd3.JPG" alt="Netherland Dwarf Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/nd4.png" alt="Netherland Dwarf Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/nd4.JPG" alt="Netherland Dwarf Rabbit">
                         </div>
                     </div>
                     
@@ -633,16 +718,16 @@
                 <div class="image-slider">
                     <div class="slider-container" id="hl-slider">
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/hl.png" alt="Holland Lop Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/hl.JPG" alt="Holland Lop Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/hl2.png" alt="Holland Lop Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/hl2.JPG" alt="Holland Lop Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/hl3.png" alt="Holland Lop Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/hl3.JPG" alt="Holland Lop Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/hl4.png" alt="Holland Lop Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/hl4.JPG" alt="Holland Lop Rabbit">
                         </div>
                     </div>
                     
@@ -682,16 +767,16 @@
                 <div class="image-slider">
                     <div class="slider-container" id="jw-slider">
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/jw.png" alt="Jersey Wooly Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/jw.jpg" alt="Jersey Wooly Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/jw2.png" alt="Jersey Wooly Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/jw2.jpg" alt="Jersey Wooly Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/jw3.png" alt="Jersey Wooly Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/jw3.JPG" alt="Jersey Wooly Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/jw4.png" alt="Jersey Wooly Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/jw4.webp" alt="Jersey Wooly Rabbit">
                         </div>
                     </div>
                     
@@ -731,16 +816,16 @@
                 <div class="image-slider">
                     <div class="slider-container" id="fg-slider">
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/fg.png" alt="Flemish Giant Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/fg.jpg" alt="Flemish Giant Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/fg2.png" alt="Flemish Giant Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/fg2.jpg" alt="Flemish Giant Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/fg3.png" alt="Flemish Giant Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/fg3.jpg" alt="Flemish Giant Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/fg4.png" alt="Flemish Giant Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/fg4.jpg" alt="Flemish Giant Rabbit">
                         </div>
                     </div>
                     
@@ -780,16 +865,16 @@
                 <div class="image-slider">
                     <div class="slider-container" id="ea-slider">
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/ea.png" alt="English Angora Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/ea.JPG" alt="English Angora Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/ea2.png" alt="English Angora Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/ea2.JPG" alt="English Angora Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/ea3.png" alt="English Angora Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/ea3.JPG" alt="English Angora Rabbit">
                         </div>
                         <div class="slide">
-                            <img src="riffanrabbitry.xyz/assets/ea4.png" alt="English Angora Rabbit">
+                            <img src="https://riffanrabbitry.xyz/assets/ea4.jpg" alt="English Angora Rabbit">
                         </div>
                     </div>
                     
@@ -821,7 +906,7 @@
         <div class="token-container">
             <h2>RFN Token - Join Our Community</h2>
             <p>Riffan Rabbit Farms is launching the RFN Token, a community token that allows rabbit enthusiasts, breeders, and animal lovers to become part of our growing ecosystem. Holders of RFN tokens will receive exclusive benefits, early access to new rabbit breeds, and voting rights in community decisions.</p>
-            <a href="riffan" class="btn">Buy RFN Token Now</a>
+            <a href="index.html" class="btn">Buy RFN Token Now</a>
         </div>
     </section>
     
@@ -830,14 +915,14 @@
         <div class="footer-container">
             <div class="footer-column">
                 <h3>Riffan Rabbit Farms</h3>
-                <p>Premium rabbit breeder specialty farm established in 2014. Located in Lembang, West Bandung, West Java, Indonesia.</p>
-                <p>2026 Rabbit Breeder Indonesia</p>
+                <p>Rabbit Breeder specialty farm established in 2014. Located in Lembang, West Bandung, West Java, Indonesia.</p>
+                <p>2026 Riffan Rabbit Farm's</p>
             </div>
             
             <div class="footer-column">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Riffan Rabbit Farm's, Lembang, West Bandung</p>
-                <p><i class="fas fa-phone"></i> <a href="wa.me/6287822793234" style="color: var(--accent); text-decoration: none;">+62 878 2279 3234</a></p>
+                <p><i class="fas fa-phone"></i> <a href="https://wa.me/6287822793234" style="color: var(--accent); text-decoration: none;">+62 878 2279 3234</a></p>
                 <div class="social-links">
                     <a href="instagram.com/kelinci_lembang" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
@@ -859,8 +944,8 @@
                 <ul style="list-style: none;">
                     <li><a href="#home" style="color: var(--accent); text-decoration: none;">Home</a></li>
                     <li><a href="#breeds" style="color: var(--accent); text-decoration: none;">Rabbit Breeds</a></li>
-                    <li><a href="#token" style="color: var(--accent); text-decoration: none;">RFN Token</a></li>
-                    <li><a href="disclaimer" style="color: var(--accent); text-decoration: none;">Disclaimer</a></li>
+                    <li><a href="index" style="color: var(--accent); text-decoration: none;">RFN Token</a></li>
+                    <li><a href="disclaimer.html" style="color: var(--accent); text-decoration: none;">Disclaimer</a></li>
                 </ul>
             </div>
         </div>
@@ -1012,6 +1097,15 @@
                 header.style.padding = '15px 0';
             }
         });
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
     </script>
 </body>
 </html>
