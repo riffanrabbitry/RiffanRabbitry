@@ -26,8 +26,8 @@ riffanrabbitry/
 
 ### 🔗 **Community Token ($RFN):**
 - **Telegram Community:** https://t.me/riffanrabbit
-- **Twitter Token:** https://twitter.com/RiffanToken
-- **Token Page:** https://riffanrabbitry.xyz/token
+- **Twitter Token:** https://twitter.com/Riffanrabbitry
+- **Token Page:** https://riffanrabbitry.xyz/riffan
 - **Smart Contract:** `0x...` (akan di-update setelah deploy)
 
 ## 💻 $RFN Token - Technical Information
@@ -43,8 +43,8 @@ riffanrabbitry/
 ### Token Features
 - Community-driven token
 - Liquidity locked for 6-12 months
-- Max transaction limits (anti-whale)
-- Max wallet limits
+- No Max transaction limits (no anti-whale)
+- No Max wallet limits
 
 ## 📝 Disclaimer
 
@@ -57,7 +57,7 @@ Important Information:
 - $RFN is NOT connected to farm revenue or profits
 - Token price is 100% market-driven and speculative
 
-**Read full disclaimer:** [https://riffanrabbitry.xyz/disclaimer.html](https://riffanrabbitry.xyz/disclaimer.html)
+**Read full disclaimer:** [https://riffanrabbitry.xyz/disclaimer.html](https://riffanrabbitry.xyz/disclaimer)
 
 ## 🏗️ Project Structure
 
@@ -104,8 +104,8 @@ npx hardhat test
 
 For Community Members
 
-1. Join Telegram: https://t.me/riffanrabbitry
-2. Follow Twitter: https://twitter.com/RiffanToken
+1. Join Telegram: https://t.me/riffanrabbit
+2. Follow Twitter: https://twitter.com/Riffanrabbitry
 3. Visit website: https://riffanrabbitry.xyz
 4. Read disclaimer before any token transactions
 
@@ -147,12 +147,12 @@ Business Inquiries (Rabbit Sales):
 
 · Instagram: @kelinci_lembang
 · WhatsApp: +62 878-2279-3234
-· X (Twitter): @kelinci_lembang
+· X (Twitter): @riffanrabbitry
 
 Token & Technical Support:
 
-· Telegram: @riffanrabbitry
-· Twitter: @RiffanToken
+· Telegram: @riffanrabbit
+· Twitter: @Riffanrabbitry
 · GitHub Issues: For technical/bug reports
 
 📄 License
@@ -178,6 +178,7 @@ Always conduct your own research (DYOR) before making any decisions.
 
 ---
 
-© 2026 Riffan Rabbitry. All rights reserved. Rabbit Breeder Specialty • Since 2014
+© 2026 Riffan Rabbitry. All rights reserved.
+Rabbit Breeder Specialty Since 2014
 
 ```
