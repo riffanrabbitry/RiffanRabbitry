@@ -1,0 +1,8 @@
+User-agent: *
+Disallow: /
+
+# Allow riffanrabbitry.xyz
+User-agent: *
+Allow: /
+Host: riffanrabbitry.xyz
+Sitemap: https://riffanrabbitry.xyz/sitemap.xml
