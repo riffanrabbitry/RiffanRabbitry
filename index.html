@@ -9,8 +9,7 @@
   <!-- ==================== -->
 <meta http-equiv="Content-Security-Policy" 
       content="default-src 'self' https://riffanrabbitry.xyz; 
-               script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com https://riffanrabbitry.xyz
-https://walletconnect.com https://cdn.walletconnect.com;
+               script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com https://riffanrabbitry.xyz https://walletconnect.com https://cdn.walletconnect.com;
                style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
                font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
                img-src 'self' data: https: blob:;
@@ -59,7 +58,8 @@ https://walletconnect.com https://cdn.walletconnect.com;
   <!-- ==================== -->
   <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-32x32.png">
   <link rel="apple-touch-icon" sizes="180x180" href="https://riffanrabbitry.xyz/assets/apple-touch-icon.png">
-  <link rel="manifest" href="https://riffanrabbitry.xyz/manifest.json">
+  <link rel="manifest" href="manifest.json">
+  <link rel="theme-color" content="#8a6d3b">
   <link rel="canonical" href="https://riffanrabbitry.xyz/">
 
   <!-- ==================== -->
@@ -83,7 +83,6 @@ https://walletconnect.com https://cdn.walletconnect.com;
     ]
   }
   </script>
-</head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -321,12 +320,18 @@ https://walletconnect.com https://cdn.walletconnect.com;
         .slide {
             width: 25%;
             height: 100%;
+            background-color: #ebebeb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
         }
         
         .slider-nav {
@@ -613,8 +618,8 @@ https://walletconnect.com https://cdn.walletconnect.com;
             <ul class="nav-menu">
                 <li><a href="#home">Home</a></li>
                 <li><a href="#breeds">Rabbit Breeds</a></li>
-                <li><a href="index">RFN Token</a></li>
-                <li><a href="disclaimer">Disclaimer</a></li>
+                <li><a href="index.html">RFN Token</a></li>
+                <li><a href="disclaimer.html">Disclaimer</a></li>
             </ul>
             
             <div class="hamburger" id="hamburger">
@@ -630,8 +635,8 @@ https://walletconnect.com https://cdn.walletconnect.com;
         <ul class="mobile-nav">
             <li><a href="#home">Home</a></li>
             <li><a href="#breeds">Rabbit Breeds</a></li>
-            <li><a href="index">RFN Token</a></li>
-            <li><a href="disclaimer">Disclaimer</a></li>
+            <li><a href="comingsoon">RFN Token</a></li>
+            <li><a href="disclaimer.html">Disclaimer</a></li>
         </ul>
     </div>
     
@@ -901,7 +906,7 @@ https://walletconnect.com https://cdn.walletconnect.com;
         <div class="token-container">
             <h2>RFN Token - Join Our Community</h2>
             <p>Riffan Rabbit Farms is launching the RFN Token, a community token that allows rabbit enthusiasts, breeders, and animal lovers to become part of our growing ecosystem. Holders of RFN tokens will receive exclusive benefits, early access to new rabbit breeds, and voting rights in community decisions.</p>
-            <a href="index" class="btn">Buy RFN Token Now</a>
+            <a href="comingsoon" class="btn">Buy RFN Token Now</a>
         </div>
     </section>
     
@@ -917,7 +922,7 @@ https://walletconnect.com https://cdn.walletconnect.com;
             <div class="footer-column">
                 <h3>Contact Us</h3>
                 <p><i class="fas fa-map-marker-alt"></i> Riffan Rabbit Farm's, Lembang, West Bandung</p>
-                <p><i class="fas fa-phone"></i> <a href="wa.me/6287822793234" style="color: var(--accent); text-decoration: none;">+62 878 2279 3234</a></p>
+                <p><i class="fas fa-phone"></i> <a href="https://wa.me/6287822793234" style="color: var(--accent); text-decoration: none;">+62 878 2279 3234</a></p>
                 <div class="social-links">
                     <a href="instagram.com/kelinci_lembang" aria-label="Instagram">
                         <i class="fab fa-instagram"></i>
@@ -939,8 +944,8 @@ https://walletconnect.com https://cdn.walletconnect.com;
                 <ul style="list-style: none;">
                     <li><a href="#home" style="color: var(--accent); text-decoration: none;">Home</a></li>
                     <li><a href="#breeds" style="color: var(--accent); text-decoration: none;">Rabbit Breeds</a></li>
-                    <li><a href="#token" style="color: var(--accent); text-decoration: none;">RFN Token</a></li>
-                    <li><a href="disclaimer" style="color: var(--accent); text-decoration: none;">Disclaimer</a></li>
+                    <li><a href="index" style="color: var(--accent); text-decoration: none;">RFN Token</a></li>
+                    <li><a href="disclaimer.html" style="color: var(--accent); text-decoration: none;">Disclaimer</a></li>
                 </ul>
             </div>
         </div>
@@ -1092,6 +1097,15 @@ https://walletconnect.com https://cdn.walletconnect.com;
                 header.style.padding = '15px 0';
             }
         });
+
+        // Register Service Worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('Service Worker registered', reg))
+                    .catch(err => console.log('Service Worker registration failed', err));
+            });
+        }
     </script>
 </body>
 </html>
