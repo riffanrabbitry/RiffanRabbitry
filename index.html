@@ -7,24 +7,31 @@
   <!-- ==================== -->
   <!-- SECURITY HEADERS -->
   <!-- ==================== -->
-<meta http-equiv="Content-Security-Policy" 
-      content="default-src 'self' https://riffanrabbitry.xyz; 
-               script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com https://riffanrabbitry.xyz https://walletconnect.com https://cdn.walletconnect.com;
-               style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
-               font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com;
-               img-src 'self' data: https: blob:;
-               connect-src 'self' https://rpc.vana.org https://evmrpc.0g.ai https://cdnjs.cloudflare.com https://relay.walletconnect.com https://*.walletconnect.com wss://*.walletconnect.com;
-               frame-src 'self' https:;
-               frame-ancestors 'none'; 
-               base-uri 'self'">
+  <meta http-equiv="Content-Security-Policy" 
+        content="default-src 'self' https://riffanrabbitry.xyz;
+                 script-src 'self' 'unsafe-inline' 'unsafe-eval' 'wasm-unsafe-eval' https://cdnjs.cloudflare.com https://unpkg.com https://riffanrabbitry.xyz https://walletconnect.com https://cdn.walletconnect.com https://*.walletconnect.com;
+                 style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com;
+                 font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com;
+                 img-src 'self' data: https: blob:;
+                 connect-src 'self' https://rpc.vana.org https://evmrpc.0g.ai https://cdnjs.cloudflare.com https://relay.walletconnect.com https://*.walletconnect.com wss://*.walletconnect.com;
+                 frame-src 'self' https:;
+                 child-src 'self' https:;
+                 frame-ancestors 'none';
+                 manifest-src 'self';
+                 object-src 'none';
+                 base-uri 'self';
+                 form-action 'self';
+                 upgrade-insecure-requests;">
+  
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="X-Frame-Options" content="DENY">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
 
   <!-- ==================== -->
   <!-- SEO PRIMARY TAGS -->
   <!-- ==================== -->
-  <title>Riffan Rabbit Farm's- Rabbit Breeder Specialty</title>
+  <title>Riffan Rabbit Farm's - Rabbit Breeder Specialty</title>
   <meta name="google-site-verification" content="gXXrXKrRhXg5irPZz9iokQ1WU7zYuj6Jd8Xqh0YRySg" />
   <meta name="description" content="Riffan Rabbitry: Where Quality Bunnies Find Loving Homes.">
   <meta name="keywords" content="riffan rabbitry, rabbit breeding, pet rabbits, show rabbits, rabbit farm, breeding stock, rabbit for sale, rabbit care, rabbit genetics, lop rabbits,holland lop, kelinci, kelinci lucu, bunny, kelinci hias, jual kelinci,kelinci nd, netherland dwarft,netherland dwarf, rex rabbits, netherland dwarf">
@@ -39,6 +46,9 @@
   <meta property="og:title" content="Riffan Rabbit Farm's - Rabbit Breeder Specialty">
   <meta property="og:description" content="Where Quality Bunnies Find Loving Homes.">
   <meta property="og:image" content="https://riffanrabbitry.xyz/assets/android-chrome-192x192.png">
+  <meta property="og:image:width" content="192">
+  <meta property="og:image:height" content="192">
+  <meta property="og:image:alt" content="Riffan Rabbitry Logo">
   <meta property="og:site_name" content="Riffan Rabbitry">
   <meta property="og:locale" content="en_US">
 
@@ -50,17 +60,27 @@
   <meta name="twitter:title" content="Riffan Rabbitry - Rabbit Breeder Specialty">
   <meta name="twitter:description" content="Where Quality Bunnies Find Loving Homes.">
   <meta name="twitter:image" content="https://riffanrabbitry.xyz/assets/rfn.png">
+  <meta name="twitter:image:alt" content="Riffan Rabbitry Banner">
   <meta name="twitter:site" content="@riffanrabbitry">
   <meta name="twitter:creator" content="@riffanrabbitry">
 
   <!-- ==================== -->
-  <!-- FAVICON -->
+  <!-- FAVICON & APP LINKS -->
   <!-- ==================== -->
-  <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-512x512.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://riffanrabbitry.xyz/assets/apple-touch-icon.png">
-  <link rel="manifest" href="manifest.json">
-  <link rel="theme-color" content="#8a6d3b">
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="any">
+  <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-512x512.png" sizes="512x512">
+  <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-192x192.png" sizes="192x192">
+  <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="https://riffanrabbitry.xyz/assets/favicon-16x16.png" sizes="16x16">
+  <link rel="apple-touch-icon" href="https://riffanrabbitry.xyz/assets/apple-touch-icon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="https://riffanrabbitry.xyz/assets/apple-touch-icon-180x180.png">
+  <link rel="manifest" href="/manifest.json" crossorigin="use-credentials">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Riffan Rabbitry">
   <link rel="canonical" href="https://riffanrabbitry.xyz/">
+  <link rel="theme-color" content="#8a6d3b" media="(prefers-color-scheme: light)">
+  <link rel="theme-color" content="#5a4529" media="(prefers-color-scheme: dark)">
 
   <!-- ==================== -->
   <!-- STRUCTURED DATA -->
@@ -72,15 +92,22 @@
     "name": "Riffan Rabbitry",
     "url": "https://riffanrabbitry.xyz/",
     "logo": "https://riffanrabbitry.xyz/assets/rfn.png",
-    "description": "Riffan Rabbitry is a premium rabbit breeding farm specializing in quality pet rabbits, show rabbits, and breeding stock with excellent genetics and care.",
+    "image": "https://riffanrabbitry.xyz/assets/android-chrome-192x192.png",
+    "description": "Riffan Rabbitry is a premium rabbit breeding specializing in pet quality, brood quality, show quality rabbits, and breeding stock with excellent genetics and care.",
     "address": {
       "@type": "PostalAddress",
-      "addressCountry": "ID"
+      "addressCountry": "ID",
+      "addressRegion": "West Java"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service"
     },
     "sameAs": [
       "https://www.instagram.com/kelinci_lembang/",
-      "https://www.facebook.com/riffanrabbitry/"
-    ]
+      "https://www.x.com/riffanrabbitry/"
+    ],
+    "openingHours": "Mo-Su"
   }
   </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
