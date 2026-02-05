@@ -1,0 +1,53 @@
+# ==================== #
+# SECURITY HEADERS - FIX SEMUA ERROR
+# ==================== #
+Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+Header set X-Frame-Options "DENY"
+Header set X-Content-Type-Options "nosniff"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
+Header set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=()"
+
+# Content Security Policy (CSP) - Sesuaikan dengan kebutuhan Anda
+Header set Content-Security-Policy "\
+default-src 'self' https://riffanrabbitry.xyz; \
+script-src 'self' 'unsafe-inline' 'unsafe-eval' \
+  https://cdnjs.cloudflare.com \
+  https://unpkg.com \
+  https://riffanrabbitry.xyz \
+  https://walletconnect.com \
+  https://cdn.walletconnect.com \
+  https://*.walletconnect.com; \
+style-src 'self' 'unsafe-inline' \
+  https://fonts.googleapis.com \
+  https://cdnjs.cloudflare.com; \
+font-src 'self' data: \
+  https://fonts.gstatic.com \
+  https://cdnjs.cloudflare.com; \
+img-src 'self' data: https: blob:; \
+connect-src 'self' \
+  https://rpc.vana.org \
+  https://evmrpc.0g.ai \
+  https://cdnjs.cloudflare.com \
+  https://relay.walletconnect.com \
+  https://*.walletconnect.com \
+  wss://*.walletconnect.com; \
+frame-src 'self' https:; \
+frame-ancestors 'none'; \
+manifest-src 'self'; \
+object-src 'none'; \
+base-uri 'self'; \
+form-action 'self'; \
+upgrade-insecure-requests;"
+
+# ==================== #
+# FORCE HTTPS (Sangat Penting!)
+# ==================== #
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ==================== #
+# REDIRECT WWW to NON-WWW (Opsional)
+# ==================== #
+RewriteCond %{HTTP_HOST} ^www\.riffanrabbitry\.xyz [NC]
+RewriteRule ^(.*)$ https://riffanrabbitry.xyz/$1 [L,R=301]
