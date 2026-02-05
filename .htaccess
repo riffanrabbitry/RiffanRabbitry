@@ -1,5 +1,5 @@
 # ==================== #
-# SECURITY HEADERS - FIX SEMUA ERROR
+# SECURITY HEADERS
 # ==================== #
 Header set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 Header set X-Frame-Options "DENY"
