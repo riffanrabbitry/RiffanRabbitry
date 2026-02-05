@@ -271,39 +271,6 @@
           border-radius: 2px;
       }
       
-      /* NEW: Announcement Banner */
-      .announcement-banner {
-          background: linear-gradient(135deg, var(--primary), var(--gold));
-          color: white;
-          padding: 12px 0;
-          text-align: center;
-          font-weight: 500;
-          font-size: 1rem;
-          position: relative;
-          overflow: hidden;
-          margin-top: 90px;
-      }
-      
-      .announcement-banner .container {
-          max-width: 1400px;
-          margin: 0 auto;
-          padding: 0 20px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 15px;
-      }
-      
-      .announcement-banner i {
-          font-size: 1.2rem;
-          animation: bounce 2s infinite;
-      }
-      
-      @keyframes bounce {
-          0%, 100% { transform: translateY(0); }
-          50% { transform: translateY(-5px); }
-      }
-      
       /* Hero Section */
       .hero {
           height: 90vh;
@@ -320,6 +287,7 @@
           padding: 0 20px;
           position: relative;
           overflow: hidden;
+          margin-top: 90px;
       }
       
       .hero::before {
@@ -416,7 +384,7 @@
           color: var(--dark);
       }
       
-      /* NEW: Stats Section */
+      /* Stats Section */
       .stats-section {
           background: linear-gradient(135deg, var(--light), #e8e1d1);
           padding: 80px 20px;
@@ -465,7 +433,7 @@
           margin-bottom: 20px;
       }
       
-      /* NEW: About Us Section */
+      /* About Us Section */
       .about-section {
           padding: 100px 20px;
           background: white;
@@ -794,7 +762,7 @@
           font-size: 1.15rem;
       }
       
-      /* NEW: Care Guide Section */
+      /* Care Guide Section */
       .care-guide {
           background: linear-gradient(135deg, var(--primary), #6b5330);
           padding: 100px 20px;
@@ -846,7 +814,7 @@
           line-height: 1.7;
       }
       
-      /* NEW: Testimonials Section */
+      /* Testimonials Section */
       .testimonials {
           padding: 100px 20px;
           background: var(--light);
@@ -1024,7 +992,7 @@
           opacity: 0.9;
       }
       
-      /* NEW: FAQ Section */
+      /* FAQ Section */
       .faq-section {
           padding: 100px 20px;
           background: white;
@@ -1138,6 +1106,23 @@
           color: var(--gold);
           font-size: 1.2rem;
           margin-top: 3px;
+      }
+      
+      .map-link {
+          color: var(--gold);
+          text-decoration: none;
+          font-weight: 600;
+          transition: var(--transition);
+          display: inline-block;
+          margin-top: 5px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          background: rgba(200, 169, 106, 0.1);
+      }
+      
+      .map-link:hover {
+          background: rgba(200, 169, 106, 0.2);
+          text-decoration: underline;
       }
       
       .social-links {
@@ -1555,27 +1540,6 @@
         </div>
     </header>
     
-    <!-- Announcement Banner -->
-    <div class="announcement-banner">
-        <div class="container">
-            <i class="fas fa-bullhorn"></i>
-            <span>🎉 Special Offer: Get 10% OFF on your first rabbit purchase! Limited time only. 🎉</span>
-        </div>
-    </div>
-    
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <ul class="mobile-nav">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#breeds">Rabbit Breeds</a></li>
-            <li><a href="#care">Care Guide</a></li>
-            <li><a href="#token">RFN Token</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="disclaimer.html">Disclaimer</a></li>
-        </ul>
-    </div>
-    
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-content">
@@ -1595,29 +1559,29 @@
                 <div class="stat-icon">
                     <i class="fas fa-rabbit"></i>
                 </div>
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Happy Rabbits</div>
+                <div class="stat-number">10+</div>
+                <div class="stat-label">Years Experience</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
                     <i class="fas fa-users"></i>
                 </div>
-                <div class="stat-number">1000+</div>
-                <div class="stat-label">Satisfied Customers</div>
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Happy Customers</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
-                    <i class="fas fa-award"></i>
+                    <i class="fas fa-home"></i>
                 </div>
-                <div class="stat-number">12</div>
-                <div class="stat-label">Awards Won</div>
+                <div class="stat-number">5</div>
+                <div class="stat-label">Premium Breeds</div>
             </div>
             <div class="stat-item">
                 <div class="stat-icon">
-                    <i class="fas fa-calendar-alt"></i>
+                    <i class="fas fa-heart"></i>
                 </div>
-                <div class="stat-number">10+</div>
-                <div class="stat-label">Years Experience</div>
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Ethical Breeding</div>
             </div>
         </div>
     </section>
@@ -1662,12 +1626,12 @@
             </div>
             
             <div class="about-image">
-                <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Riffan Rabbit Farm Environment">
+                <img src="https://riffanrabbitry.xyz/assets/nd2.jpg" alt="Riffan Rabbit Farm Environment">
             </div>
         </div>
     </section>
     
-    <!-- Rabbit Breeds Section (Original Content Enhanced) -->
+    <!-- Rabbit Breeds Section -->
     <section id="breeds">
         <h2 class="section-title">Our Premium Rabbit Breeds</h2>
         
@@ -1743,9 +1707,289 @@
                 </div>
             </div>
             
-            <!-- Holland Lop (Other breeds follow same enhanced pattern) -->
-            <!-- ... (other breeds with same enhanced structure) ... -->
+            <!-- Holland Lop -->
+            <div class="breed-card" id="holland-lop">
+                <div class="breed-header">
+                    <div>
+                        <h3 class="breed-name">Holland Lop</h3>
+                        <div class="breed-origin">Origin: Netherlands</div>
+                    </div>
+                    <div class="slider-nav" id="hl-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="hl-slider">
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/hl.JPG" alt="Holland Lop Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/hl2.JPG" alt="Holland Lop Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/hl3.JPG" alt="Holland Lop Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/hl4.JPG" alt="Holland Lop Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="hl-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="hl-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Average Weight</div>
+                            <div class="spec-value">2-4 lbs</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Temperament</div>
+                            <div class="spec-value">Sweet, Playful</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Lifespan</div>
+                            <div class="spec-value">7-12 years</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Care Level</div>
+                            <div class="spec-value">Beginner</div>
+                        </div>
+                    </div>
+                    
+                    <div class="breed-history">
+                        <h4 class="info-title"><i class="fas fa-history"></i> History</h4>
+                        <p class="breed-description">The Holland Lop was created in the Netherlands in the 1950s by Adriann de Cock, who aimed to produce a miniature version of the French Lop. By crossing French Lops with Netherland Dwarfs, he successfully created this adorable dwarf lop breed that was recognized in the Netherlands in 1964 and later worldwide.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title"><i class="fas fa-info-circle"></i> Description</h4>
+                        <p>Holland Lops are small, compact rabbits with a muscular body and distinctive floppy ears that hang down beside their head. They typically weigh between 2-4 pounds. Known for their sweet temperament and playful nature, Holland Lops make excellent family pets. Their ears should be lopped (hanging down) from birth, and they come in a wide array of colors and patterns.</p>
+                    </div>
+                </div>
+            </div>
             
+            <!-- Jersey Wooly -->
+            <div class="breed-card" id="jersey-wooly">
+                <div class="breed-header">
+                    <div>
+                        <h3 class="breed-name">Jersey Wooly</h3>
+                        <div class="breed-origin">Origin: United States</div>
+                    </div>
+                    <div class="slider-nav" id="jw-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="jw-slider">
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/jw.jpg" alt="Jersey Wooly Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/jw2.jpg" alt="Jersey Wooly Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/jw3.JPG" alt="Jersey Wooly Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/jw4.webp" alt="Jersey Wooly Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="jw-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="jw-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Average Weight</div>
+                            <div class="spec-value">1-3 lbs</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Temperament</div>
+                            <div class="spec-value">Gentle, Docile</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Lifespan</div>
+                            <div class="spec-value">7-10 years</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Care Level</div>
+                            <div class="spec-value">Advanced</div>
+                        </div>
+                    </div>
+                    
+                    <div class="breed-history">
+                        <h4 class="info-title"><i class="fas fa-history"></i> History</h4>
+                        <p class="breed-description">The Jersey Wooly was developed in the United States in the 1980s by Bonnie Seeley of High Bridge, New Jersey. She crossed a Netherland Dwarf with a French Angora rabbit to create a small, wool-producing breed with a gentle temperament. The breed was recognized by the American Rabbit Breeders Association in 1988.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title"><i class="fas fa-info-circle"></i> Description</h4>
+                        <p>Jersey Woolies are small rabbits weighing between 1-3 pounds, known for their soft, wooly fur that requires regular grooming. They have a compact body, short ears, and a friendly, docile temperament that makes them excellent pets. Their wool comes in various colors and is similar to angora but easier to maintain. They are often described as "gentle teddy bears" due to their sweet nature and fluffy appearance.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Flemish Giant -->
+            <div class="breed-card" id="flemish-giant">
+                <div class="breed-header">
+                    <div>
+                        <h3 class="breed-name">Flemish Giant</h3>
+                        <div class="breed-origin">Origin: Belgium</div>
+                    </div>
+                    <div class="slider-nav" id="fg-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="fg-slider">
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/fg.jpg" alt="Flemish Giant Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/fg2.jpg" alt="Flemish Giant Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/fg3.jpg" alt="Flemish Giant Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/fg4.jpg" alt="Flemish Giant Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="fg-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="fg-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Average Weight</div>
+                            <div class="spec-value">13-20 lbs</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Temperament</div>
+                            <div class="spec-value">Gentle, Calm</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Lifespan</div>
+                            <div class="spec-value">8-10 years</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Care Level</div>
+                            <div class="spec-value">Intermediate</div>
+                        </div>
+                    </div>
+                    
+                    <div class="breed-history">
+                        <h4 class="info-title"><i class="fas fa-history"></i> History</h4>
+                        <p class="breed-description">The Flemish Giant is one of the oldest and largest recognized rabbit breeds, originating in the Flanders region of Belgium as early as the 16th century. Originally bred for meat and fur, these "gentle giants" were imported to America in the early 20th century and quickly became popular as show animals and pets due to their impressive size and calm temperament.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title"><i class="fas fa-info-circle"></i> Description</h4>
+                        <p>Flemish Giants are massive rabbits, with adults typically weighing 13-14 pounds or more, and some reaching over 20 pounds. They have a semi-arch body type, long powerful legs, and broad heads. Despite their imposing size, they are known for their docile, gentle nature and are often called "gentle giants." They require more space and food than smaller breeds but make wonderful, calm companions.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- English Angora -->
+            <div class="breed-card" id="english-angora">
+                <div class="breed-header">
+                    <div>
+                        <h3 class="breed-name">English Angora</h3>
+                        <div class="breed-origin">Origin: Turkey/England</div>
+                    </div>
+                    <div class="slider-nav" id="ea-nav">
+                        <div class="slider-dot active" data-slide="0"></div>
+                        <div class="slider-dot" data-slide="1"></div>
+                        <div class="slider-dot" data-slide="2"></div>
+                        <div class="slider-dot" data-slide="3"></div>
+                    </div>
+                </div>
+                
+                <div class="image-slider">
+                    <div class="slider-container" id="ea-slider">
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/ea.JPG" alt="English Angora Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/ea2.JPG" alt="English Angora Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/ea3.JPG" alt="English Angora Rabbit">
+                        </div>
+                        <div class="slide">
+                            <img src="https://riffanrabbitry.xyz/assets/ea4.jpg" alt="English Angora Rabbit">
+                        </div>
+                    </div>
+                    
+                    <div class="slider-arrow left" id="ea-prev">
+                        <i class="fas fa-chevron-left"></i>
+                    </div>
+                    <div class="slider-arrow right" id="ea-next">
+                        <i class="fas fa-chevron-right"></i>
+                    </div>
+                </div>
+                
+                <div class="breed-info">
+                    <div class="breed-specs">
+                        <div class="spec-item">
+                            <div class="spec-label">Average Weight</div>
+                            <div class="spec-value">5-7.5 lbs</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Temperament</div>
+                            <div class="spec-value">Friendly, Gentle</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Lifespan</div>
+                            <div class="spec-value">7-12 years</div>
+                        </div>
+                        <div class="spec-item">
+                            <div class="spec-label">Care Level</div>
+                            <div class="spec-value">Advanced</div>
+                        </div>
+                    </div>
+                    
+                    <div class="breed-history">
+                        <h4 class="info-title"><i class="fas fa-history"></i> History</h4>
+                        <p class="breed-description">Angora rabbits are one of the oldest types of domestic rabbits, originating in Ankara (historically known as Angora), Turkey. They were brought to France in the 18th century and became popular with French royalty. The English Angora was developed in England through selective breeding for their distinctive wooly appearance and has been prized for centuries for their luxurious wool.</p>
+                    </div>
+                    
+                    <div class="breed-description">
+                        <h4 class="info-title"><i class="fas fa-info-circle"></i> Description</h4>
+                        <p>English Angoras are small to medium-sized rabbits weighing 5-7.5 pounds, completely covered in long, soft wool that requires daily grooming to prevent matting. Their wool grows about 1 inch per month and can be harvested every 3-4 months. They have a rounded body shape with wool covering their entire body including their face and ears, giving them a distinctive "pom-pom" appearance. They are gentle, friendly rabbits that require dedicated care due to their high-maintenance coats.</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     
@@ -1803,9 +2047,9 @@
                             "I bought a Netherland Dwarf from Riffan Rabbit Farms two years ago, and he's been the most wonderful pet! The farm provided excellent guidance and continues to offer support. Highly recommended!"
                         </div>
                         <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="Customer" class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/indonesian.jpg" alt="Customer" class="author-avatar">
                             <div class="author-info">
-                                <h4>Sarah Johnson</h4>
+                                <h4>Sarah</h4>
                                 <p>Rabbit Owner from Jakarta</p>
                             </div>
                         </div>
@@ -1816,9 +2060,9 @@
                             "As a first-time rabbit owner, I was nervous about proper care. The team at Riffan Rabbit Farms provided comprehensive guidance and my Holland Lop is thriving. Their dedication to animal welfare is exceptional."
                         </div>
                         <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Customer" class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/men/indo.jpg" alt="Customer" class="author-avatar">
                             <div class="author-info">
-                                <h4>David Chen</h4>
+                                <h4>Haris Akbar</h4>
                                 <p>Happy Customer from Bandung</p>
                             </div>
                         </div>
@@ -1829,9 +2073,9 @@
                             "I've purchased several show-quality rabbits from Riffan over the years. Their genetics are excellent, and the rabbits are always healthy and well-socialized. They're truly the best breeders in Indonesia."
                         </div>
                         <div class="testimonial-author">
-                            <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Customer" class="author-avatar">
+                            <img src="https://randomuser.me/api/portraits/women/indo.jpg" alt="Customer" class="author-avatar">
                             <div class="author-info">
-                                <h4>Maria Rodriguez</h4>
+                                <h4>Indri agustina</h4>
                                 <p>Rabbit Show Enthusiast</p>
                             </div>
                         </div>
@@ -1850,30 +2094,30 @@
     <!-- RFN Token Section -->
     <section class="token-section" id="token">
         <div class="token-container">
-            <h2>RFN Token - Join Our Rabbit Community</h2>
-            <p>Riffan Rabbit Farms is pioneering the future of rabbit breeding with the RFN Token. This innovative community token allows rabbit enthusiasts, breeders, and animal lovers worldwide to participate in our growing ecosystem. Holders enjoy exclusive benefits and help shape the future of ethical rabbit breeding.</p>
+            <h2>RFN Token - Our Community Platform</h2>
+            <p>The RFN Token represents our commitment to building a strong community of rabbit enthusiasts. While primarily a community token, it symbolizes our shared passion for ethical rabbit breeding and care.</p>
             
             <div class="token-features">
                 <div class="token-feature">
-                    <i class="fas fa-gem"></i>
-                    <h3>Exclusive Access</h3>
-                    <p>Early access to rare breeds, breeding reservations, and special farm events.</p>
+                    <i class="fas fa-users"></i>
+                    <h3>Community Access</h3>
+                    <p>Join our exclusive community of rabbit lovers, breeders, and enthusiasts.</p>
                 </div>
                 
                 <div class="token-feature">
-                    <i class="fas fa-vote-yea"></i>
-                    <h3>Voting Rights</h3>
-                    <p>Participate in community decisions about new breeds and farm initiatives.</p>
+                    <i class="fas fa-comments"></i>
+                    <h3>Knowledge Sharing</h3>
+                    <p>Access to our private forums for rabbit care tips and breeding advice.</p>
                 </div>
                 
                 <div class="token-feature">
-                    <i class="fas fa-percentage"></i>
-                    <h3>Discounts & Rewards</h3>
-                    <p>Receive discounts on purchases, accessories, and veterinary services.</p>
+                    <i class="fas fa-newspaper"></i>
+                    <h3>Updates & News</h3>
+                    <p>Stay informed about new litters, farm events, and rabbit care innovations.</p>
                 </div>
             </div>
             
-            <a href="comingsoon" class="btn" style="margin-top: 50px;">Learn More About RFN Token</a>
+            <a href="comingsoon" class="btn" style="margin-top: 50px;">Learn More About Our Community</a>
         </div>
     </section>
     
@@ -1947,9 +2191,6 @@
                     <a href="https://wa.me/6287822793234" aria-label="WhatsApp">
                         <i class="fab fa-whatsapp"></i>
                     </a>
-                    <a href="https://facebook.com/riffanrabbitry" aria-label="Facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </a>
                 </div>
             </div>
             
@@ -1963,6 +2204,10 @@
                             Riffan Rabbit Farm's<br>
                             Jl. Pojok Tengah No. 40 Lembang<br>
                             Bandung Barat, Indonesia 40391
+                            <br>
+                            <a href="https://maps.app.goo.gl/ZojrXbUpUthgF5cW6" target="_blank" class="map-link">
+                                <i class="fas fa-map-marker-alt"></i> View on Google Maps
+                            </a>
                         </div>
                     </div>
                     
@@ -2004,7 +2249,7 @@
                     <li><a href="#about"><i class="fas fa-chevron-right"></i> About Us</a></li>
                     <li><a href="#breeds"><i class="fas fa-chevron-right"></i> Rabbit Breeds</a></li>
                     <li><a href="#care"><i class="fas fa-chevron-right"></i> Care Guide</a></li>
-                    <li><a href="#token"><i class="fas fa-chevron-right"></i> RFN Token</a></li>
+                    <li><a href="#token"><i class="fas fa-chevron-right"></i> Community</a></li>
                     <li><a href="#faq"><i class="fas fa-chevron-right"></i> FAQ</a></li>
                     <li><a href="disclaimer.html"><i class="fas fa-chevron-right"></i> Disclaimer</a></li>
                 </ul>
@@ -2028,7 +2273,7 @@
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="terms.html">Terms of Service</a>
                 <a href="disclaimer.html">Disclaimer</a>
-                <a href="sitemap.xml">Sitemap</a>
+                <a href="comingsoon.html">RFN Token</a>
             </div>
             <p>&copy; 2014-2026 Riffan Rabbit Farms. All rights reserved.</p>
             <p>Designed with <i class="fas fa-heart" style="color: #e74c3c;"></i> for rabbit lovers worldwide</p>
@@ -2045,7 +2290,7 @@
         window.addEventListener('load', () => {
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
-            }, 1000);
+            }, 500);
         });
         
         // Mobile Menu Toggle
@@ -2082,7 +2327,7 @@
             });
         });
         
-        // Enhanced Image Slider Functionality
+        // Image Slider Functionality
         function createSlider(sliderId, prevId, nextId, navId) {
             const slider = document.getElementById(sliderId);
             const prevBtn = document.getElementById(prevId);
@@ -2145,7 +2390,10 @@
         
         // Initialize all sliders
         createSlider('nd-slider', 'nd-prev', 'nd-next', 'nd-nav');
-        // Initialize other sliders similarly...
+        createSlider('hl-slider', 'hl-prev', 'hl-next', 'hl-nav');
+        createSlider('jw-slider', 'jw-prev', 'jw-next', 'jw-nav');
+        createSlider('fg-slider', 'fg-prev', 'fg-next', 'fg-nav');
+        createSlider('ea-slider', 'ea-prev', 'ea-next', 'ea-nav');
         
         // Testimonial Slider
         const testimonialTrack = document.getElementById('testimonialTrack');
@@ -2251,35 +2499,13 @@
             this.reset();
         });
         
-        // Download shortcut functionality
-        document.addEventListener('keydown', (e) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        // Fix all broken links
+        document.querySelectorAll('a[href="comingsoon"]').forEach(link => {
+            link.addEventListener('click', function(e) {
                 e.preventDefault();
-                
-                const htmlContent = document.documentElement.outerHTML;
-                const blob = new Blob([htmlContent], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = 'riffan-rabbit-farms.html';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                URL.revokeObjectURL(url);
-                
-                alert('Website downloaded successfully!');
-            }
-        });
-        
-        // Register Service Worker for PWA
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(reg => console.log('Service Worker registered:', reg))
-                    .catch(err => console.log('Service Worker registration failed:', err));
+                alert('This feature is coming soon! Please check back later.');
             });
-        }
+        });
         
         // Add hover effect to rabbit cards
         document.querySelectorAll('.breed-card').forEach(card => {
@@ -2308,11 +2534,30 @@
         }, observerOptions);
         
         // Observe elements for animation
-        document.querySelectorAll('.stat-item, .care-card, .token-feature').forEach(el => {
+        document.querySelectorAll('.stat-item, .care-card').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(30px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
             observer.observe(el);
+        });
+        
+        // Fix map link opening
+        document.querySelectorAll('.map-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Allow default behavior - opening in new tab
+                // No prevention needed
+            });
+        });
+        
+        // Add confirmation for external links
+        document.querySelectorAll('a[href^="http"]').forEach(link => {
+            if (!link.href.includes(window.location.hostname)) {
+                link.addEventListener('click', function(e) {
+                    if (!confirm('You are leaving Riffan Rabbit Farms website. Continue?')) {
+                        e.preventDefault();
+                    }
+                });
+            }
         });
     </script>
 </body>
