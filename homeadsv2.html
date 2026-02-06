@@ -297,38 +297,7 @@
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     }
     
-    /* ADVERTISEMENT BANNER POPUP */
-    .ad-popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background-color: white;
-      border-radius: 15px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
-      z-index: 2000;
-      max-width: 500px;
-      width: 90%;
-      overflow: hidden;
-      display: none;
-      animation: popupFadeIn 0.5s ease;
-    }
-    
-    @keyframes popupFadeIn {
-      from {
-        opacity: 0;
-        transform: translate(-50%, -60%);
-      }
-      to {
-        opacity: 1;
-        transform: translate(-50%, -50%);
-      }
-    }
-    
-    .ad-popup.active {
-      display: block;
-    }
-    
+    /* ADVERTISEMENT BANNER POPUP - FIXED FOR MOBILE */
     .ad-popup-overlay {
       position: fixed;
       top: 0;
@@ -336,12 +305,38 @@
       right: 0;
       bottom: 0;
       background-color: rgba(0, 0, 0, 0.7);
-      z-index: 1999;
+      z-index: 2000;
       display: none;
+      justify-content: center;
+      align-items: center;
+      padding: 15px;
     }
     
     .ad-popup-overlay.active {
-      display: block;
+      display: flex;
+    }
+    
+    .ad-popup {
+      background-color: white;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 400px;
+      max-height: 85vh;
+      overflow-y: auto;
+      animation: popupFadeIn 0.5s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    @keyframes popupFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     
     .ad-popup-header {
@@ -351,10 +346,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      border-radius: 15px 15px 0 0;
+      flex-shrink: 0;
     }
     
     .ad-popup-title {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       font-weight: 600;
     }
     
@@ -371,6 +368,7 @@
       align-items: center;
       justify-content: center;
       transition: var(--transition);
+      flex-shrink: 0;
     }
     
     .ad-popup-close:hover {
@@ -378,28 +376,49 @@
     }
     
     .ad-popup-content {
-      padding: 25px;
+      padding: 20px;
       text-align: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+    
+    .ad-popup-image-container {
+      width: 100%;
+      height: 150px;
+      margin-bottom: 15px;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      background-color: #f5f5f5;
+      flex-shrink: 0;
     }
     
     .ad-popup-image {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      border: 2px solid var(--accent);
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.5s ease;
+    }
+    
+    .ad-popup-image:hover {
+      transform: scale(1.05);
     }
     
     .ad-popup-text {
       color: var(--dark);
-      margin-bottom: 25px;
-      line-height: 1.6;
+      margin-bottom: 20px;
+      line-height: 1.5;
+      font-size: 0.95rem;
+      flex: 1;
     }
     
     .ad-popup-cta {
       background-color: var(--gold);
       color: var(--dark);
-      padding: 12px 25px;
+      padding: 10px 20px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
@@ -407,34 +426,51 @@
       transition: var(--transition);
       border: none;
       cursor: pointer;
+      margin: 5px 0;
+      font-size: 0.9rem;
+      flex-shrink: 0;
     }
     
     .ad-popup-cta:hover {
       background-color: var(--primary);
       color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     
     .ad-popup-footer {
-      padding: 15px 20px;
+      padding: 12px 15px;
       background-color: rgba(138, 109, 59, 0.05);
       text-align: center;
       border-top: 1px solid var(--accent);
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--secondary);
+      border-radius: 0 0 15px 15px;
+      flex-shrink: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      line-height: 1.3;
+    }
+    
+    .ad-popup-footer span {
+      margin: 0 3px;
     }
     
     .ad-popup-footer a {
       color: var(--primary);
       text-decoration: none;
+      margin: 0 3px;
+      white-space: nowrap;
     }
     
     .ad-popup-footer a:hover {
       text-decoration: underline;
     }
     
-    /* ADVERTISEMENT BAR (BOTTOM) */
+    /* ADVERTISEMENT BAR (BOTTOM) - FIXED FOR MOBILE */
     .ad-bar {
       position: fixed;
       bottom: 0;
@@ -442,14 +478,15 @@
       right: 0;
       background-color: white;
       border-top: 3px solid var(--gold);
-      padding: 15px 20px;
+      padding: 10px 12px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 1001;
-      box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.08);
       transform: translateY(100%);
       transition: transform 0.4s ease;
+      min-height: 60px;
     }
     
     .ad-bar.active {
@@ -459,47 +496,71 @@
     .ad-bar-content {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
       flex: 1;
+      min-width: 0;
+    }
+    
+    .ad-bar-image-container {
+      width: 50px;
+      height: 40px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .ad-bar-image {
-      width: 80px;
-      height: 60px;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
-      border: 1px solid var(--accent);
+      object-position: center;
     }
     
     .ad-bar-text {
       flex: 1;
+      min-width: 0;
+      overflow: hidden;
     }
     
     .ad-bar-title {
       font-weight: 600;
       color: var(--primary);
-      margin-bottom: 5px;
+      margin-bottom: 2px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     
     .ad-bar-description {
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       color: var(--dark);
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.2;
     }
     
     .ad-bar-close {
       background: none;
       border: none;
       color: var(--secondary);
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       cursor: pointer;
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: var(--transition);
-      margin-left: 10px;
+      margin-left: 5px;
+      flex-shrink: 0;
     }
     
     .ad-bar-close:hover {
@@ -509,13 +570,15 @@
     .ad-bar-cta {
       background-color: var(--gold);
       color: var(--dark);
-      padding: 8px 20px;
+      padding: 5px 12px;
       border-radius: 50px;
       text-decoration: none;
       font-weight: 600;
-      font-size: 0.9rem;
+      font-size: 0.75rem;
       transition: var(--transition);
       white-space: nowrap;
+      flex-shrink: 0;
+      margin-left: 8px;
     }
     
     .ad-bar-cta:hover {
@@ -595,7 +658,7 @@
     .slide {
       width: 25%;
       height: 100%;
-      background-color: #ebebeb;
+      background-color: #f5f5f5;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -847,28 +910,42 @@
         flex-direction: column;
         align-items: flex-start;
         gap: 10px;
+        padding: 15px 20px;
       }
       
-      .ad-bar-content {
-        flex-direction: column;
-        text-align: center;
-        gap: 10px;
+      .ad-popup {
+        max-width: 350px;
       }
       
-      .ad-bar-image {
-        width: 100px;
-        height: 70px;
+      .ad-popup-header {
+        padding: 12px 15px;
       }
       
-      .ad-bar {
-        flex-direction: column;
-        gap: 15px;
-        padding: 20px;
+      .ad-popup-title {
+        font-size: 1rem;
+      }
+      
+      .ad-popup-content {
+        padding: 15px;
+      }
+      
+      .ad-popup-image-container {
+        height: 120px;
+      }
+      
+      .ad-popup-text {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+      }
+      
+      .ad-popup-footer {
+        padding: 10px 12px;
+        font-size: 0.75rem;
+        gap: 5px;
       }
       
       .ad-bar-cta {
-        align-self: stretch;
-        text-align: center;
+        display: inline-block;
       }
     }
     
@@ -898,43 +975,211 @@
         padding: 20px;
       }
       
-      .ad-popup {
-        width: 95%;
+      .breed-name {
+        font-size: 1.5rem;
       }
       
-      .ad-popup-content {
-        padding: 20px 15px;
+      .ad-popup-overlay {
+        padding: 10px;
+      }
+      
+      .ad-popup {
+        max-width: 320px;
+        max-height: 80vh;
+      }
+      
+      .ad-popup-header {
+        padding: 10px 12px;
+      }
+      
+      .ad-popup-title {
+        font-size: 0.95rem;
+      }
+      
+      .ad-popup-close {
+        width: 26px;
+        height: 26px;
+        font-size: 1.3rem;
+      }
+      
+      .ad-popup-image-container {
+        height: 100px;
+        margin-bottom: 12px;
+      }
+      
+      .ad-popup-text {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+      
+      .ad-popup-cta {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        margin: 8px 0;
+      }
+      
+      .ad-popup-footer {
+        padding: 8px 10px;
+        font-size: 0.7rem;
+        line-height: 1.2;
+      }
+      
+      .ad-bar {
+        padding: 8px 10px;
+        min-height: 55px;
+      }
+      
+      .ad-bar-image-container {
+        width: 45px;
+        height: 35px;
+      }
+      
+      .ad-bar-title {
+        font-size: 0.85rem;
+      }
+      
+      .ad-bar-description {
+        font-size: 0.7rem;
+      }
+      
+      .ad-bar-cta {
+        padding: 4px 10px;
+        font-size: 0.7rem;
+        margin-left: 5px;
+      }
+      
+      .ad-bar-close {
+        width: 24px;
+        height: 24px;
+        font-size: 1rem;
+        margin-left: 3px;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      .ad-popup {
+        max-width: 300px;
+        border-radius: 12px;
+      }
+      
+      .ad-popup-header {
+        border-radius: 12px 12px 0 0;
+      }
+      
+      .ad-popup-footer {
+        border-radius: 0 0 12px 12px;
+      }
+      
+      .ad-popup-image-container {
+        height: 90px;
+      }
+      
+      .ad-popup-title {
+        font-size: 0.9rem;
+      }
+      
+      .ad-popup-text {
+        font-size: 0.8rem;
+      }
+      
+      .ad-popup-cta {
+        padding: 7px 14px;
+        font-size: 0.8rem;
+      }
+      
+      .ad-popup-footer {
+        flex-direction: column;
+        gap: 3px;
+        padding: 6px 8px;
+      }
+      
+      .ad-bar {
+        padding: 6px 8px;
+        min-height: 50px;
+      }
+      
+      .ad-bar-image-container {
+        width: 40px;
+        height: 30px;
+        border-radius: 4px;
+      }
+      
+      .ad-bar-title {
+        font-size: 0.8rem;
+      }
+      
+      .ad-bar-description {
+        display: none;
+      }
+      
+      .ad-bar-cta {
+        padding: 3px 8px;
+        font-size: 0.65rem;
+      }
+      
+      .ad-bar-close {
+        width: 22px;
+        height: 22px;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 350px) {
+      .ad-popup {
+        max-width: 280px;
+      }
+      
+      .ad-popup-overlay {
+        padding: 8px;
+      }
+      
+      .ad-bar {
+        padding: 5px 6px;
+      }
+      
+      .ad-bar-image-container {
+        display: none;
+      }
+      
+      .ad-bar-cta {
+        margin-left: 3px;
       }
     }
   </style>
 </head>
 <body>
   <!-- Advertisement Popup -->
-  <div class="ad-popup-overlay" id="adPopupOverlay"></div>
-  
-  <div class="ad-popup" id="adPopup">
-    <div class="ad-popup-header">
-      <div class="ad-popup-title">Advertisement Space Available</div>
-      <button class="ad-popup-close" id="closeAdPopup">&times;</button>
-    </div>
-    
-    <div class="ad-popup-content">
-      <img src="https://riffanrabbitry.xyz/assets/ads.png" alt="Advertisement Space" class="ad-popup-image">
-      <p class="ad-popup-text">Increase your product visibility! This premium advertising space reaches thousands of rabbit enthusiasts monthly. Contact us to showcase your products or services.</p>
-      <a href="https://wa.me/6285157772234" target="_blank" class="ad-popup-cta">
-        <i class="fab fa-whatsapp"></i> Contact for Advertising
-      </a>
-    </div>
-    
-    <div class="ad-popup-footer">
-      <p>Advertisement • <a href="javascript:void(0)" id="hideAdForSession">Hide for this session</a> • <a href="javascript:void(0)" id="hideAdPermanently">Don't show again</a></p>
+  <div class="ad-popup-overlay" id="adPopupOverlay">
+    <div class="ad-popup" id="adPopup">
+      <div class="ad-popup-header">
+        <div class="ad-popup-title">Advertisement Space Available</div>
+        <button class="ad-popup-close" id="closeAdPopup">&times;</button>
+      </div>
+      
+      <div class="ad-popup-content">
+        <div class="ad-popup-image-container">
+          <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="Advertisement Space" class="ad-popup-image">
+        </div>
+        <p class="ad-popup-text">Increase your product visibility! This premium advertising space reaches thousands of rabbit enthusiasts monthly. Contact us to showcase your products or services.</p>
+        <a href="https://wa.me/6285157772234" target="_blank" class="ad-popup-cta">
+          <i class="fab fa-whatsapp"></i> Contact for Advertising
+        </a>
+      </div>
+      
+      <div class="ad-popup-footer">
+        <span>Advertisement</span> • 
+        <a href="javascript:void(0)" id="hideAdForSession">Hide for this session</a> • 
+        <a href="javascript:void(0)" id="hideAdPermanently">Don't show again</a>
+      </div>
     </div>
   </div>
   
   <!-- Advertisement Bar -->
   <div class="ad-bar" id="adBar">
     <div class="ad-bar-content">
-      <img src="https://riffanrabbitry.xyz/assets/ads.png" alt="Ad Space" class="ad-bar-image">
+      <div class="ad-bar-image-container">
+        <img src="https://riffanrabbitry.xyz/assets/nd2.jpg" alt="Ad Space" class="ad-bar-image">
+      </div>
       <div class="ad-bar-text">
         <div class="ad-bar-title">Advertising Space Available</div>
         <div class="ad-bar-description">Reach thousands of rabbit enthusiasts. Contact us for advertising opportunities.</div>
@@ -1334,30 +1579,29 @@
   
   <script>
     // ======================
-    // ADVERTISEMENT SYSTEM
+    // ADVERTISEMENT SYSTEM - FIXED FOR MOBILE
     // ======================
     
-    // Advertisement Configuration - MUDAH DIEDIT
+    console.log('Advertisement system loading...');
+    
+    // Advertisement Configuration
     const adConfig = {
-      // Popup ad settings
       popup: {
         enabled: true,
-        delay: 2000, // Delay in milliseconds before showing popup
-        showAgainAfter: 1/60, // Hours before showing again after closing
+        delay: 2000, // 2 seconds
+        showAgainAfter: 1, // 5 minutes
         title: "Advertisement Space Available",
-        image: "https://riffanrabbitry.xyz/assets/rfn.png",
+        image: "https://riffanrabbitry.xyz/assets/nd2.jpg",
         description: "Increase your product visibility! This premium advertising space reaches thousands of rabbit enthusiasts monthly. Contact us to showcase your products or services.",
         ctaText: "Contact for Advertising",
-        ctaLink: "https://wa.me/6285157772234",
-        footerText: "Advertisement"
+        ctaLink: "https://wa.me/6285157772234"
       },
       
-      // Bottom bar ad settings
       bar: {
         enabled: true,
-        delay: 5000, // Delay in milliseconds before showing bar
-        showAgainAfter: 0.5/60, // Hours before showing again after closing
-        image: "https://riffanrabbitry.xyz/assets/rfn.png",
+        delay: 3000, // 3 seconds
+        showAgainAfter: 1, // 5 minutes
+        image: "https://riffanrabbitry.xyz/assets/nd2.jpg",
         title: "Advertising Space Available",
         description: "Reach thousands of rabbit enthusiasts. Contact us for advertising opportunities.",
         ctaText: "Contact Us",
@@ -1365,179 +1609,136 @@
       }
     };
     
-    // DOM Elements
-    const adPopup = document.getElementById('adPopup');
+    // Get DOM elements
     const adPopupOverlay = document.getElementById('adPopupOverlay');
     const closeAdPopup = document.getElementById('closeAdPopup');
-    const hideAdForSession = document.getElementById('hideAdForSession');
-    const hideAdPermanently = document.getElementById('hideAdPermanently');
     const adBar = document.getElementById('adBar');
     const closeAdBar = document.getElementById('closeAdBar');
     
-    // Local Storage Keys
-    const STORAGE_KEYS = {
-      POPUP_HIDDEN_UNTIL: 'riffan_ad_popup_hidden_until',
-      BAR_HIDDEN_UNTIL: 'riffan_ad_bar_hidden_until',
-      POPUP_PERMANENTLY_HIDDEN: 'riffan_ad_popup_permanently_hidden',
-      BAR_PERMANENTLY_HIDDEN: 'riffan_ad_bar_permanently_hidden'
-    };
-    
-    // Initialize Advertisement System
-    function initAdvertisementSystem() {
-      // Update ad content from config
-      updateAdContent();
+    // Check if ad should be shown
+    function shouldShowAd(adType) {
+      const storageKey = `riffan_${adType}_hidden_until`;
+      const hiddenUntil = localStorage.getItem(storageKey);
       
-      // Show ads with delay if not hidden
-      setTimeout(() => {
-        if (adConfig.popup.enabled && !isAdHidden(STORAGE_KEYS.POPUP_HIDDEN_UNTIL) && 
-            !isPermanentlyHidden(STORAGE_KEYS.POPUP_PERMANENTLY_HIDDEN)) {
-          showAdPopup();
-        }
-      }, adConfig.popup.delay);
+      if (!hiddenUntil) return true;
       
-      setTimeout(() => {
-        if (adConfig.bar.enabled && !isAdHidden(STORAGE_KEYS.BAR_HIDDEN_UNTIL) && 
-            !isPermanentlyHidden(STORAGE_KEYS.BAR_PERMANENTLY_HIDDEN)) {
-          showAdBar();
-        }
-      }, adConfig.bar.delay);
-      
-      // Set up event listeners
-      setupAdEventListeners();
+      const now = Date.now();
+      return now > parseInt(hiddenUntil);
     }
     
-    // Update ad content from config
-    function updateAdContent() {
-      // Update popup content
-      if (adPopup) {
-        const titleElement = adPopup.querySelector('.ad-popup-title');
-        const imageElement = adPopup.querySelector('.ad-popup-image');
-        const textElement = adPopup.querySelector('.ad-popup-text');
-        const ctaElement = adPopup.querySelector('.ad-popup-cta');
-        const footerElement = adPopup.querySelector('.ad-popup-footer p');
-        
-        if (titleElement) titleElement.textContent = adConfig.popup.title;
-        if (imageElement) imageElement.src = adConfig.popup.image;
-        if (textElement) textElement.textContent = adConfig.popup.description;
-        if (ctaElement) {
-          ctaElement.textContent = adConfig.popup.ctaText;
-          ctaElement.href = adConfig.popup.ctaLink;
-        }
-        if (footerElement) footerElement.innerHTML = `${adConfig.popup.footerText} • <a href="javascript:void(0)" id="hideAdForSession">Hide for this session</a> • <a href="javascript:void(0)" id="hideAdPermanently">Don't show again</a>`;
-      }
-      
-      // Update bar content
-      if (adBar) {
-        const barImageElement = adBar.querySelector('.ad-bar-image');
-        const barTitleElement = adBar.querySelector('.ad-bar-title');
-        const barDescElement = adBar.querySelector('.ad-bar-description');
-        const barCtaElement = adBar.querySelector('.ad-bar-cta');
-        
-        if (barImageElement) barImageElement.src = adConfig.bar.image;
-        if (barTitleElement) barTitleElement.textContent = adConfig.bar.title;
-        if (barDescElement) barDescElement.textContent = adConfig.bar.description;
-        if (barCtaElement) {
-          barCtaElement.textContent = adConfig.bar.ctaText;
-          barCtaElement.href = adConfig.bar.ctaLink;
-        }
-      }
+    // Set ad as hidden
+    function setAdHidden(adType, minutes) {
+      const storageKey = `riffan_${adType}_hidden_until`;
+      const hiddenUntil = Date.now() + (minutes * 60 * 1000);
+      localStorage.setItem(storageKey, hiddenUntil.toString());
+      console.log(`${adType} ad hidden until ${new Date(hiddenUntil).toLocaleTimeString()}`);
     }
     
-    // Set up event listeners for ads
-    function setupAdEventListeners() {
-      // Popup close button
-      if (closeAdPopup) {
-        closeAdPopup.addEventListener('click', () => {
-          hideAdPopup();
-          setAdHiddenUntil(STORAGE_KEYS.POPUP_HIDDEN_UNTIL, adConfig.popup.showAgainAfter);
-        });
+    // Show popup ad
+    function showPopupAd() {
+      console.log('Attempting to show popup ad...');
+      
+      if (!adConfig.popup.enabled) {
+        console.log('Popup ad disabled in config');
+        return;
       }
       
-      // Overlay click to close
-      if (adPopupOverlay) {
-        adPopupOverlay.addEventListener('click', () => {
-          hideAdPopup();
-          setAdHiddenUntil(STORAGE_KEYS.POPUP_HIDDEN_UNTIL, adConfig.popup.showAgainAfter);
-        });
+      if (!shouldShowAd('popup')) {
+        console.log('Popup ad currently hidden');
+        return;
       }
       
-      // Bar close button
-      if (closeAdBar) {
-        closeAdBar.addEventListener('click', () => {
-          hideAdBar();
-          setAdHiddenUntil(STORAGE_KEYS.BAR_HIDDEN_UNTIL, adConfig.bar.showAgainAfter);
-        });
+      console.log('Showing popup ad');
+      adPopupOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    
+    // Hide popup ad
+    function hidePopupAd() {
+      console.log('Hiding popup ad');
+      adPopupOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    
+    // Show bottom bar ad
+    function showBarAd() {
+      console.log('Attempting to show bottom bar ad...');
+      
+      if (!adConfig.bar.enabled) {
+        console.log('Bottom bar ad disabled in config');
+        return;
       }
       
-      // Hide for session (re-add event listeners after content update)
-      document.addEventListener('click', function(e) {
-        if (e.target && e.target.id === 'hideAdForSession') {
-          hideAdPopup();
-          setAdHiddenUntil(STORAGE_KEYS.POPUP_HIDDEN_UNTIL, adConfig.popup.showAgainAfter);
-          e.preventDefault();
-        }
-        
-        if (e.target && e.target.id === 'hideAdPermanently') {
-          hideAdPopup();
-          setPermanentlyHidden(STORAGE_KEYS.POPUP_PERMANENTLY_HIDDEN);
-          e.preventDefault();
+      if (!shouldShowAd('bar')) {
+        console.log('Bottom bar ad currently hidden');
+        return;
+      }
+      
+      console.log('Showing bottom bar ad');
+      setTimeout(() => {
+        adBar.classList.add('active');
+      }, 100);
+    }
+    
+    // Hide bottom bar ad
+    function hideBarAd() {
+      console.log('Hiding bottom bar ad');
+      adBar.classList.remove('active');
+    }
+    
+    // Initialize ads with delay
+    setTimeout(() => {
+      console.log('Initializing popup ad...');
+      showPopupAd();
+    }, adConfig.popup.delay);
+    
+    setTimeout(() => {
+      console.log('Initializing bottom bar ad...');
+      showBarAd();
+    }, adConfig.bar.delay);
+    
+    // Event listeners for closing ads
+    if (closeAdPopup) {
+      closeAdPopup.addEventListener('click', () => {
+        hidePopupAd();
+        setAdHidden('popup', adConfig.popup.showAgainAfter);
+      });
+    }
+    
+    if (closeAdBar) {
+      closeAdBar.addEventListener('click', () => {
+        hideBarAd();
+        setAdHidden('bar', adConfig.bar.showAgainAfter);
+      });
+    }
+    
+    // Close popup when clicking overlay
+    if (adPopupOverlay) {
+      adPopupOverlay.addEventListener('click', (e) => {
+        if (e.target === adPopupOverlay) {
+          hidePopupAd();
+          setAdHidden('popup', adConfig.popup.showAgainAfter);
         }
       });
     }
     
-    // Show/hide functions
-    function showAdPopup() {
-      if (adPopup && adPopupOverlay) {
-        adPopup.classList.add('active');
-        adPopupOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
+    // Event listeners for footer links
+    document.addEventListener('click', function(e) {
+      if (e.target && e.target.id === 'hideAdForSession') {
+        e.preventDefault();
+        hidePopupAd();
+        setAdHidden('popup', adConfig.popup.showAgainAfter);
+        console.log('Popup ad hidden for session');
       }
-    }
-    
-    function hideAdPopup() {
-      if (adPopup && adPopupOverlay) {
-        adPopup.classList.remove('active');
-        adPopupOverlay.classList.remove('active');
-        document.body.style.overflow = '';
-      }
-    }
-    
-    function showAdBar() {
-      if (adBar) {
-        setTimeout(() => {
-          adBar.classList.add('active');
-        }, 100);
-      }
-    }
-    
-    function hideAdBar() {
-      if (adBar) {
-        adBar.classList.remove('active');
-      }
-    }
-    
-    // Storage functions
-    function isAdHidden(storageKey) {
-      const hiddenUntil = localStorage.getItem(storageKey);
-      if (!hiddenUntil) return false;
       
-      const now = new Date().getTime();
-      return now < parseInt(hiddenUntil);
-    }
-    
-    function setAdHiddenUntil(storageKey, hours) {
-      const now = new Date().getTime();
-      const hiddenUntil = now + (hours * 60 * 60 * 1000);
-      localStorage.setItem(storageKey, hiddenUntil.toString());
-    }
-    
-    function isPermanentlyHidden(storageKey) {
-      return localStorage.getItem(storageKey) === 'true';
-    }
-    
-    function setPermanentlyHidden(storageKey) {
-      localStorage.setItem(storageKey, 'true');
-    }
+      if (e.target && e.target.id === 'hideAdPermanently') {
+        e.preventDefault();
+        hidePopupAd();
+        // Set to far future (10 years)
+        localStorage.setItem('riffan_popup_hidden_until', (Date.now() + (10 * 365 * 24 * 60 * 60 * 1000)).toString());
+        console.log('Popup ad hidden permanently');
+      }
+    });
     
     // ======================
     // EXISTING FUNCTIONALITY
@@ -1629,7 +1830,7 @@
       setInterval(() => {
         currentSlide = (currentSlide + 1) % totalSlides;
         updateSlider();
-      }, 4000);
+      }, 5000);
     }
     
     // Initialize all sliders
@@ -1692,37 +1893,25 @@
       }
     });
     
-    // Register Service Worker for PWA
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('Service Worker registered', reg))
-          .catch(err => console.log('Service Worker registration failed', err));
-      });
-    }
+    // Log when page is loaded
+    console.log('Page loaded successfully');
+    console.log('Ad popup element:', adPopupOverlay);
+    console.log('Ad bar element:', adBar);
     
-    // Initialize advertisement system when DOM is loaded
-    document.addEventListener('DOMContentLoaded', initAdvertisementSystem);
+    // Test function to manually show ads
+    window.showAds = function() {
+      console.log('Manually showing ads...');
+      showPopupAd();
+      showBarAd();
+    };
     
-    // ======================
-    // EDIT INSTRUCTION COMMENT
-    // ======================
-    /*
-    CARA MUDAH MENGEDIT IKLAN:
-    
-    1. Untuk mengubah konten iklan, edit variabel 'adConfig' di atas.
-    2. Ubah teks, gambar, tautan, dan waktu tunda sesuai kebutuhan.
-    3. Untuk menonaktifkan popup atau bar, ubah 'enabled' menjadi false.
-    4. Untuk mengubah berapa lama iklan disembunyikan setelah ditutup, ubah 'showAgainAfter' (dalam jam).
-    
-    Contoh edit cepat:
-    
-    adConfig.popup.title = "Promo Spesial Kelinci!";
-    adConfig.popup.image = "https://example.com/promo.jpg";
-    adConfig.popup.description = "Dapatkan diskon 20% untuk pembelian kelinci Holland Lop bulan ini!";
-    adConfig.popup.ctaLink = "https://wa.me/628123456789";
-    adConfig.popup.delay = 3000; // Muncul setelah 3 detik
-    */
+    // Test function to clear ad storage
+    window.clearAdStorage = function() {
+      localStorage.removeItem('riffan_popup_hidden_until');
+      localStorage.removeItem('riffan_bar_hidden_until');
+      console.log('Ad storage cleared');
+      alert('Ad storage cleared. Refresh page to see ads.');
+    };
   </script>
 </body>
 </html>
