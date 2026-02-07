@@ -320,12 +320,14 @@
       background-color: white;
       border-radius: 15px;
       width: 100%;
-      max-width: 400px;
-      max-height: 85vh;
+      max-width: 420px;
+      max-height: 90vh;
       overflow-y: auto;
       animation: popupFadeIn 0.5s ease;
       display: flex;
       flex-direction: column;
+      box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(138, 109, 59, 0.2);
     }
     
     @keyframes popupFadeIn {
@@ -386,20 +388,25 @@
     
     .ad-popup-image-container {
       width: 100%;
-      height: 150px;
+      height: auto;
+      max-height: 220px;
       margin-bottom: 15px;
       border-radius: 10px;
       overflow: hidden;
       position: relative;
-      background-color: #f5f5f5;
+      background-color: #f9f9f9;
       flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     .ad-popup-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
+      max-width: 100%;
+      max-height: 220px;
+      width: auto;
+      height: auto;
+      object-fit: contain;
       transition: transform 0.5s ease;
     }
     
@@ -476,17 +483,18 @@
       bottom: 0;
       left: 0;
       right: 0;
-      background-color: white;
-      border-top: 3px solid var(--gold);
-      padding: 10px 12px;
+      background-color: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(10px);
+      border-top: 4px solid var(--gold);
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       z-index: 1001;
-      box-shadow: 0 -3px 15px rgba(0, 0, 0, 0.08);
+      box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.1);
       transform: translateY(100%);
-      transition: transform 0.4s ease;
-      min-height: 60px;
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      min-height: 70px;
     }
     
     .ad-bar.active {
@@ -496,7 +504,7 @@
     .ad-bar-content {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 15px;
       flex: 1;
       min-width: 0;
     }
@@ -523,27 +531,20 @@
     .ad-bar-text {
       flex: 1;
       min-width: 0;
-      overflow: hidden;
     }
     
     .ad-bar-title {
-      font-weight: 600;
+      font-weight: 700;
       color: var(--primary);
       margin-bottom: 2px;
-      font-size: 0.9rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 1rem;
+      line-height: 1.2;
     }
     
     .ad-bar-description {
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       color: var(--dark);
-      display: -webkit-box;
-      -webkit-line-clamp: 1;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-      line-height: 1.2;
+      line-height: 1.3;
     }
     
     .ad-bar-close {
@@ -570,15 +571,16 @@
     .ad-bar-cta {
       background-color: var(--gold);
       color: var(--dark);
-      padding: 5px 12px;
+      padding: 8px 18px;
       border-radius: 50px;
       text-decoration: none;
-      font-weight: 600;
-      font-size: 0.75rem;
+      font-weight: 700;
+      font-size: 0.85rem;
       transition: var(--transition);
       white-space: nowrap;
       flex-shrink: 0;
-      margin-left: 8px;
+      margin-left: 12px;
+      box-shadow: 0 4px 10px rgba(200, 169, 106, 0.3);
     }
     
     .ad-bar-cta:hover {
@@ -914,7 +916,7 @@
       }
       
       .ad-popup {
-        max-width: 350px;
+        max-width: 380px;
       }
       
       .ad-popup-header {
@@ -930,7 +932,8 @@
       }
       
       .ad-popup-image-container {
-        height: 120px;
+        height: auto;
+        max-height: 180px;
       }
       
       .ad-popup-text {
@@ -942,6 +945,11 @@
         padding: 10px 12px;
         font-size: 0.75rem;
         gap: 5px;
+      }
+      
+      .ad-bar {
+        padding: 10px 15px;
+        min-height: 65px;
       }
       
       .ad-bar-cta {
@@ -985,7 +993,7 @@
       
       .ad-popup {
         max-width: 320px;
-        max-height: 80vh;
+        max-height: 85vh;
       }
       
       .ad-popup-header {
@@ -1003,7 +1011,8 @@
       }
       
       .ad-popup-image-container {
-        height: 100px;
+        height: auto;
+        max-height: 140px;
         margin-bottom: 12px;
       }
       
@@ -1025,8 +1034,8 @@
       }
       
       .ad-bar {
-        padding: 8px 10px;
-        min-height: 55px;
+        padding: 8px 12px;
+        min-height: 60px;
       }
       
       .ad-bar-image-container {
@@ -1071,7 +1080,8 @@
       }
       
       .ad-popup-image-container {
-        height: 90px;
+        height: auto;
+        max-height: 120px;
       }
       
       .ad-popup-title {
@@ -1094,27 +1104,34 @@
       }
       
       .ad-bar {
-        padding: 6px 8px;
-        min-height: 50px;
+        padding: 12px 10px;
+        min-height: 80px;
+        flex-wrap: wrap;
+      }
+      
+      .ad-bar-content {
+        gap: 10px;
+        flex-wrap: wrap;
       }
       
       .ad-bar-image-container {
         width: 40px;
-        height: 30px;
-        border-radius: 4px;
+        height: 40px;
+        flex-shrink: 0;
+        display: flex;
       }
       
       .ad-bar-title {
-        font-size: 0.8rem;
+        font-size: 0.85rem;
       }
       
       .ad-bar-description {
-        display: none;
+        font-size: 0.75rem;
       }
       
       .ad-bar-cta {
-        padding: 3px 8px;
-        font-size: 0.65rem;
+        padding: 4px 10px;
+        font-size: 0.7rem;
       }
       
       .ad-bar-close {
@@ -1138,7 +1155,10 @@
       }
       
       .ad-bar-image-container {
-        display: none;
+        width: 35px;
+        height: 35px;
+        flex-shrink: 0;
+        display: flex;
       }
       
       .ad-bar-cta {
@@ -1648,6 +1668,32 @@
         return;
       }
       
+      // Update content from config and add cache buster
+      const cacheBuster = `v=${Date.now()}`;
+      const popupImg = document.querySelector('.ad-popup-image');
+      if (popupImg && adConfig.popup.image) {
+        const separator = adConfig.popup.image.includes('?') ? '&' : '?';
+        popupImg.src = `${adConfig.popup.image}${separator}${cacheBuster}`;
+      }
+      
+      const popupTitle = document.querySelector('.ad-popup-title');
+      if (popupTitle && adConfig.popup.title) {
+        popupTitle.textContent = adConfig.popup.title;
+      }
+      
+      const popupText = document.querySelector('.ad-popup-text');
+      if (popupText && adConfig.popup.description) {
+        popupText.textContent = adConfig.popup.description;
+      }
+      
+      const popupCta = document.querySelector('.ad-popup-cta');
+      if (popupCta && adConfig.popup.ctaText) {
+        const icon = popupCta.querySelector('i');
+        popupCta.textContent = ' ' + adConfig.popup.ctaText;
+        if (icon) popupCta.prepend(icon);
+        popupCta.href = adConfig.popup.ctaLink;
+      }
+      
       console.log('Showing popup ad');
       adPopupOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
@@ -1672,6 +1718,30 @@
       if (!shouldShowAd('bar')) {
         console.log('Bottom bar ad currently hidden');
         return;
+      }
+
+      // Update content from config and add cache buster
+      const cacheBuster = `v=${Date.now()}`;
+      const barImg = document.querySelector('.ad-bar-image');
+      if (barImg && adConfig.bar.image) {
+        const separator = adConfig.bar.image.includes('?') ? '&' : '?';
+        barImg.src = `${adConfig.bar.image}${separator}${cacheBuster}`;
+      }
+      
+      const barTitle = document.querySelector('.ad-bar-title');
+      if (barTitle && adConfig.bar.title) {
+        barTitle.textContent = adConfig.bar.title;
+      }
+      
+      const barDesc = document.querySelector('.ad-bar-description');
+      if (barDesc && adConfig.bar.description) {
+        barDesc.textContent = adConfig.bar.description;
+      }
+      
+      const barCta = document.querySelector('.ad-bar-cta');
+      if (barCta && adConfig.bar.ctaText) {
+        barCta.textContent = adConfig.bar.ctaText;
+        barCta.href = adConfig.bar.ctaLink;
       }
       
       console.log('Showing bottom bar ad');
