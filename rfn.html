@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RIFFAN RABBITRY COMMUNITY TOKEN - Join The Largest Rabbit Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-image: url('https://images.unsplash.com/photo-1551028712-7c5c8615f5c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: overlay;
+            background-color: rgba(240, 249, 255, 0.95);
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.98);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0, 100, 0, 0.15);
+            overflow: hidden;
+            border: 3px solid #0ea5e9;
+            text-align: center;
+            padding: 50px 40px;
+            position: relative;
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #0ea5e9, #22d3ee, #2dd4bf);
+            border-radius: 30px 30px 0 0;
+        }
+
+        .logo-section {
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .logo-large {
+            width: 280px;
+            height: 280px;
+            margin: 0 auto 30px;
+            display: block;
+            border-radius: 50%;
+            border: 10px solid #0ea5e9;
+            padding: 15px;
+            background: white;
+            box-shadow: 
+                0 0 60px rgba(14, 165, 233, 0.4),
+                inset 0 0 40px rgba(14, 165, 233, 0.2);
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .logo-large:hover {
+            transform: rotate(5deg) scale(1.05);
+        }
+
+        .token-title {
+            font-size: 3.8rem;
+            font-weight: 900;
+            background: linear-gradient(90deg, #0ea5e9, #22d3ee, #2dd4bf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            letter-spacing: 1.5px;
+            text-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);
+        }
+
+        .token-subtitle {
+            font-size: 1.8rem;
+            color: #475569;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .tagline {
+            color: #0ea5e9;
+            font-size: 1.3rem;
+            font-style: italic;
+            margin-bottom: 50px;
+            font-weight: 500;
+        }
+
+        .community-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #2dd4bf, #0ea5e9);
+            color: white;
+            padding: 12px 40px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 1.6rem;
+            letter-spacing: 2px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .description {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #475569;
+            max-width: 900px;
+            margin: 0 auto 50px;
+            padding: 0 20px;
+        }
+
+        .highlight {
+            color: #0ea5e9;
+            font-weight: 800;
+            background: linear-gradient(90deg, #e0f2fe, #f0f9ff);
+            padding: 0 10px;
+            border-radius: 5px;
+        }
+
+        /* NEW: Buy Section Styles */
+        .buy-section {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .buy-title {
+            font-size: 2rem;
+            margin-bottom: 25px;
+            color: #22d3ee;
+        }
+
+        .contract-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(34,211,238,0.5);
+        }
+
+        .contract-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #94a3b8;
+        }
+
+        .contract-address {
+            font-family: monospace;
+            font-size: 1.1rem;
+            word-break: break-all;
+            margin: 10px 0;
+            color: #22d3ee;
+        }
+
+        .copy-btn {
+            background: #22d3ee;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #0f172a;
+            transition: all 0.3s;
+        }
+
+        .copy-btn:hover {
+            background: #2dd4bf;
+            transform: scale(1.05);
+        }
+
+        .trade-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .trade-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .gecko-btn {
+            background: #1a1a1a;
+            color: white;
+            border: 2px solid #4CAF50;
+        }
+
+        .fourmeme-btn {
+            background: linear-gradient(90deg, #FF6B6B, #FF8E53);
+            color: white;
+        }
+
+        .trade-btn:hover {
+            transform: translateY(-5px);
+            filter: brightness(1.1);
+        }
+
+        /* NEW: Wallet Guide Section */
+        .wallet-guide {
+            background: #f8fafc;
+            border-radius: 25px;
+            padding: 40px;
+            margin-bottom: 50px;
+            text-align: left;
+        }
+
+        .guide-title {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #0ea5e9;
+        }
+
+        .wallet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .wallet-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s;
+        }
+
+        .wallet-card:hover {
+            border-color: #0ea5e9;
+            transform: translateY(-5px);
+        }
+
+        .wallet-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .wallet-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+        }
+
+        .trust-icon { background: #3B82F6; color: white; }
+        .tokenpocket-icon { background: #2094F3; color: white; }
+        .bitget-icon { background: #F28C38; color: white; }
+        .binance-icon { background: #F3BA2F; color: #0b0e11; }
+
+        .wallet-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .step {
+            margin: 12px 0;
+            font-size: 0.9rem;
+            color: #475569;
+            line-height: 1.5;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: #0ea5e9;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .warning-small {
+            background: #fef3c7;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 2px solid #e0f2fe;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: #0ea5e9;
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #0ea5e9;
+            margin-bottom: 20px;
+            height: 80px;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #e0f2fe;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            color: #1e293b;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-desc {
+            color: #64748b;
+            line-height: 1.6;
+        }
+
+        .join-section {
+            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
+            border-radius: 25px;
+            padding: 50px 40px;
+            margin-bottom: 50px;
+            border: 3px dashed #0ea5e9;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .join-title {
+            font-size: 2.5rem;
+            color: #0ea5e9;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .whatsapp-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            background: linear-gradient(90deg, #25D366, #128C7E);
+            color: white;
+            text-decoration: none;
+            padding: 22px 50px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .whatsapp-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.4);
+        }
+
+        .whatsapp-icon {
+            font-size: 2rem;
+        }
+
+        .join-note {
+            color: #475569;
+            font-size: 1.1rem;
+            margin-top: 25px;
+            font-style: italic;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: #1e293b;
+            padding: 25px 30px;
+            border-radius: 20px;
+            background: white;
+            width: 200px;
+            transition: all 0.3s ease;
+            border: 2px solid #e0f2fe;
+        }
+
+        .social-link:hover {
+            transform: translateY(-8px);
+            border-color: #0ea5e9;
+            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.2);
+        }
+
+        .social-icon {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            height: 70px;
+            width: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .instagram { color: #E4405F; background: #ffe0e6; }
+        .twitter { color: #000000; background: #f0f0f0; }
+        .telegram { color: #0088cc; background: #e3f2fd; }
+
+        .social-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .social-handle {
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+
+        .rabbit-icons {
+            font-size: 2.8rem;
+            color: #0ea5e9;
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .copyright {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0f2fe;
+        }
+
+        .disclaimer {
+            background: #fef3c7;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 40px;
+            border-left: 5px solid #f59e0b;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #92400e;
+        }
+
+        @media (max-width: 992px) {
+            .container { padding: 40px 30px; }
+            .logo-large { width: 240px; height: 240px; }
+            .token-title { font-size: 3rem; }
+            .token-subtitle { font-size: 1.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 35px 25px; }
+            .logo-large { width: 220px; height: 220px; }
+            .token-title { font-size: 2.5rem; }
+            .wallet-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 576px) {
+            .container { padding: 30px 20px; }
+            .logo-large { width: 200px; height: 200px; }
+            .token-title { font-size: 2rem; }
+            .trade-btn { padding: 12px 25px; font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Logo & Header Section (PERTAHANKAN) -->
+        <div class="logo-section">
+            <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="RIFFAN RABBITRY TOKEN Logo" class="logo-large">
+            <h1 class="token-title">RIFFAN RABBITRY TOKEN</h1>
+            <div class="token-subtitle">Community Token</div>
+            <div class="tagline">Connecting Rabbit Enthusiasts Worldwide</div>
+            <div class="community-badge">
+                <i class="fas fa-users"></i> "$RFN lIVE NOW" THE LARGEST RABBIT COMMUNITY
+            </div>
+        </div>
+
+        <!-- Original Description -->
+        <p class="description">
+            <span class="highlight">$RFN</span> is a community token created to unite rabbit lovers, breeders, and enthusiasts from around the world. 
+            This is NOT an investment instrument, but a fun way to connect with fellow rabbit lovers, share knowledge, 
+            and participate in the world's largest rabbit community activities.
+        </p>
+
+        <div class="rabbit-icons">
+            <i class="fas fa-paw"></i>
+            <i class="fas fa-rabbit"></i>
+            <i class="fas fa-heart"></i>
+            <i class="fas fa-seedling"></i>
+            <i class="fas fa-paw"></i>
+        </div>
+
+        <!-- NEW: BUY SECTION -->
+        <div class="buy-section">
+            <h2 class="buy-title"><i class="fas fa-shopping-cart"></i> BUY $RFN TOKEN</h2>
+            
+            <div class="contract-box">
+                <div class="contract-label"><i class="fas fa-link"></i> BNB SMART CHAIN CONTRACT ADDRESS</div>
+                <div class="contract-address" id="contractAddress">0x817f786122d462c8a33bb599503c6004c53a4444</div>
+                <button class="copy-btn" onclick="copyAddress()"><i class="fas fa-copy"></i> Copy Address</button>
+            </div>
+
+            <div class="trade-buttons">
+                <a href="https://www.geckoterminal.com/bsc/pools/0x817f786122d462c8a33bb599503c6004c53a4444" target="_blank" class="trade-btn gecko-btn">
+                    <i class="fas fa-chart-line"></i> View on GeckoTerminal
+                </a>
+                <a href="https://four.meme/en/token/0x817f786122d462c8a33bb599503c6004c53a4444" target="_blank" class="trade-btn fourmeme-btn">
+                    <i class="fas fa-fire"></i> Trade on Four.Meme
+                </a>
+            </div>
+        </div>
+
+        <!-- NEW: FAST SWAP GUIDE - WALLET INTEGRATION -->
+        <div class="wallet-guide">
+            <h2 class="guide-title"><i class="fas fa-wallet"></i> How to Buy $RFN Fast Swap</h2>
+            <div class="wallet-grid">
+                
+                <!-- Trust Wallet -->
+                <div class="wallet-card">
+                    <div class="wallet-header">
+                        <div class="wallet-icon trust-icon"><i class="fas fa-check-circle"></i></div>
+                        <span class="wallet-name">Trust Wallet</span>
+                    </div>
+                    <div class="step"><span class="step-number">1</span> Download Trust Wallet from Play Store/App Store</div>
+                    <div class="step"><span class="step-number">2</span> Create wallet & backup seed phrase</div>
+                    <div class="step"><span class="step-number">3</span> Tap [Smart Chain] - [Receive] - [Copy Address]</div>
+                    <div class="step"><span class="step-number">4</span> Buy BNB & transfer to wallet</div>
+                    <div class="step"><span class="step-number">5</span> Go to DApps/Browser → Open GeckoTerminal or Four.Meme</div>
+                    <div class="step"><span class="step-number">6</span> Connect wallet & swap BNB → $RFN</div>
+                    <div class="warning-small"><i class="fas fa-shield-alt"></i> Add token: Click [Add Custom Token] → Paste Contract</div>
+                </div>
+
+                <!-- TokenPocket -->
+                <div class="wallet-card">
+                    <div class="wallet-header">
+                        <div class="wallet-icon tokenpocket-icon"><i class="fas fa-database"></i></div>
+                        <span class="wallet-name">TokenPocket</span>
+                    </div>
+                    <div class="step"><span class="step-number">1</span> Install TokenPocket app</div>
+                    <div class="step"><span class="step-number">2</span> Create wallet on BNB Smart Chain</div>
+                    <div class="step"><span class="step-number">3</span> Deposit BNB to your wallet address</div>
+                    <div class="step"><span class="step-number">4</span> Tap [Discover] → Search "PancakeSwap"</div>
+                    <div class="step"><span class="step-number">5</span> Paste contract: 0x817f786122d462c8a33bb599503c6004c53a4444</div>
+                    <div class="step"><span class="step-number">6</span> Set slippage 1-5% → Swap BNB → $RFN</div>
+                    <div class="warning-small"><i class="fas fa-star"></i> Auto-add token after swap</div>
+                </div>
+
+                <!-- Bitget Wallet -->
+                <div class="wallet-card">
+                    <div class="wallet-header">
+                        <div class="wallet-icon bitget-icon"><i class="fas fa-chart-simple"></i></div>
+                        <span class="wallet-name">Bitget Wallet</span>
+                    </div>
+                    <div class="step"><span class="step-number">1</span> Download Bitget Wallet (formerly BitKeep)</div>
+                    <div class="step"><span class="step-number">2</span> Create wallet → Choose BNB Chain</div>
+                    <div class="step"><span class="step-number">3</span> Fund with BNB (buy via integrated on-ramp)</div>
+                    <div class="step"><span class="step-number">4</span> Tap [Swap] → Set BNB as "From"</div>
+                    <div class="step"><span class="step-number">5</span> Paste $RFN contract in "To" field</div>
+                    <div class="step"><span class="step-number">6</span> Confirm swap → $RFN automatically appears</div>
+                    <div class="warning-small"><i class="fas fa-bolt"></i> Fastest swap! Auto-detects new tokens</div>
+                </div>
+
+                <!-- Binance Wallet -->
+                <div class="wallet-card">
+                    <div class="wallet-header">
+                        <div class="wallet-icon binance-icon"><i class="fab fa-binance"></i></div>
+                        <span class="wallet-name">Binance Wallet</span>
+                    </div>
+                    <div class="step"><span class="step-number">1</span> Open Binance App → Go to [Wallets] → [Web3 Wallet]</div>
+                    <div class="step"><span class="step-number">2</span> Create Web3 wallet (if not exist)</div>
+                    <div class="step"><span class="step-number">3</span> Transfer BNB from Spot to Web3 wallet</div>
+                    <div class="step"><span class="step-number">4</span> Go to [DApps] → Search "GeckoTerminal"</div>
+                    <div class="step"><span class="step-number">5</span> Paste contract & approve</div>
+                    <div class="step"><span class="step-number">6</span> Swap BNB → $RFN</div>
+                    <div class="warning-small"><i class="fas fa-chart-line"></i> View token in [Web3 Wallet] → [Manage Tokens]</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Original Features (PERTAHANKAN) -->
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
+                <h3 class="feature-title">Global Community</h3>
+                <p class="feature-desc">Connect with rabbit enthusiasts from different countries, share experiences, and learn about various rabbit breeds worldwide.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-graduation-cap"></i></div>
+                <h3 class="feature-title">Knowledge Sharing</h3>
+                <p class="feature-desc">Access exclusive content about rabbit care, breeding tips, health advice, and sustainable rabbit farming practices.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fas fa-trophy"></i></div>
+                <h3 class="feature-title">Community Events</h3>
+                <p class="feature-desc">Participate in virtual rabbit shows, photo contests, breeding seminars, and community meetups organized exclusively for members.</p>
+            </div>
+        </div>
+
+        <!-- Original Join Section (PERTAHANKAN) -->
+        <div class="join-section">
+            <h2 class="join-title">JOIN OUR COMMUNITY NOW!</h2>
+            <p class="description" style="margin-bottom: 30px;">
+                Be part of the world's largest rabbit community. Connect with thousands of rabbit lovers, share photos of your rabbits, 
+                get advice from experienced breeders, and participate in fun community activities.
+            </p>
+            <a href="https://chat.whatsapp.com/ECmAR8uRDhGF4pi5O0y14Q?mode=gi_t" target="_blank" class="whatsapp-btn">
+                <i class="fab fa-whatsapp whatsapp-icon"></i> JOIN WHATSAPP GROUP
+            </a>
+            <p class="join-note">Click the button above to join our active WhatsApp community of rabbit enthusiasts!</p>
+        </div>
+
+        <!-- Original Social Links -->
+        <div class="social-links">
+            <a href="https://instagram.com/kelinci_lembang" target="_blank" class="social-link">
+                <div class="social-icon instagram"><i class="fab fa-instagram"></i></div>
+                <div class="social-name">Instagram</div>
+                <div class="social-handle">@kelinci_lembang</div>
+            </a>
+            <a href="https://x.com/riffanrabbitry" target="_blank" class="social-link">
+                <div class="social-icon twitter"><i class="fab fa-twitter"></i></div>
+                <div class="social-name">Twitter / X</div>
+                <div class="social-handle">@riffanrabbitry</div>
+            </a>
+            <a href="https://t.me/riffanrabbit" target="_blank" class="social-link">
+                <div class="social-icon telegram"><i class="fab fa-telegram"></i></div>
+                <div class="social-name">Telegram</div>
+                <div class="social-handle">@riffanrabbit</div>
+            </a>
+        </div>
+
+        <!-- Original Disclaimer & Copyright -->
+        <div class="disclaimer">
+            <p><strong>IMPORTANT:</strong> $RFN is a community token for educational and social purposes only. It is NOT an investment product, security, or financial instrument. The token has no monetary value and is not intended for speculative trading. This is purely a community-building initiative for rabbit enthusiasts worldwide.</p>
+        </div>
+        <p class="copyright">
+            © 2026 RIFFAN RABBITRY COMMUNITY TOKEN ($RFN). All rights reserved.<br>
+            Connecting rabbit lovers around the world | Not an investment opportunity
+        </p>
+    </div>
+
+    <script>
+        // Copy contract address
+        function copyAddress() {
+            const address = document.getElementById('contractAddress').innerText;
+            navigator.clipboard.writeText(address);
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+            }, 2000);
+        }
+
+        // Logo hover effects
+        const logo = document.querySelector('.logo-large');
+        if(logo) {
+            logo.addEventListener('mouseenter', () => {
+                logo.style.boxShadow = '0 0 80px rgba(14, 165, 233, 0.6), inset 0 0 50px rgba(14, 165, 233, 0.3)';
+            });
+            logo.addEventListener('mouseleave', () => {
+                logo.style.boxShadow = '0 0 60px rgba(14, 165, 233, 0.4), inset 0 0 40px rgba(14, 165, 233, 0.2)';
+            });
+        }
+
+        // WhatsApp button animation
+        const whatsappBtn = document.querySelector('.whatsapp-btn');
+        if(whatsappBtn) {
+            whatsappBtn.addEventListener('click', () => {
+                whatsappBtn.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    whatsappBtn.style.transform = '';
+                }, 150);
+            });
+        }
+
+        // Subtle background animation
+        let angle = 0;
+        function updateBackground() {
+            angle = (angle + 0.2) % 360;
+            const x = Math.cos(angle * Math.PI / 180) * 5;
+            const y = Math.sin(angle * Math.PI / 180) * 5;
+            const container = document.querySelector('.container');
+            if(container) container.style.transform = `translate(${x}px, ${y}px)`;
+            requestAnimationFrame(updateBackground);
+        }
+        updateBackground();
+    </script>
+</body>
+</html>
