@@ -28,7 +28,7 @@ riffanrabbitry/
 - **Telegram Community:** https://t.me/riffanrabbit
 - **Twitter Token:** https://twitter.com/Riffanrabbitry
 - **Token Page:** https://riffanrabbitry.xyz/riffan
-- **Smart Contract:** `0x...` (akan di-update setelah deploy)
+- **Smart Contract:** 0x817f786122d462c8a33bb599503c6004c53a4444
 
 ## 💻 $RFN Token - Technical Information
 
@@ -36,9 +36,9 @@ riffanrabbitry/
 - **Network:** Binance Smart Chain (BSC)
 - **Standard:** BEP-20
 - **Token Symbol:** RFN
-- **Total Supply:** 27,000,000 RFN
+- **Total Supply:** 1,000,000,000 RFN
 - **Decimals:** 18
-- **Contract Address:** `Coming Soon`
+- **Contract Address:** 0x817f786122d462c8a33bb599503c6004c53a4444
 
 ### Token Features
 - Community-driven token
