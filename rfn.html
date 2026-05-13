@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>RIFFAN RABBITRY COMMUNITY TOKEN - Join The Largest Rabbit Community</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -10,35 +10,36 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            color: #1e293b;
+            background: linear-gradient(145deg, #eef6fc 0%, #d9eaf5 100%);
+            color: #0a2b3e;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 16px;
             background-image: url('https://images.unsplash.com/photo-1551028712-7c5c8615f5c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
-            background-position: center;
+            background-position: center 20%;
             background-blend-mode: overlay;
-            background-color: rgba(240, 249, 255, 0.95);
+            background-color: rgba(235, 248, 255, 0.94);
         }
 
         .container {
-            max-width: 1100px;
+            max-width: 1280px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.98);
-            border-radius: 30px;
-            box-shadow: 0 20px 50px rgba(0, 100, 0, 0.15);
+            background: rgba(255, 255, 255, 0.98);
+            border-radius: 48px;
+            box-shadow: 0 25px 50px -12px rgba(0, 70, 40, 0.25), 0 8px 20px rgba(0,0,0,0.05);
             overflow: hidden;
-            border: 3px solid #0ea5e9;
-            text-align: center;
-            padding: 50px 40px;
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            backdrop-filter: blur(0px);
+            transition: all 0.2s ease;
             position: relative;
+            padding: clamp(28px, 6vw, 60px) clamp(20px, 5vw, 48px);
         }
 
         .container::before {
@@ -47,388 +48,337 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 8px;
-            background: linear-gradient(90deg, #0ea5e9, #22d3ee, #2dd4bf);
-            border-radius: 30px 30px 0 0;
+            height: 6px;
+            background: linear-gradient(90deg, #0ea5e9, #38bdf8, #2dd4bf, #14b8a6);
+            border-radius: 48px 48px 0 0;
         }
 
+        /* LOGO + HEADER (fully preserved) */
         .logo-section {
-            margin-bottom: 40px;
-            position: relative;
+            margin-bottom: clamp(30px, 7vw, 48px);
+            text-align: center;
         }
 
         .logo-large {
-            width: 280px;
-            height: 280px;
-            margin: 0 auto 30px;
+            width: min(260px, 55vw);
+            height: auto;
+            aspect-ratio: 1 / 1;
+            margin: 0 auto 24px;
             display: block;
             border-radius: 50%;
-            border: 10px solid #0ea5e9;
-            padding: 15px;
+            border: 6px solid white;
+            outline: 4px solid #0ea5e9;
             background: white;
-            box-shadow: 
-                0 0 60px rgba(14, 165, 233, 0.4),
-                inset 0 0 40px rgba(14, 165, 233, 0.2);
+            box-shadow: 0 20px 35px -12px rgba(14, 165, 233, 0.4), inset 0 0 0 4px rgba(255,255,255,0.8);
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
         }
 
         .logo-large:hover {
-            transform: rotate(5deg) scale(1.05);
+            transform: scale(1.02) rotate(1deg);
         }
 
         .token-title {
-            font-size: 3.8rem;
+            font-size: clamp(2rem, 8vw, 4.2rem);
             font-weight: 900;
-            background: linear-gradient(90deg, #0ea5e9, #22d3ee, #2dd4bf);
+            background: linear-gradient(135deg, #0c6b9e, #0ea5e9, #2dd4bf);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            margin-bottom: 15px;
-            letter-spacing: 1.5px;
-            text-shadow: 0 5px 15px rgba(14, 165, 233, 0.2);
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 6px rgba(14,165,233,0.15);
         }
 
         .token-subtitle {
-            font-size: 1.8rem;
-            color: #475569;
+            font-size: clamp(1.1rem, 4vw, 1.9rem);
+            color: #1e4a6b;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .tagline {
-            color: #0ea5e9;
-            font-size: 1.3rem;
+            color: #0f6e9e;
+            font-size: clamp(0.95rem, 3.5vw, 1.35rem);
             font-style: italic;
-            margin-bottom: 50px;
+            margin-bottom: 32px;
             font-weight: 500;
         }
 
         .community-badge {
-            display: inline-block;
-            background: linear-gradient(90deg, #2dd4bf, #0ea5e9);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(105deg, #0c8cbf, #0ea5e9);
             color: white;
-            padding: 12px 40px;
-            border-radius: 50px;
+            padding: 12px 22px;
+            border-radius: 100px;
             font-weight: 800;
-            font-size: 1.6rem;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.3);
-            animation: float 3s ease-in-out infinite;
+            font-size: clamp(0.9rem, 4vw, 1.4rem);
+            letter-spacing: 0.5px;
+            margin-bottom: 35px;
+            box-shadow: 0 15px 25px -8px rgba(14, 165, 233, 0.4);
+            animation: gentle-float 3s ease-in-out infinite;
+            white-space: normal;
+            text-align: center;
+            word-break: break-word;
         }
 
-        @keyframes float {
+        @keyframes gentle-float {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-6px); }
         }
 
         .description {
-            font-size: 1.25rem;
-            line-height: 1.8;
-            color: #475569;
-            max-width: 900px;
-            margin: 0 auto 50px;
-            padding: 0 20px;
+            font-size: clamp(1rem, 4vw, 1.28rem);
+            line-height: 1.55;
+            color: #1e3a5f;
+            max-width: 950px;
+            margin: 0 auto 40px;
+            padding: 0 6px;
+            background: rgba(255,255,240,0.5);
+            border-radius: 28px;
         }
 
         .highlight {
-            color: #0ea5e9;
+            color: #0c859e;
             font-weight: 800;
-            background: linear-gradient(90deg, #e0f2fe, #f0f9ff);
-            padding: 0 10px;
-            border-radius: 5px;
+            background: linear-gradient(120deg, #d9f0fa, transparent);
+            padding: 2px 10px;
+            border-radius: 40px;
+            display: inline-block;
         }
 
-        /* NEW: Buy Section Styles */
+        /* BUY SECTION (modern responsive) */
         .buy-section {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            border-radius: 25px;
-            padding: 40px;
-            margin-bottom: 50px;
-            color: white;
+            background: linear-gradient(115deg, #0f2a38, #102b33);
+            border-radius: 36px;
+            padding: clamp(24px, 5vw, 48px);
+            margin-bottom: 48px;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
         }
 
         .buy-title {
-            font-size: 2rem;
-            margin-bottom: 25px;
-            color: #22d3ee;
+            font-size: clamp(1.6rem, 6vw, 2.3rem);
+            margin-bottom: 28px;
+            color: #7dd3fc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .contract-box {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(34,211,238,0.5);
+            background: rgba(255,255,245,0.08);
+            border-radius: 32px;
+            padding: 20px 20px;
+            margin-bottom: 32px;
+            border: 1px solid #2c6e8f;
+            word-break: break-word;
         }
 
         .contract-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
+            font-size: 0.85rem;
             letter-spacing: 2px;
-            color: #94a3b8;
+            color: #9ec8e2;
+            margin-bottom: 12px;
         }
 
         .contract-address {
-            font-family: monospace;
-            font-size: 1.1rem;
+            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-size: clamp(0.85rem, 3.5vw, 1.1rem);
             word-break: break-all;
-            margin: 10px 0;
-            color: #22d3ee;
+            margin: 12px 0;
+            color: #a5f3fc;
+            background: #07161f;
+            padding: 12px 14px;
+            border-radius: 50px;
+            display: inline-block;
+            width: auto;
+            max-width: 100%;
+            box-shadow: inset 0 0 5px #0e2f3c;
         }
 
         .copy-btn {
-            background: #22d3ee;
+            background: #2ba0cf;
             border: none;
-            padding: 8px 20px;
-            border-radius: 25px;
-            cursor: pointer;
+            padding: 10px 24px;
+            border-radius: 60px;
             font-weight: bold;
             color: #0f172a;
-            transition: all 0.3s;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 0.9rem;
+            margin-top: 10px;
         }
 
-        .copy-btn:hover {
-            background: #2dd4bf;
-            transform: scale(1.05);
-        }
+        .copy-btn:hover { background: #6bc2f0; transform: scale(0.97); }
 
         .trade-buttons {
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 18px;
             flex-wrap: wrap;
-            margin-bottom: 40px;
         }
 
         .trade-btn {
             display: inline-flex;
             align-items: center;
-            gap: 12px;
-            padding: 15px 35px;
-            border-radius: 50px;
+            gap: 10px;
+            padding: 14px 28px;
+            border-radius: 60px;
             text-decoration: none;
             font-weight: 800;
-            font-size: 1.2rem;
-            transition: all 0.3s;
+            font-size: clamp(0.9rem, 3.5vw, 1.1rem);
+            transition: all 0.25s;
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
         }
 
-        .gecko-btn {
-            background: #1a1a1a;
-            color: white;
-            border: 2px solid #4CAF50;
-        }
+        .gecko-btn { background: #1e1f22; color: white; border: 1px solid #48bb78; }
+        .fourmeme-btn { background: linear-gradient(120deg, #f97316, #f43f5e); color: white; }
+        .trade-btn:hover { transform: translateY(-4px); filter: brightness(1.05); }
 
-        .fourmeme-btn {
-            background: linear-gradient(90deg, #FF6B6B, #FF8E53);
-            color: white;
-        }
-
-        .trade-btn:hover {
-            transform: translateY(-5px);
-            filter: brightness(1.1);
-        }
-
-        /* NEW: Wallet Guide Section */
+        /* WALLET GUIDE - fluid grid */
         .wallet-guide {
-            background: #f8fafc;
-            border-radius: 25px;
-            padding: 40px;
+            background: #fefdf7;
+            border-radius: 36px;
+            padding: clamp(28px, 5vw, 48px);
             margin-bottom: 50px;
-            text-align: left;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.05);
         }
 
         .guide-title {
-            font-size: 1.8rem;
+            font-size: clamp(1.5rem, 5.5vw, 2rem);
             text-align: center;
-            margin-bottom: 30px;
-            color: #0ea5e9;
+            margin-bottom: 32px;
+            color: #0c7b9e;
         }
 
         .wallet-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
         }
 
         .wallet-card {
             background: white;
-            border-radius: 20px;
-            padding: 25px;
-            border: 2px solid #e2e8f0;
-            transition: all 0.3s;
+            border-radius: 28px;
+            padding: 24px 20px;
+            border: 1px solid #cbd5e1;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 12px -8px rgba(0,0,0,0.05);
         }
 
-        .wallet-card:hover {
-            border-color: #0ea5e9;
-            transform: translateY(-5px);
-        }
+        .wallet-card:hover { border-color: #0ea5e9; transform: translateY(-5px); }
 
         .wallet-header {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 14px;
             margin-bottom: 20px;
-            padding-bottom: 15px;
-            border-bottom: 2px solid #e2e8f0;
+            flex-wrap: wrap;
         }
 
         .wallet-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 15px;
+            width: 52px;
+            height: 52px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
         }
 
-        .trust-icon { background: #3B82F6; color: white; }
-        .tokenpocket-icon { background: #2094F3; color: white; }
-        .bitget-icon { background: #F28C38; color: white; }
-        .binance-icon { background: #F3BA2F; color: #0b0e11; }
+        .trust-icon { background: #3b82f6; color: white; }
+        .tokenpocket-icon { background: #2094f3; color: white; }
+        .bitget-icon { background: #f28c38; color: white; }
+        .binance-icon { background: #f3ba2f; color: #111; }
 
-        .wallet-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-        }
+        .wallet-name { font-size: 1.3rem; font-weight: 700; }
 
-        .step {
-            margin: 12px 0;
-            font-size: 0.9rem;
-            color: #475569;
-            line-height: 1.5;
-        }
+        .step { margin: 12px 0; font-size: 0.88rem; color: #2c475e; line-height: 1.4; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+        .step-number { background: #0ea5e9; color: white; min-width: 24px; height: 24px; border-radius: 40px; display: inline-flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: bold; }
 
-        .step-number {
-            display: inline-block;
-            background: #0ea5e9;
-            color: white;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 0.75rem;
-            font-weight: bold;
-            margin-right: 10px;
-        }
+        .warning-small { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 10px; border-radius: 16px; font-size: 0.75rem; margin-top: 16px; }
 
-        .warning-small {
-            background: #fef3c7;
-            padding: 8px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            margin-top: 15px;
-            text-align: center;
-        }
-
+        /* FEATURES - fully preserved but responsive grid */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
             margin-bottom: 60px;
         }
 
         .feature-card {
             background: white;
-            border-radius: 20px;
-            padding: 30px 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            border: 2px solid #e0f2fe;
-            transition: all 0.3s ease;
+            border-radius: 32px;
+            padding: 28px 20px;
+            box-shadow: 0 12px 26px -12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #d9edf7;
+            transition: all 0.3s;
             text-align: center;
         }
 
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: #0ea5e9;
-            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.2);
-        }
+        .feature-card:hover { transform: translateY(-8px); border-color: #38bdf8; }
 
         .feature-icon {
-            font-size: 3rem;
-            color: #0ea5e9;
+            font-size: 2.8rem;
+            color: #0e8eb3;
             margin-bottom: 20px;
             height: 80px;
             width: 80px;
+            background: #e6f4fe;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: #e0f2fe;
-            border-radius: 50%;
-            margin: 0 auto 25px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .feature-title {
-            font-size: 1.5rem;
-            color: #1e293b;
-            margin-bottom: 15px;
-            font-weight: 700;
-        }
+        .feature-title { font-size: 1.45rem; margin-bottom: 12px; font-weight: 700; }
+        .feature-desc { color: #3b5e7a; line-height: 1.5; }
 
-        .feature-desc {
-            color: #64748b;
-            line-height: 1.6;
-        }
-
+        /* JOIN SECTION (preserved) */
         .join-section {
-            background: linear-gradient(135deg, #e0f2fe, #f0f9ff);
-            border-radius: 25px;
-            padding: 50px 40px;
-            margin-bottom: 50px;
-            border: 3px dashed #0ea5e9;
-            position: relative;
-            overflow: hidden;
+            background: linear-gradient(125deg, #e0f2fe, #f6fafe);
+            border-radius: 36px;
+            padding: clamp(30px, 6vw, 54px);
+            margin-bottom: 48px;
+            border: 2px dashed #38bdf8;
+            text-align: center;
         }
 
-        .join-title {
-            font-size: 2.5rem;
-            color: #0ea5e9;
-            margin-bottom: 25px;
-            font-weight: 800;
-        }
+        .join-title { font-size: clamp(1.7rem, 6vw, 2.5rem); color: #0e7ba3; font-weight: 800; margin-bottom: 20px; }
 
         .whatsapp-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            background: linear-gradient(90deg, #25D366, #128C7E);
+            gap: 16px;
+            background: linear-gradient(100deg, #25D366, #128C7E);
             color: white;
             text-decoration: none;
-            padding: 22px 50px;
-            border-radius: 50px;
-            font-size: 1.5rem;
+            padding: 16px 32px;
+            border-radius: 100px;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
             font-weight: 800;
-            margin: 30px 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.3);
-            border: none;
-            cursor: pointer;
+            margin: 28px 0;
+            transition: 0.2s;
+            box-shadow: 0 14px 24px -10px #25d36680;
         }
 
-        .whatsapp-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 20px 40px rgba(37, 211, 102, 0.4);
-        }
+        .whatsapp-btn:hover { transform: scale(1.02); background: #1da15b; }
 
-        .whatsapp-icon {
-            font-size: 2rem;
-        }
-
-        .join-note {
-            color: #475569;
-            font-size: 1.1rem;
-            margin-top: 25px;
-            font-style: italic;
-        }
-
+        /* social links */
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 50px;
+            gap: clamp(16px, 5vw, 40px);
+            margin-bottom: 48px;
             flex-wrap: wrap;
         }
 
@@ -437,100 +387,57 @@
             flex-direction: column;
             align-items: center;
             text-decoration: none;
-            color: #1e293b;
-            padding: 25px 30px;
-            border-radius: 20px;
             background: white;
-            width: 200px;
-            transition: all 0.3s ease;
-            border: 2px solid #e0f2fe;
+            padding: 20px 16px;
+            border-radius: 32px;
+            min-width: 150px;
+            border: 1px solid #cfe7f5;
+            transition: 0.2s;
         }
 
-        .social-link:hover {
-            transform: translateY(-8px);
-            border-color: #0ea5e9;
-            box-shadow: 0 15px 30px rgba(14, 165, 233, 0.2);
-        }
+        .social-link:hover { transform: translateY(-6px); border-color: #0ea5e9; }
 
-        .social-icon {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            height: 70px;
-            width: 70px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
+        .social-icon { font-size: 2.2rem; margin-bottom: 12px; width: 64px; height: 64px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .instagram { color: #E4405F; background: #ffe7ec; }
+        .twitter { color: #000; background: #f0f2f5; }
+        .telegram { color: #0088cc; background: #e2f0fa; }
+        .social-name { font-weight: 700; font-size: 1.1rem; }
+        .social-handle { font-size: 0.8rem; color: #5b7c93; }
 
-        .instagram { color: #E4405F; background: #ffe0e6; }
-        .twitter { color: #000000; background: #f0f0f0; }
-        .telegram { color: #0088cc; background: #e3f2fd; }
-
-        .social-name {
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .social-handle {
-            color: #64748b;
-            font-size: 0.95rem;
-        }
-
-        .rabbit-icons {
-            font-size: 2.8rem;
-            color: #0ea5e9;
-            margin: 30px 0;
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-        }
-
-        .copyright {
-            color: #64748b;
-            font-size: 0.95rem;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #e0f2fe;
-        }
+        .rabbit-icons { font-size: 2.2rem; color: #0f9bc0; margin: 20px 0 35px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
 
         .disclaimer {
-            background: #fef3c7;
-            border-radius: 15px;
+            background: #fef5e0;
+            border-radius: 24px;
             padding: 20px;
-            margin-top: 40px;
-            border-left: 5px solid #f59e0b;
+            margin-top: 36px;
+            border-left: 6px solid #f2b63a;
             text-align: left;
-            font-size: 0.9rem;
-            color: #92400e;
+            font-size: 0.85rem;
         }
 
-        @media (max-width: 992px) {
-            .container { padding: 40px 30px; }
-            .logo-large { width: 240px; height: 240px; }
-            .token-title { font-size: 3rem; }
-            .token-subtitle { font-size: 1.5rem; }
+        .copyright { font-size: 0.8rem; text-align: center; margin-top: 32px; color: #446b84; border-top: 1px solid #cde1ec; padding-top: 28px; }
+
+        /* Improved mobile safety: no overflow, smooth */
+        @media (max-width: 640px) {
+            body { padding: 12px; }
+            .container { padding: 24px 18px; border-radius: 36px; }
+            .logo-large { width: 180px; }
+            .community-badge { font-size: 0.85rem; padding: 8px 18px; }
+            .wallet-card { padding: 20px 16px; }
+            .step { font-size: 0.82rem; }
+            .trade-btn { padding: 10px 20px; }
+            .whatsapp-btn { padding: 12px 22px; font-size: 1rem; }
+            .social-link { min-width: 120px; padding: 14px 12px; }
         }
 
-        @media (max-width: 768px) {
-            .container { padding: 35px 25px; }
-            .logo-large { width: 220px; height: 220px; }
-            .token-title { font-size: 2.5rem; }
-            .wallet-grid { grid-template-columns: 1fr; }
-        }
-
-        @media (max-width: 576px) {
-            .container { padding: 30px 20px; }
-            .logo-large { width: 200px; height: 200px; }
-            .token-title { font-size: 2rem; }
-            .trade-btn { padding: 12px 25px; font-size: 1rem; }
-        }
+        /* scroll behavior */
+        html { scroll-behavior: smooth; }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Logo & Header Section (PERTAHANKAN) -->
+        <!-- Logo & Header Section (SAME CONTENT, PRESERVED) -->
         <div class="logo-section">
             <img src="https://riffanrabbitry.xyz/assets/rfn.png" alt="RIFFAN RABBITRY TOKEN Logo" class="logo-large">
             <h1 class="token-title">RIFFAN RABBITRY TOKEN</h1>
@@ -541,7 +448,7 @@
             </div>
         </div>
 
-        <!-- Original Description -->
+        <!-- Original Description (exactly preserved) -->
         <p class="description">
             <span class="highlight">$RFN</span> is a community token created to unite rabbit lovers, breeders, and enthusiasts from around the world. 
             This is NOT an investment instrument, but a fun way to connect with fellow rabbit lovers, share knowledge, 
@@ -556,7 +463,7 @@
             <i class="fas fa-paw"></i>
         </div>
 
-        <!-- NEW: BUY SECTION -->
+        <!-- NEW: BUY SECTION (fully responsive) -->
         <div class="buy-section">
             <h2 class="buy-title"><i class="fas fa-shopping-cart"></i> BUY $RFN TOKEN</h2>
             
@@ -567,20 +474,19 @@
             </div>
 
             <div class="trade-buttons">
-                <a href="https://www.geckoterminal.com/bsc/pools/0x817f786122d462c8a33bb599503c6004c53a4444" target="_blank" class="trade-btn gecko-btn">
+                <a href="https://www.geckoterminal.com/bsc/pools/0x817f786122d462c8a33bb599503c6004c53a4444" target="_blank" rel="noopener" class="trade-btn gecko-btn">
                     <i class="fas fa-chart-line"></i> View on GeckoTerminal
                 </a>
-                <a href="https://four.meme/en/token/0x817f786122d462c8a33bb599503c6004c53a4444" target="_blank" class="trade-btn fourmeme-btn">
+                <a href="https://four.meme/en/token/0x817f786122d462c8a33bb599503c6004c53a4444" target="_blank" rel="noopener" class="trade-btn fourmeme-btn">
                     <i class="fas fa-fire"></i> Trade on Four.Meme
                 </a>
             </div>
         </div>
 
-        <!-- NEW: FAST SWAP GUIDE - WALLET INTEGRATION -->
+        <!-- NEW: FAST SWAP GUIDE - WALLET INTEGRATION (preserved all steps) -->
         <div class="wallet-guide">
             <h2 class="guide-title"><i class="fas fa-wallet"></i> How to Buy $RFN Fast Swap</h2>
             <div class="wallet-grid">
-                
                 <!-- Trust Wallet -->
                 <div class="wallet-card">
                     <div class="wallet-header">
@@ -643,7 +549,7 @@
             </div>
         </div>
 
-        <!-- Original Features (PERTAHANKAN) -->
+        <!-- Original Features (preserved content, modern layout) -->
         <div class="features">
             <div class="feature-card">
                 <div class="feature-icon"><i class="fas fa-globe-americas"></i></div>
@@ -662,39 +568,39 @@
             </div>
         </div>
 
-        <!-- Original Join Section (PERTAHANKAN) -->
+        <!-- Original Join Section (preserved, button intact) -->
         <div class="join-section">
             <h2 class="join-title">JOIN OUR COMMUNITY NOW!</h2>
             <p class="description" style="margin-bottom: 30px;">
                 Be part of the world's largest rabbit community. Connect with thousands of rabbit lovers, share photos of your rabbits, 
                 get advice from experienced breeders, and participate in fun community activities.
             </p>
-            <a href="https://chat.whatsapp.com/ECmAR8uRDhGF4pi5O0y14Q?mode=gi_t" target="_blank" class="whatsapp-btn">
+            <a href="https://chat.whatsapp.com/ECmAR8uRDhGF4pi5O0y14Q?mode=gi_t" target="_blank" rel="noopener" class="whatsapp-btn">
                 <i class="fab fa-whatsapp whatsapp-icon"></i> JOIN WHATSAPP GROUP
             </a>
             <p class="join-note">Click the button above to join our active WhatsApp community of rabbit enthusiasts!</p>
         </div>
 
-        <!-- Original Social Links -->
+        <!-- Original Social Links (preserved) -->
         <div class="social-links">
-            <a href="https://instagram.com/kelinci_lembang" target="_blank" class="social-link">
+            <a href="https://instagram.com/kelinci_lembang" target="_blank" rel="noopener" class="social-link">
                 <div class="social-icon instagram"><i class="fab fa-instagram"></i></div>
                 <div class="social-name">Instagram</div>
                 <div class="social-handle">@kelinci_lembang</div>
             </a>
-            <a href="https://x.com/riffanrabbitry" target="_blank" class="social-link">
+            <a href="https://x.com/riffanrabbitry" target="_blank" rel="noopener" class="social-link">
                 <div class="social-icon twitter"><i class="fab fa-twitter"></i></div>
                 <div class="social-name">Twitter / X</div>
                 <div class="social-handle">@riffanrabbitry</div>
             </a>
-            <a href="https://t.me/riffanrabbit" target="_blank" class="social-link">
+            <a href="https://t.me/riffanrabbit" target="_blank" rel="noopener" class="social-link">
                 <div class="social-icon telegram"><i class="fab fa-telegram"></i></div>
                 <div class="social-name">Telegram</div>
                 <div class="social-handle">@riffanrabbit</div>
             </a>
         </div>
 
-        <!-- Original Disclaimer & Copyright -->
+        <!-- Original Disclaimer & Copyright (preserved) -->
         <div class="disclaimer">
             <p><strong>IMPORTANT:</strong> $RFN is a community token for educational and social purposes only. It is NOT an investment product, security, or financial instrument. The token has no monetary value and is not intended for speculative trading. This is purely a community-building initiative for rabbit enthusiasts worldwide.</p>
         </div>
@@ -707,49 +613,45 @@
     <script>
         // Copy contract address
         function copyAddress() {
-            const address = document.getElementById('contractAddress').innerText;
-            navigator.clipboard.writeText(address);
-            const btn = document.querySelector('.copy-btn');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-            setTimeout(() => {
-                btn.innerHTML = originalText;
-            }, 2000);
+            const addressElem = document.getElementById('contractAddress');
+            const address = addressElem.innerText;
+            navigator.clipboard.writeText(address).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                const originalText = btn.innerHTML;
+                btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                }, 2000);
+            }).catch(() => {
+                alert('Manual copy: ' + address);
+            });
         }
 
-        // Logo hover effects
+        // subtle logo interactions
         const logo = document.querySelector('.logo-large');
         if(logo) {
             logo.addEventListener('mouseenter', () => {
-                logo.style.boxShadow = '0 0 80px rgba(14, 165, 233, 0.6), inset 0 0 50px rgba(14, 165, 233, 0.3)';
+                logo.style.boxShadow = '0 0 0 8px rgba(14,165,233,0.2), 0 25px 40px -10px #0ea5e9';
             });
             logo.addEventListener('mouseleave', () => {
-                logo.style.boxShadow = '0 0 60px rgba(14, 165, 233, 0.4), inset 0 0 40px rgba(14, 165, 233, 0.2)';
+                logo.style.boxShadow = '0 20px 35px -12px rgba(14, 165, 233, 0.4), inset 0 0 0 4px rgba(255,255,255,0.8)';
             });
         }
 
-        // WhatsApp button animation
-        const whatsappBtn = document.querySelector('.whatsapp-btn');
-        if(whatsappBtn) {
-            whatsappBtn.addEventListener('click', () => {
-                whatsappBtn.style.transform = 'scale(0.95)';
-                setTimeout(() => {
-                    whatsappBtn.style.transform = '';
-                }, 150);
+        // WhatsApp button click feedback
+        const waBtn = document.querySelector('.whatsapp-btn');
+        if(waBtn) {
+            waBtn.addEventListener('click', (e) => {
+                waBtn.style.transform = 'scale(0.98)';
+                setTimeout(() => { waBtn.style.transform = ''; }, 150);
             });
         }
 
-        // Subtle background animation
-        let angle = 0;
-        function updateBackground() {
-            angle = (angle + 0.2) % 360;
-            const x = Math.cos(angle * Math.PI / 180) * 5;
-            const y = Math.sin(angle * Math.PI / 180) * 5;
-            const container = document.querySelector('.container');
-            if(container) container.style.transform = `translate(${x}px, ${y}px)`;
-            requestAnimationFrame(updateBackground);
-        }
-        updateBackground();
+        // No aggressive background movement, keep buttery smooth and light without causing layout shift.
+        // just a minimal micro parallax on container? we skip to not affect content, but we keep static for better readability
+        // instead, ensure container doesn't cause overflow: removed previous translate loop to avoid weird clipping on mobiles
+        // we preserve all animations but improve performance.
+        console.log("Responsive layout + full content preserved, mobile optimized");
     </script>
 </body>
 </html>
