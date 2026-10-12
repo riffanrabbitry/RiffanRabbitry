@@ -170,6 +170,7 @@
     </div>
     <div class="row">
       <button id="btnConnect">Connect Wallet</button>
+      <button id="btnDisconnect" class="secondary">Disconnect</button>
       <button id="btnSwitch" class="secondary">Switch ke Core DAO</button>
     </div>
     <div style="margin-top:10px;">
@@ -196,7 +197,7 @@
   <div class="card hidden" id="cardToggle">
     <h2>🔘 Toggle Whitelist</h2>
     <div class="info-box">
-      <b>ON</b> = hanya alamat yang di-whitelist yang bisa jual (yang lain revert).<br>
+      <b>ON</b> = hanya alamat yang di-whitelist yang bisa jual.<br>
       <b>OFF</b> = semua orang bisa jual bebas.
     </div>
     <div class="row">
@@ -270,20 +271,16 @@ const CONFIG = {
     blockExplorerUrls: ["https://scan.coredao.org"]
   },
   ABI: [
-    // Read
     "function canSell(address) view returns (bool)",
     "function whitelistEnabled() view returns (bool)",
     "function admin() view returns (address)",
     "function owner() view returns (address)",
     "function buyFee() view returns (uint256)",
     "function sellFee() view returns (uint256)",
-    // Write - whitelist
     "function setSeller(address account, bool allowed)",
     "function setSellers(address[] calldata accounts, bool allowed)",
     "function setWhitelistEnabled(bool enabled)",
-    // Write - fee
     "function setFees(uint256 newBuyFee, uint256 newSellFee)",
-    // Write - admin
     "function setAdmin(address newAdmin)"
   ]
 };
@@ -295,6 +292,7 @@ let provider = null;
 let signer = null;
 let contract = null;
 let currentAccount = null;
+let listenersAttached = false;   // ⬅️ cegah pasang listener berkali-kali
 
 // ============================================================
 // LOGGING
@@ -318,35 +316,57 @@ async function connectWallet() {
   }
   try {
     const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+    if (!accounts || accounts.length === 0) {
+      log("Tidak ada akun terhubung", "err");
+      return;
+    }
     currentAccount = accounts[0];
+
     provider = new ethers.providers.Web3Provider(window.ethereum);
     signer = provider.getSigner();
 
+    // Cek network
     const net = await provider.getNetwork();
     if (Number(net.chainId) !== CONFIG.CHAIN_ID) {
       log(`Network salah (chainId=${net.chainId}). Switch ke Core DAO...`, "info");
       await switchNetwork();
     }
 
+    // Update UI
     document.getElementById("walletAddr").textContent = currentAccount;
     document.getElementById("netDot").classList.add("on");
     document.getElementById("netStatus").textContent = "Terhubung ke Core DAO";
     document.getElementById("netStatusBox").classList.add("ok");
     log(`Wallet terhubung: ${currentAccount}`, "ok");
 
-    const bal = await provider.getBalance(currentAccount);
-    document.getElementById("walletBal").textContent = 
-      parseFloat(ethers.utils.formatEther(bal)).toFixed(4) + " CORE";
+    // Balance
+    await updateBalance();
 
+    // Init contract
     initContract();
 
+    // Show cards
     ["cardStatus","cardToggle","cardSeller","cardBatch","cardFee","cardAdmin"]
       .forEach(id => document.getElementById(id).classList.remove("hidden"));
 
     await refreshStatus();
 
+    // Pasang listener SEKALI saja
+    attachWalletListeners();
+
   } catch (e) {
     log("Error connect: " + (e.message || e), "err");
+  }
+}
+
+async function updateBalance() {
+  if (!provider || !currentAccount) return;
+  try {
+    const bal = await provider.getBalance(currentAccount);
+    document.getElementById("walletBal").textContent = 
+      parseFloat(ethers.utils.formatEther(bal)).toFixed(4) + " CORE";
+  } catch (e) {
+    log("Gagal ambil balance: " + e.message, "err");
   }
 }
 
@@ -373,6 +393,62 @@ function initContract() {
 }
 
 // ============================================================
+// WALLET EVENT LISTENERS (tanpa reload!)
+// ============================================================
+function attachWalletListeners() {
+  if (listenersAttached) return;   // ⬅️ hanya sekali
+  listenersAttached = true;
+
+  // Ganti akun → refresh data, TANPA reload
+  window.ethereum.on("accountsChanged", async (accounts) => {
+    if (!accounts || accounts.length === 0) {
+      log("Wallet terputus", "err");
+      resetUI();
+      return;
+    }
+    currentAccount = accounts[0];
+    log(`Akun berubah: ${currentAccount}`, "info");
+    document.getElementById("walletAddr").textContent = currentAccount;
+    await updateBalance();
+    // Re-init contract dengan signer baru
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+    initContract();
+    await refreshStatus();
+  });
+
+  // Ganti network → refresh data, TANPA reload
+  window.ethereum.on("chainChanged", async (chainIdHex) => {
+    const chainId = parseInt(chainIdHex, 16);
+    log(`Network berubah: chainId=${chainId}`, "info");
+    if (chainId !== CONFIG.CHAIN_ID) {
+      log("⚠️ Anda tidak di Core DAO. Klik 'Switch ke Core DAO'", "err");
+      document.getElementById("netStatus").textContent = "Network salah";
+      document.getElementById("netDot").classList.remove("on");
+    } else {
+      provider = new ethers.providers.Web3Provider(window.ethereum);
+      signer = provider.getSigner();
+      initContract();
+      document.getElementById("netStatus").textContent = "Terhubung ke Core DAO";
+      document.getElementById("netDot").classList.add("on");
+      await updateBalance();
+      await refreshStatus();
+    }
+  });
+}
+
+function resetUI() {
+  currentAccount = null;
+  contract = null;
+  document.getElementById("walletAddr").textContent = "-";
+  document.getElementById("walletBal").textContent = "-";
+  document.getElementById("netDot").classList.remove("on");
+  document.getElementById("netStatus").textContent = "Belum terhubung";
+  ["cardStatus","cardToggle","cardSeller","cardBatch","cardFee","cardAdmin"]
+    .forEach(id => document.getElementById(id).classList.add("hidden"));
+}
+
+// ============================================================
 // REFRESH STATUS
 // ============================================================
 async function refreshStatus() {
@@ -396,7 +472,6 @@ async function refreshStatus() {
     document.getElementById("buyFeeVal").textContent = buyF.toString();
     document.getElementById("sellFeeVal").textContent = sellF.toString();
 
-    // Deteksi role
     const acc = currentAccount.toLowerCase();
     let role = "❌ Bukan admin/owner";
     if (acc === ownerAddr.toLowerCase() && acc === adminAddr.toLowerCase()) 
@@ -431,9 +506,13 @@ async function sendTx(fnName, args, successMsg) {
 }
 
 // ============================================================
-// EVENT LISTENERS
+// EVENT LISTENERS UI
 // ============================================================
 document.getElementById("btnConnect").onclick = connectWallet;
+document.getElementById("btnDisconnect").onclick = () => {
+  resetUI();
+  log("Wallet di-disconnect dari UI (bukan dari MetaMask)", "info");
+};
 document.getElementById("btnSwitch").onclick = async () => {
   try { await switchNetwork(); log("Switched ke Core DAO ✓", "ok"); }
   catch (e) { log("Switch error: " + e.message, "err"); }
@@ -465,8 +544,7 @@ document.getElementById("btnCheck").onclick = async () => {
     const html = status 
       ? `<span class="badge on">✅ BOLEH JUAL</span>` 
       : `<span class="badge off">❌ TIDAK BOLEH JUAL</span>`;
-    document.getElementById("checkResult").innerHTML = 
-      `${addr} → ${html}`;
+    document.getElementById("checkResult").innerHTML = `${addr} → ${html}`;
     log(`Cek ${addr}: ${status ? "boleh jual" : "tidak boleh jual"}`, "ok");
   } catch (e) {
     log("Error cek: " + e.message, "err");
@@ -504,12 +582,6 @@ document.getElementById("btnSetAdmin").onclick = () => {
   if (!ethers.utils.isAddress(addr)) return log("Alamat tidak valid", "err");
   sendTx("setAdmin", [addr], `Admin diganti ke ${addr}`);
 };
-
-// Auto-refresh balance saat ganti akun/network
-if (window.ethereum) {
-  window.ethereum.on("accountsChanged", () => location.reload());
-  window.ethereum.on("chainChanged", () => location.reload());
-}
 
 log("Panel siap. Klik 'Connect Wallet' untuk mulai.", "info");
 </script>
