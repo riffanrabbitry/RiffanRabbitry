@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>APEPE Admin Panel — Core DAO</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.1/ethers.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: linear-gradient(135deg, #0a0e27, #1a1a3e, #0f0c29);
+    color: #e0e0e0;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .container { max-width: 900px; margin: 0 auto; }
+  h1 {
+    text-align: center;
+    margin-bottom: 8px;
+    background: linear-gradient(90deg, #f39c12, #e74c3c, #9b59b6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 30px;
+    font-weight: 800;
+  }
+  .subtitle { text-align: center; color: #888; margin-bottom: 24px; font-size: 13px; }
+
+  .card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    backdrop-filter: blur(10px);
+  }
+  .card h2 {
+    font-size: 16px;
+    margin-bottom: 14px;
+    color: #f39c12;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .status {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    padding: 12px;
+    background: rgba(0,0,0,0.3);
+    border-radius: 8px;
+    border-left: 3px solid #666;
+  }
+  .status.ok { border-left-color: #2ecc71; }
+  .status.warn { border-left-color: #e74c3c; }
+  .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: #e74c3c;
+    box-shadow: 0 0 8px #e74c3c;
+    flex-shrink: 0;
+  }
+  .dot.on { background: #2ecc71; box-shadow: 0 0 8px #2ecc71; }
+
+  input, textarea {
+    width: 100%;
+    padding: 11px 14px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 8px;
+    color: #fff;
+    font-size: 13px;
+    font-family: inherit;
+    margin-bottom: 10px;
+    outline: none;
+    transition: border 0.2s;
+  }
+  input:focus, textarea:focus { border-color: #f39c12; }
+  textarea { min-height: 100px; resize: vertical; font-family: monospace; font-size: 12px; }
+
+  button {
+    padding: 11px 16px;
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  button:hover:not(:disabled) { transform: translateY(-1px); }
+  button:active:not(:disabled) { transform: translateY(0); }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  button.secondary {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  button.danger { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+  button.success { background: linear-gradient(135deg, #2ecc71, #27ae60); }
+
+  .row { display: flex; gap: 8px; flex-wrap: wrap; }
+  .row > * { flex: 1; min-width: 130px; }
+
+  .log {
+    background: #000;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    padding: 12px;
+    border-radius: 8px;
+    max-height: 220px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+    line-height: 1.6;
+  }
+  .log .err { color: #ff6b6b; }
+  .log .ok { color: #2ecc71; }
+  .log .info { color: #f39c12; }
+
+  .addr {
+    font-family: monospace;
+    font-size: 11px;
+    color: #888;
+    word-break: break-all;
+    margin: 4px 0;
+  }
+  .hidden { display: none !important; }
+  .badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .badge.on { background: #2ecc71; color: #000; }
+  .badge.off { background: #e74c3c; color: #fff; }
+  .info-box {
+    font-size: 12px;
+    color: #aaa;
+    background: rgba(243,156,18,0.1);
+    border-left: 3px solid #f39c12;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>🐵 APEPE Admin Panel</h1>
+  <p class="subtitle">
+    Core DAO Mainnet — 
+    <span class="addr">0x6A51aFD578967ee2BDA52a0Ca01FD82Bfc867a99</span>
+  </p>
+
+  <!-- KONEKSI WALLET -->
+  <div class="card">
+    <h2>🔌 Koneksi Wallet</h2>
+    <div class="status" id="netStatusBox">
+      <div class="dot" id="netDot"></div>
+      <span id="netStatus">Belum terhubung</span>
+    </div>
+    <div class="row">
+      <button id="btnConnect">Connect Wallet</button>
+      <button id="btnSwitch" class="secondary">Switch ke Core DAO</button>
+    </div>
+    <div style="margin-top:10px;">
+      <div class="addr">Wallet: <span id="walletAddr">-</span></div>
+      <div class="addr">Balance: <span id="walletBal">-</span></div>
+    </div>
+  </div>
+
+  <!-- STATUS KONTRAK -->
+  <div class="card hidden" id="cardStatus">
+    <h2>📊 Status Kontrak</h2>
+    <div class="status" id="wlStatusBox">
+      <div class="dot" id="wlDot"></div>
+      <span>Whitelist: <b id="wlStatus">-</b></span>
+    </div>
+    <div class="addr">Owner: <span id="ownerAddr">-</span></div>
+    <div class="addr">Admin: <span id="adminAddr">-</span></div>
+    <div class="addr">Sell Fee: <span id="sellFeeVal">-</span>% | Buy Fee: <span id="buyFeeVal">-</span>%</div>
+    <div class="addr">Your Role: <span id="myRole">-</span></div>
+    <button id="btnRefresh" class="secondary" style="margin-top:10px;">🔄 Refresh Status</button>
+  </div>
+
+  <!-- TOGGLE WHITELIST -->
+  <div class="card hidden" id="cardToggle">
+    <h2>🔘 Toggle Whitelist</h2>
+    <div class="info-box">
+      <b>ON</b> = hanya alamat yang di-whitelist yang bisa jual (yang lain revert).<br>
+      <b>OFF</b> = semua orang bisa jual bebas.
+    </div>
+    <div class="row">
+      <button id="btnWlOn" class="success">✅ Aktifkan Whitelist</button>
+      <button id="btnWlOff" class="danger">❌ Matikan Whitelist</button>
+    </div>
+  </div>
+
+  <!-- INPUT PENJUAL (SINGLE) -->
+  <div class="card hidden" id="cardSeller">
+    <h2>👤 Input Penjual (Single)</h2>
+    <input id="sellerAddr" placeholder="0xAlamat wallet penjual" />
+    <div class="row">
+      <button id="btnAllow" class="success">✅ Izinkan Jual</button>
+      <button id="btnRevoke" class="danger">❌ Cabut Izin</button>
+      <button id="btnCheck" class="secondary">🔍 Cek Status</button>
+    </div>
+    <div id="checkResult" style="margin-top:10px;font-size:12px;"></div>
+  </div>
+
+  <!-- INPUT PENJUAL (BATCH) -->
+  <div class="card hidden" id="cardBatch">
+    <h2>👥 Input Penjual (Batch)</h2>
+    <div class="info-box">Satu alamat per baris.</div>
+    <textarea id="batchAddrs" placeholder="0xAlamat1&#10;0xAlamat2&#10;0xAlamat3"></textarea>
+    <div class="row">
+      <button id="btnBatchAllow" class="success">✅ Izinkan Semua</button>
+      <button id="btnBatchRevoke" class="danger">❌ Cabut Semua</button>
+    </div>
+  </div>
+
+  <!-- FEE -->
+  <div class="card hidden" id="cardFee">
+    <h2>💰 Atur Tax</h2>
+    <div class="info-box">Fee dalam persen (0–100). Contoh: 5 = 5%.</div>
+    <div class="row">
+      <input id="buyFeeInput" type="number" placeholder="Buy Fee %" min="0" max="100" />
+      <input id="sellFeeInput" type="number" placeholder="Sell Fee %" min="0" max="100" />
+    </div>
+    <button id="btnSetFee" class="success">💾 Simpan Fee</button>
+  </div>
+
+  <!-- ADMIN MANAGEMENT -->
+  <div class="card hidden" id="cardAdmin">
+    <h2>🛡️ Ganti Admin (Owner only)</h2>
+    <input id="newAdminAddr" placeholder="0xAlamat admin baru" />
+    <button id="btnSetAdmin" class="danger">Ganti Admin</button>
+  </div>
+
+  <!-- LOG -->
+  <div class="card">
+    <h2>📜 Log Aktivitas</h2>
+    <div class="log" id="log">Menunggu koneksi...</div>
+    <button id="btnClearLog" class="secondary" style="margin-top:10px;">Clear Log</button>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// KONFIGURASI
+// ============================================================
+const CONFIG = {
+  CONTRACT_ADDRESS: "0x6A51aFD578967ee2BDA52a0Ca01FD82Bfc867a99",
+  CHAIN_ID: 1116,
+  CHAIN_PARAMS: {
+    chainId: "0x45c",
+    chainName: "Core Blockchain Mainnet",
+    nativeCurrency: { name: "Core", symbol: "CORE", decimals: 18 },
+    rpcUrls: ["https://rpc.coredao.org"],
+    blockExplorerUrls: ["https://scan.coredao.org"]
+  },
+  ABI: [
+    // Read
+    "function canSell(address) view returns (bool)",
+    "function whitelistEnabled() view returns (bool)",
+    "function admin() view returns (address)",
+    "function owner() view returns (address)",
+    "function buyFee() view returns (uint256)",
+    "function sellFee() view returns (uint256)",
+    // Write - whitelist
+    "function setSeller(address account, bool allowed)",
+    "function setSellers(address[] calldata accounts, bool allowed)",
+    "function setWhitelistEnabled(bool enabled)",
+    // Write - fee
+    "function setFees(uint256 newBuyFee, uint256 newSellFee)",
+    // Write - admin
+    "function setAdmin(address newAdmin)"
+  ]
+};
+
+// ============================================================
+// STATE
+// ============================================================
+let provider = null;
+let signer = null;
+let contract = null;
+let currentAccount = null;
+
+// ============================================================
+// LOGGING
+// ============================================================
+const logEl = document.getElementById("log");
+function log(msg, type = "info") {
+  const time = new Date().toLocaleTimeString();
+  const cls = type === "err" ? "err" : type === "ok" ? "ok" : "info";
+  logEl.innerHTML += `<span class="${cls}">[${time}] ${msg}</span>\n`;
+  logEl.scrollTop = logEl.scrollHeight;
+}
+document.getElementById("btnClearLog").onclick = () => { logEl.innerHTML = ""; };
+
+// ============================================================
+// CONNECT WALLET
+// ============================================================
+async function connectWallet() {
+  if (!window.ethereum) {
+    log("MetaMask tidak terdeteksi. Install dulu di metamask.io", "err");
+    return;
+  }
+  try {
+    const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+    currentAccount = accounts[0];
+    provider = new ethers.providers.Web3Provider(window.ethereum);
+    signer = provider.getSigner();
+
+    const net = await provider.getNetwork();
+    if (Number(net.chainId) !== CONFIG.CHAIN_ID) {
+      log(`Network salah (chainId=${net.chainId}). Switch ke Core DAO...`, "info");
+      await switchNetwork();
+    }
+
+    document.getElementById("walletAddr").textContent = currentAccount;
+    document.getElementById("netDot").classList.add("on");
+    document.getElementById("netStatus").textContent = "Terhubung ke Core DAO";
+    document.getElementById("netStatusBox").classList.add("ok");
+    log(`Wallet terhubung: ${currentAccount}`, "ok");
+
+    const bal = await provider.getBalance(currentAccount);
+    document.getElementById("walletBal").textContent = 
+      parseFloat(ethers.utils.formatEther(bal)).toFixed(4) + " CORE";
+
+    initContract();
+
+    ["cardStatus","cardToggle","cardSeller","cardBatch","cardFee","cardAdmin"]
+      .forEach(id => document.getElementById(id).classList.remove("hidden"));
+
+    await refreshStatus();
+
+  } catch (e) {
+    log("Error connect: " + (e.message || e), "err");
+  }
+}
+
+async function switchNetwork() {
+  try {
+    await window.ethereum.request({
+      method: "wallet_switchEthereumChain",
+      params: [{ chainId: CONFIG.CHAIN_PARAMS.chainId }]
+    });
+  } catch (e) {
+    if (e.code === 4902) {
+      await window.ethereum.request({
+        method: "wallet_addEthereumChain",
+        params: [CONFIG.CHAIN_PARAMS]
+      });
+    } else throw e;
+  }
+}
+
+function initContract() {
+  if (!signer) return;
+  contract = new ethers.Contract(CONFIG.CONTRACT_ADDRESS, CONFIG.ABI, signer);
+  log("Kontrak APEPE di-load ✓", "ok");
+}
+
+// ============================================================
+// REFRESH STATUS
+// ============================================================
+async function refreshStatus() {
+  if (!contract) return;
+  try {
+    const [wl, ownerAddr, adminAddr, buyF, sellF] = await Promise.all([
+      contract.whitelistEnabled(),
+      contract.owner(),
+      contract.admin(),
+      contract.buyFee(),
+      contract.sellFee()
+    ]);
+
+    document.getElementById("wlStatus").innerHTML = 
+      wl ? '<span class="badge on">AKTIF</span>' : '<span class="badge off">NONAKTIF</span>';
+    document.getElementById("wlDot").className = wl ? "dot on" : "dot";
+    document.getElementById("wlStatusBox").className = wl ? "status ok" : "status warn";
+
+    document.getElementById("ownerAddr").textContent = ownerAddr;
+    document.getElementById("adminAddr").textContent = adminAddr;
+    document.getElementById("buyFeeVal").textContent = buyF.toString();
+    document.getElementById("sellFeeVal").textContent = sellF.toString();
+
+    // Deteksi role
+    const acc = currentAccount.toLowerCase();
+    let role = "❌ Bukan admin/owner";
+    if (acc === ownerAddr.toLowerCase() && acc === adminAddr.toLowerCase()) 
+      role = "👑 Owner + Admin";
+    else if (acc === ownerAddr.toLowerCase()) role = "👑 Owner";
+    else if (acc === adminAddr.toLowerCase()) role = "🛡️ Admin";
+    document.getElementById("myRole").innerHTML = role;
+
+    log("Status di-refresh ✓", "ok");
+  } catch (e) {
+    log("Error refresh: " + (e.message || e), "err");
+  }
+}
+
+// ============================================================
+// HELPER: Kirim transaksi
+// ============================================================
+async function sendTx(fnName, args, successMsg) {
+  if (!contract) { log("Connect wallet dulu", "err"); return; }
+  try {
+    log(`Mengirim ${fnName}(${args.join(", ")})...`, "info");
+    const tx = await contract[fnName](...args);
+    log(`Tx dikirim: ${tx.hash}`, "info");
+    log("Menunggu konfirmasi...", "info");
+    const receipt = await tx.wait();
+    log(`✅ ${successMsg} (block ${receipt.blockNumber})`, "ok");
+    await refreshStatus();
+  } catch (e) {
+    const msg = e?.error?.message || e?.data?.message || e.message || e;
+    log("❌ Gagal: " + msg, "err");
+  }
+}
+
+// ============================================================
+// EVENT LISTENERS
+// ============================================================
+document.getElementById("btnConnect").onclick = connectWallet;
+document.getElementById("btnSwitch").onclick = async () => {
+  try { await switchNetwork(); log("Switched ke Core DAO ✓", "ok"); }
+  catch (e) { log("Switch error: " + e.message, "err"); }
+};
+document.getElementById("btnRefresh").onclick = refreshStatus;
+
+// Toggle whitelist
+document.getElementById("btnWlOn").onclick = () =>
+  sendTx("setWhitelistEnabled", [true], "Whitelist diaktifkan");
+document.getElementById("btnWlOff").onclick = () =>
+  sendTx("setWhitelistEnabled", [false], "Whitelist dimatikan");
+
+// Single seller
+document.getElementById("btnAllow").onclick = () => {
+  const addr = document.getElementById("sellerAddr").value.trim();
+  if (!ethers.utils.isAddress(addr)) return log("Alamat tidak valid", "err");
+  sendTx("setSeller", [addr, true], `Alamat ${addr} diizinkan jual`);
+};
+document.getElementById("btnRevoke").onclick = () => {
+  const addr = document.getElementById("sellerAddr").value.trim();
+  if (!ethers.utils.isAddress(addr)) return log("Alamat tidak valid", "err");
+  sendTx("setSeller", [addr, false], `Izin jual ${addr} dicabut`);
+};
+document.getElementById("btnCheck").onclick = async () => {
+  const addr = document.getElementById("sellerAddr").value.trim();
+  if (!ethers.utils.isAddress(addr)) return log("Alamat tidak valid", "err");
+  try {
+    const status = await contract.canSell(addr);
+    const html = status 
+      ? `<span class="badge on">✅ BOLEH JUAL</span>` 
+      : `<span class="badge off">❌ TIDAK BOLEH JUAL</span>`;
+    document.getElementById("checkResult").innerHTML = 
+      `${addr} → ${html}`;
+    log(`Cek ${addr}: ${status ? "boleh jual" : "tidak boleh jual"}`, "ok");
+  } catch (e) {
+    log("Error cek: " + e.message, "err");
+  }
+};
+
+// Batch seller
+document.getElementById("btnBatchAllow").onclick = () => batchSend(true);
+document.getElementById("btnBatchRevoke").onclick = () => batchSend(false);
+
+function batchSend(allowed) {
+  const raw = document.getElementById("batchAddrs").value;
+  const addrs = raw.split("\n").map(s => s.trim()).filter(s => s.length > 0);
+  if (addrs.length === 0) return log("Isi minimal 1 alamat", "err");
+  for (const a of addrs) {
+    if (!ethers.utils.isAddress(a)) return log(`Alamat tidak valid: ${a}`, "err");
+  }
+  sendTx("setSellers", [addrs, allowed], 
+    `${addrs.length} alamat ${allowed ? "diizinkan" : "dicabut"}`);
+}
+
+// Fee
+document.getElementById("btnSetFee").onclick = () => {
+  const buy = parseInt(document.getElementById("buyFeeInput").value);
+  const sell = parseInt(document.getElementById("sellFeeInput").value);
+  if (isNaN(buy) || isNaN(sell)) return log("Isi buy & sell fee", "err");
+  if (buy < 0 || buy > 100 || sell < 0 || sell > 100) 
+    return log("Fee harus 0–100", "err");
+  sendTx("setFees", [buy, sell], `Fee diset: buy=${buy}%, sell=${sell}%`);
+};
+
+// Admin
+document.getElementById("btnSetAdmin").onclick = () => {
+  const addr = document.getElementById("newAdminAddr").value.trim();
+  if (!ethers.utils.isAddress(addr)) return log("Alamat tidak valid", "err");
+  sendTx("setAdmin", [addr], `Admin diganti ke ${addr}`);
+};
+
+// Auto-refresh balance saat ganti akun/network
+if (window.ethereum) {
+  window.ethereum.on("accountsChanged", () => location.reload());
+  window.ethereum.on("chainChanged", () => location.reload());
+}
+
+log("Panel siap. Klik 'Connect Wallet' untuk mulai.", "info");
+</script>
+</body>
+</html>
